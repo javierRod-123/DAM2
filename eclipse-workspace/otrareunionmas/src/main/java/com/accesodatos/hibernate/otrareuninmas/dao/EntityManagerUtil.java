@@ -1,0 +1,16 @@
+package com.accesodatos.hibernate.otrareuninmas.dao;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+public class EntityManagerUtil {
+
+	public static EntityManager getEntityManagerUtil() {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("OtraReunionMas");
+		EntityManager manager = factory.createEntityManager();
+		
+		return manager;
+	}
+
+}

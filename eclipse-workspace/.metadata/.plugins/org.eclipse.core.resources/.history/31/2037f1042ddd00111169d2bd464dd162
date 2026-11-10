@@ -1,0 +1,35 @@
+package com.accesodatos.hibernate.otrareuninmas.dao;
+
+import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import com.accesodatos.hibernate.otrareunionmas.utiles.EntityManagerUtil;
+
+
+public abstract class AbstractDao<T> implements Dao<T> {
+	
+	private EntityManager entityManager = EntityManagerUtil.getEntityManagerUtil();
+	private Class<T> clazz;
+	
+	@Override
+	public Optional<T> get(int id){
+		return Optional.ofNullable(entityManager.find(clazz, id));
+	}
+	
+	@Override
+	public List<T> getAll(){
+		String qlString = "FROM" + clazz.getName();
+		Query query = entityManager.createQuery(qlString);
+		return query.getResultList();
+	}
+	
+	@Override
+	public void save(T t) {
+		executeInsideTransaction(entityManager -> entityManager.persist(t));
+	}
+
+	protected abstract void executeInsideTransaction(Object object);
+}

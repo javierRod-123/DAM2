@@ -1,0 +1,5 @@
+package com.accesodatos.hibernate.otrareuninmas.dao;
+
+public abstract class AbstractDao {
+
+}

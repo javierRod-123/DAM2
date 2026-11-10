@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="interfacesgraficas.Vista"/>
-    <fullyQualifiedTypeName name="interfacesgraficas.DialogoAltaAlumno"/>
-    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
-    <fullyQualifiedTypeName name="javax.swing.JDesktopPane"/>
-    <fullyQualifiedTypeName name="javax.swing.JDialog"/>
-    <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
     <fullyQualifiedTypeName name="examen.Paciente"/>
     <fullyQualifiedTypeName name="examen.Medico"/>
     <fullyQualifiedTypeName name="examen.MedicoEspecialista"/>
@@ -60,4 +54,10 @@
     <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="u1.examen25102026.fuentes.Evaluacion"/>
     <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
+    <fullyQualifiedTypeName name="javax.persistence.EntityManager"/>
+    <fullyQualifiedTypeName name="com.accesodatos.hibernate.otrareunionmas.utiles.EntityManagerUtil"/>
+    <fullyQualifiedTypeName name="java.util.Optional"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
 </qualifiedTypeNameHistroy>
