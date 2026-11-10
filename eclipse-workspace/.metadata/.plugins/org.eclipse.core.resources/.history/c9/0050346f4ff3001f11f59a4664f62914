@@ -1,0 +1,15 @@
+package colecciones;
+
+
+import java.util.Collections;
+import java.util.TreeSet;
+
+public class Act5 {
+
+	public static void main(String[] args) {
+		TreeSet<Integer> numeros = new TreeSet<>(Collections.reverseOrder());
+				
+
+	}
+
+}

@@ -1,0 +1,16 @@
+package tiposExamen;
+
+import java.util.Scanner;
+
+public class Ej2 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Introduce un curso: ");
+		String curso = sc.next();
+		
+		sc.close();
+	}
+
+}

@@ -1,0 +1,22 @@
+package appcalculadora;
+
+public class CalculadoraQueDivide {
+
+	private int divisor;
+
+	public CalculadoraQueDivide(int divisor) {
+		if (divisor == 0) {
+			throw new IllegalArgumentException("El divisor no puede ser cero.");
+		}
+		this.divisor = divisor;
+	}
+
+	public int dividir(int dividendo) {
+		return dividendo / divisor;
+	}
+
+	public boolean esDivisible(int numero) {
+		return numero % divisor == 0;
+	}
+
+}

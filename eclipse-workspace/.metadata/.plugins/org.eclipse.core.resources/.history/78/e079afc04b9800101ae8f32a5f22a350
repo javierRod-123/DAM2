@@ -1,0 +1,12 @@
+package bol1;
+
+public class Ej2 {
+
+	public static void main(String[] args) {
+		int num1 = 5;
+		int num2 = 72;
+		double div = num2 / num1;
+
+	}
+
+}

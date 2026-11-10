@@ -1,0 +1,18 @@
+package junit;
+
+import static org.junit.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
+class CalculadoraQueDivideTest {
+
+	@Test
+	void testCalculadoraQueDivideExcepcion() {
+		assertThrows(IllegalArgumentException.class, () -> new CalculadoraQueDivide(0));
+	}
+	
+	@Test
+	void testEsDivisibleTrue() {
+		
+	}
+
+}

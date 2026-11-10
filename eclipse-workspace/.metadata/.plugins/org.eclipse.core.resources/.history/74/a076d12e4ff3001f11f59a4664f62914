@@ -1,0 +1,12 @@
+package colecciones;
+
+import java.util.TreeSet;
+
+public class Act5 {
+
+	public static void main(String[] args) {
+		TreeSet<Integer> numeros = new 
+
+	}
+
+}

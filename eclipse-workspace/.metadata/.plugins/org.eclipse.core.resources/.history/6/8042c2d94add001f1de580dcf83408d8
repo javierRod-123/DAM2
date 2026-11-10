@@ -1,0 +1,51 @@
+package examen;
+
+import java.util.Scanner;
+
+public class ExamenRecuperacionJavier {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		System.out.print("1- ");
+		System.out.print("2- ");
+		System.out.print("3- ");
+		System.out.print("4- ");
+		System.out.print("5- ");
+		System.out.println("6- ");
+		int option = sc.nextInt();
+
+		while (option < 5) {
+			switch (option) {
+			case 1:
+
+				break;
+			case 2:
+
+				break;
+
+			case 3:
+
+				break;
+
+			case 4:
+
+				break;
+
+			case 5:
+
+				break;
+			}
+			System.out.print("1- ");
+			System.out.print("2- ");
+			System.out.print("3- ");
+			System.out.print("4- ");
+			System.out.print("5- ");
+			option = sc.nextInt();
+
+		}
+		sc.close();
+
+	}
+
+}

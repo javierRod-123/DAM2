@@ -1,0 +1,81 @@
+package evalucion2objetos;
+
+import java.util.Arrays;
+
+public class Agencia {
+	private Portador[] registro = new Portador[10];
+	private int numPortadores;
+	
+	public void anyadePortador(Portador p) {
+		if (numPortadores == registro.length) {
+			registro = Arrays.copyOf(registro, numPortadores + 10);
+		}
+		
+		registro[numPortadores++] = p;
+	}
+
+	public Portador[] getRegistro() {
+		return registro;
+	}
+
+	public int getNumPortadores() {
+		return numPortadores;
+	}
+
+	public boolean contieneStand(Stand stand) {
+		
+		for (int i = 0; i < numPortadores; i++) {
+			Stand standActual = registro[i].getStand();
+			
+			if (standActual.equals(stand)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+	public boolean hayErrores(Portador portador) {
+		
+		for (int i = 0; i < numPortadores; i++) {
+			Portador portadorActual = registro[i];
+			
+			if (portador.equals(portadorActual)) {
+				if(portador.getStand().equals(portadorActual.getStand())) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+
+	public Stand[] standOrdenados() {
+		
+		Stand tStand[] = new Stand[numPortadores];
+		int tamanyo = 0;
+		
+		for (int i = 0; i < numPortadores; i++) {
+			Stand standActual = registro[i].getStand();
+			
+			tStand[tamanyo++] = standActual;
+		}
+	
+		Arrays.sort(tStand);
+		
+		return tStand;
+	}
+
+	public void standMasPoderoso() {
+		
+		Stand masFuerte = null;
+		
+		for (int i = 0; i < numPortadores; i++) {
+			Stand actual = registro[i].getStand();
+			
+			
+		}
+		
+	}
+
+}

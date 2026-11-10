@@ -1,0 +1,46 @@
+package arrays;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Actividad4 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		System.out.print("Longitud de la clave: ");
+		int longitud = sc.nextInt();
+
+		int random[] = new int[longitud];
+
+		for (int i = 0; i < random.length; i++) {
+			random[i] = (int) (Math.floor(Math.random() * (0 - 5 + 1) + 5));
+		}
+
+		int posibleContrasenya[] = new int[longitud];
+
+		for (int j = 0; j < posibleContrasenya.length; j++) {
+			posibleContrasenya[j] = sc.nextInt();
+		}
+
+		while (!Arrays.equals(posibleContrasenya, random)) {
+			for (int i = 0; i < longitud; i++) {
+				if (posibleContrasenya[i] > random[i]) {
+					System.out.println("- El " + posibleContrasenya[i] + " es mayor");
+				} else if (posibleContrasenya[i] < random[i]) {
+					System.out.println("- El " + posibleContrasenya[i] + " es menor");
+				} else if (posibleContrasenya[i] == random[i]) {
+					System.out.println("- El " + posibleContrasenya[i] + " es igual");
+				}
+			}
+
+			for (int j = 0; j < posibleContrasenya.length; j++) {
+				posibleContrasenya[j] = sc.nextInt();
+			}
+		}
+		
+		System.out.println("Lo has adivinado, el número secreto era: "+Arrays.toString(random));
+
+		sc.close();
+	}
+}

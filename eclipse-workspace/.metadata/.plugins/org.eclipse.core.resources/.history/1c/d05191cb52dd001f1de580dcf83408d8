@@ -1,0 +1,121 @@
+package examen;
+
+import java.util.Scanner;
+
+public class ExamenRecuperacionJavier {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int registro[][] = new int[20][20];
+		String curso[] = new String[20];
+		int sesionYTiempo[][] = new int[20][20];
+		String usuario[] = new String[20];
+		String nombreUsuario = "";
+		int sesionAlumno = 0;
+		String nombreCurso = "";
+		int optionSesiones = 0;
+		int tiempoSesion = 0;
+		int contSesion = 0;
+		int indiceCurso = 0;
+		int numCurso = 0;
+		int indiceUsuario = 0;
+		int numUsuario = 0;
+		float nota = 0;
+
+		System.out.print("Nombre del Curso: ");
+		nombreCurso = sc.next();
+
+		System.out.print("Nº de sesiones: ");
+		optionSesiones = sc.nextInt();
+		indiceCurso = getIndexOf(curso, numCurso, nombreCurso);
+		if (indiceCurso == numCurso) {
+			curso[numCurso] = nombreCurso;
+			numCurso++;
+		}
+		for (int i = 0; i < optionSesiones; i++) {
+			System.out.print("Tiempo estimado de la sesion " + i + ": ");
+			tiempoSesion = sc.nextInt();
+			contSesion++;
+			sesionYTiempo[indiceCurso][contSesion] = tiempoSesion;
+		}
+
+		System.out.print("1. Registrar la calificación de un usuario en cierta sesión de aprendizaje.\r\n"
+				+ "2. Listar todas las sesiones, junto con su duración y notas.\r\n"
+				+ "3. Indicar cuál es la sesión en la que se ha sacado mejor nota media.\r\n"
+				+ "4. Mostrar los usuarios que han estudiado solo una sesión.\r\n"
+				+ "5. Listar usuarios (ordenados alfabéticamente) con su nota media.\r\n" + "6. Salir");
+		int option = sc.nextInt();
+
+		while (option < 5) {
+			switch (option) {
+			case 1:
+				System.out.print("Nombre de usuario: ");
+				nombreUsuario = sc.next();
+
+				indiceUsuario = getIndexOf(usuario, numUsuario, nombreUsuario);
+				if (indiceUsuario == numUsuario) {
+					usuario[numUsuario] = nombreCurso;
+					numUsuario++;
+				}
+
+				System.out.print("El nº de sesión: ");
+				sesionAlumno = sc.nextInt();
+				System.out.print("Nota obtenida: ");
+				nota = sc.nextFloat();
+
+				registro[indiceUsuario][sesionAlumno] = (int) nota;
+				break;
+			case 2:
+				for (int i = 0; i < sesionYTiempo.length; i++) {
+					for (int j = 0; j < sesionYTiempo.length; j++) {
+						
+					}
+				}
+
+				break;
+
+			case 3:
+
+				break;
+
+			case 4:
+
+				break;
+
+			case 5:
+
+				break;
+			case 6:
+				break;
+			}
+			System.out.print("1. Registrar la calificación de un usuario en cierta sesión de aprendizaje.\r\n"
+					+ "2. Listar todas las sesiones, junto con su duración y notas.\r\n"
+					+ "3. Indicar cuál es la sesión en la que se ha sacado mejor nota media.\r\n"
+					+ "4. Mostrar los usuarios que han estudiado solo una sesión.\r\n"
+					+ "5. Listar usuarios (ordenados alfabéticamente) con su nota media.\r\n" + "6. Salir");
+
+			option = sc.nextInt();
+
+		}
+		sc.close();
+
+	}
+
+	public static int getIndexOf(String[] tablaString, int numElementos, String elemABuscar) {
+		int indice = -1;
+
+		// Recorre el array para encontrar el índice del elemento
+		for (int i = 0; i < numElementos && indice == -1; i++) {
+			if (tablaString[i].equals(elemABuscar)) {
+				indice = i;
+			}
+		}
+
+		if (indice == -1) {
+			indice = numElementos;
+		}
+
+		return indice;
+	}
+
+}

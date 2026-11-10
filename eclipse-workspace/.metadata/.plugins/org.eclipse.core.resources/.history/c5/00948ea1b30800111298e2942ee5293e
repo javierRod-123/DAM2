@@ -1,0 +1,29 @@
+package tareas;
+
+import java.util.*;
+
+public class Actividad4 {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Introduce una frase: ");
+        String frase = sc.nextLine();
+        
+        String palabrasArray[] = frase.split(" ");
+        
+        List<String> palabras = new ArrayList<String>();
+        
+        for (String p : palabrasArray) {
+        	palabras.add(p);
+        }
+        
+        Map<String, Integer> cont = new HashMap<String, Integer>();
+        
+        for (String p : palabras) {
+        	cont.put(p, cont.getOrDefault(p, 0) + 1);
+        }
+        
+        sc.close();
+    }
+}

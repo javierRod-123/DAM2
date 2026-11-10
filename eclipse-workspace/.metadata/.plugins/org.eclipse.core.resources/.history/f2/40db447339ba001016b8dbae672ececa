@@ -1,0 +1,40 @@
+package arrays;
+
+import java.util.Scanner;
+
+public class Actividad3 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int sumaPositivos = 0;
+		int sumaNegativos = 0;
+		int cont0 = 0;
+		
+		System.out.print("Introduce el número que va a rellenar: ");
+		int n = sc.nextInt();
+		
+		int a[] = new int [n];
+		
+		for(int i = 0; i < a.length; i++) {
+			System.out.print("Introduce un número: ");
+			a[i] = sc.nextInt();
+		}
+		
+		for(int j = 0; j < a.length; j++) {
+			if(a[j] > 0) {
+				sumaPositivos += a[j];
+			} else if(a[j] < 0) {
+				sumaNegativos += a[j];
+			} else if(a[j] == 0) {
+				cont0++;
+			}
+		}
+		
+		System.out.println("Media de números positivos:  "+(float) sumaPositivos / n);
+		System.out.println("Media de números negativos: "+ (float) sumaNegativos / n);
+		System.out.println("Total de números 0: "+cont0);
+		
+		sc.close();
+	}
+
+}

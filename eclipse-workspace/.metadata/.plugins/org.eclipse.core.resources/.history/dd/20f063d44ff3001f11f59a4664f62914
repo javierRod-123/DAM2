@@ -1,0 +1,20 @@
+package colecciones;
+
+
+import java.util.Collections;
+import java.util.Random;
+import java.util.TreeSet;
+
+public class Act5 {
+
+	public static void main(String[] args) {
+		TreeSet<Integer> numeros = new TreeSet<>(Collections.reverseOrder());
+		Random random = new Random();	
+
+		while (numeros.size() < 20) {
+			int num = random.nextInt(100);
+			numeros.add(num);
+		}
+	}
+
+}

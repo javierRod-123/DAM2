@@ -1,0 +1,15 @@
+package com.accesodatos.hibernate.otrareunionmas.dominio;
+
+import java.time.LocalDateTime;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "reunion")
+public class Reunion {
+
+	private int id;
+	private LocalDateTime fecha;
+	private String asunto;
+}

@@ -1,0 +1,58 @@
+package evalucion2objetos;
+
+public class Stand {
+	private String nombre;
+	private Estadisticas estadisticas[];
+
+	public Stand(String nombre, Estadisticas[] estadisticas) {
+		super();
+		this.nombre = nombre;
+		this.estadisticas = estadisticas;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Estadisticas[] getEstadisticas() {
+		return estadisticas;
+	}
+
+	public void setEstadisticas(Estadisticas[] estadisticas) {
+		this.estadisticas = estadisticas;
+	}
+
+	public int poderTotal() {
+		
+		int suma = 0;
+		
+		for (int i = 0; i < estadisticas.length; i++) {
+			suma += estadisticas[i].getValor();
+		}
+		
+		return suma;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (this == obj) {
+			return true;
+		}
+		
+		if (obj == null || obj.getClass() != getClass()) {
+			return false;
+		}
+		
+		Stand o = (Stand) obj;
+		
+		return this.nombre.equalsIgnoreCase(o.nombre);
+	}
+	
+	
+
+}

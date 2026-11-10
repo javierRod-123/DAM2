@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;ficherosXML.Act1&apos; to &apos;Act2&apos;&#x0D;&#x0A;- Original project: &apos;ADAT&apos;&#x0D;&#x0A;- Original element: &apos;ficherosXML.Act1&apos;&#x0D;&#x0A;- Renamed element: &apos;ficherosXML.Act2&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Act1&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;ficherosXML{Act1.java[Act1" matchStrategy="1" name="Act2" qualified="false" references="true" similarDeclarations="false" stamp="1792054436390" textual="false" version="1.0"/>
+</session>

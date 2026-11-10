@@ -1,0 +1,36 @@
+package tema6_boletin1;
+
+public class Ej1 {
+
+//	Crea un método que reciba un array de enteros y un entero. El método debe devolver la
+//	posición del elemento recibido como segundo parámetro. ¿Qué excepciones se te ocurre
+//	que puede generar este método si no se programa bien? Por ejemplo:
+//	- si el array contiene nulos,
+//	- si accedo a una posición del array que no existe
+
+	public static void main(String[] args) {
+		int numero = 3;
+		int array [] = {1, 2, 3, 4, 5};
+		
+		try {
+            int posicion = encontrarPosicion(array, elementoRecibido(array, numero));
+            System.out.println("El elemento " + elementoRecibido(array, numero) + " está en la posición " + posicion);
+        } catch (NullPointerException e) {
+            System.out.println("Excepción: " + e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Excepción: " + e.getMessage());
+        }
+    }
+	
+
+	public static int elementoRecibido(int array[], int elemento) {
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == elemento) {
+				return i;
+			}
+		}
+
+		return -1;
+	}
+
+}

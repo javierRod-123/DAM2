@@ -1,0 +1,14 @@
+package evalucion2objetos;
+
+public class Principal {
+
+	public static void main(String[] args) {
+		
+		Agencia agencia = new Agencia();
+		
+		
+		
+		
+	}
+
+}

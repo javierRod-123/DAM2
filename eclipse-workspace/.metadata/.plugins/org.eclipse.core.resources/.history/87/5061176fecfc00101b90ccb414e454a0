@@ -1,0 +1,18 @@
+package boletin4.semaforos;
+
+public class ComienzoClase {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Bienvenida b = new Bienvenida();
+		String nombres[] = { "Maria", "Juan", "Pepe", "Isabel" };
+		Alumno alumnos[] = new Alumno[nombres.length];
+
+		for (int i = 0; i < nombres.length; i++) {
+			new Alumno(b, nombres[i], i).start();
+		}
+		Profesor profesor = new Profesor("María Molina", b);
+		profesor.start();
+	}
+
+}

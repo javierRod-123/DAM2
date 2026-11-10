@@ -1,0 +1,10 @@
+package tipoExamenArrays;
+
+public class NotasEvaluacion {
+
+	public static void main(String[] args) {
+		
+
+	}
+
+}

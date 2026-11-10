@@ -1,0 +1,6 @@
+package evaluacion3grafica;
+
+public class Persona {
+	private String nombre;
+	private String debilidad; 
+}

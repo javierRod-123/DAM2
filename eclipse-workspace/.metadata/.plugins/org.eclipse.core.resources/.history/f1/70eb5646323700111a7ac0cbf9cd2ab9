@@ -1,0 +1,52 @@
+package examenrepaso;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+public class Principal {
+
+	public static void main(String[] args) throws IOException {
+
+		ProcessBuilder pb1 = new ProcessBuilder("java", "-cp", "bin", "examenrepaso.HiloGeneradorNumeros", "25", "50",
+				"datos.txt");
+		pb1.redirectError(new File("errores_GENERADORNUMEROS.txt"));
+
+		Process procesoGerenador = pb1.start();
+
+		ProcessBuilder pb2 = new ProcessBuilder("java", "-cp", "bin", "examenrepaso.HiloLeerPares", "datos.txt");
+		pb1.redirectError(new File("error_LEERPARES.txt"));
+		
+		Process procesoLeerPares = pb2.start();
+		
+		ProcessBuilder pb3 = new ProcessBuilder("java", "-cp", "bin", "examenrepaso.HiloCalculo", "datos.txt");
+		pb3.redirectError(new File("errores_CALCULO.txt"));
+		
+		Process procesoCalculo = pb3.start();
+		
+		ProcessBuilder pb4 =new ProcessBuilder("java", "-cp", "bin", "examenrepaso.HiloCalculo", "pares.txt");
+		pb4.redirectError(new File("errores_CALCULOPARES.txt"));
+		
+		Process procesoCalcularPares = pb4.start();
+		
+		InputStream salidaCalculoNormal = procesoCalculo.getInputStream();
+		InputStream salidaCalculoPares = procesoCalcularPares.getInputStream();
+		
+		BufferedReader leerSalidaCalculoNormal = new BufferedReader(new InputStreamReader(salidaCalculoNormal));
+		BufferedReader leerSalidaCalculoPares = new BufferedReader(new InputStreamReader(salidaCalculoPares));
+		
+		String linea;
+		
+		while ((linea = leerSalidaCalculoNormal.readLine()) != null) {
+			System.out.println(linea);
+		}
+		
+		while ((linea = leerSalidaCalculoPares.readLine()) != null) {
+			System.out.println(linea);
+		}
+		
+	}
+
+}

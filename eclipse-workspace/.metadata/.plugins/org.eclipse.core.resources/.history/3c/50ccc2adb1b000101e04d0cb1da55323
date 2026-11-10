@@ -1,0 +1,16 @@
+package funciones;
+
+public class Actividad7 {
+
+	public static void main(String[] args) {
+		
+		int num1 = 6;
+
+		esPrimo(num1);
+	}
+	
+	static void esPrimo (int num) {
+		
+	}
+
+}

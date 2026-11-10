@@ -1,0 +1,29 @@
+package fuentes;
+
+public class Pago{
+	private Mes mes;
+	private float importe;
+	public Pago(Mes mes, float importe) {
+		super();
+		this.mes = mes;
+		this.importe = importe;
+	}
+	public Mes getMes() {
+		return mes;
+	}
+	public void setMes(Mes mes) {
+		this.mes = mes;
+	}
+	public float getImporte() {
+		return importe;
+	}
+	public void setImporte(float importe) {
+		this.importe = importe;
+	}
+	@Override
+	public String toString() {
+		return "Pago [mes=" + mes + ", importe=" + importe + "]";
+	}
+	
+	
+}

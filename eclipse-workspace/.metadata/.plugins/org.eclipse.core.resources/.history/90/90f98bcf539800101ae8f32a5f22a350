@@ -1,0 +1,21 @@
+package bol1;
+
+import java.util.Scanner;
+
+public class Ej7 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Dime la base y la altura de un triángulo: ");
+		double base = sc.nextDouble();
+		double altura = sc.nextDouble();
+		
+		double area = (double) base * altura / 2;
+		
+		System.out.println("El área del triángulo sería: "+ area);
+		
+		sc.close();
+	}
+
+}

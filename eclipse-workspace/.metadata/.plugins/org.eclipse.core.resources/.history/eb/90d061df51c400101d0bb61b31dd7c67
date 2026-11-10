@@ -1,0 +1,22 @@
+package tipoExamenArrays;
+
+import java.util.Scanner;
+
+public class NotasEvaluacion {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("1- Introducir alumno, nota del control y nota del examen final del alumno.\r\n"
+				+ "2- Poner un positivo a un alumno.\r\n"
+				+ "3- Listar todos los alumnos con su nota final de evaluación ordenado por\r\n" + "nota.\r\n"
+				+ "4- Mostrar estadísticas de la evaluación.\r\n" + "5- Fin.");
+		int option = sc.nextInt();
+		
+		while(option != 5) {
+			
+		}
+		sc.close();
+	}
+
+}

@@ -1,0 +1,68 @@
+package examen3;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeMap;
+
+public class Principal {
+	private Modelo modelo;
+	private VentanaPpal vista;
+
+	public Principal() {
+		this.modelo = new Modelo();
+		this.vista = new VentanaPpal(this);
+		this.vista.setVisible(true);
+	}
+
+	public static void main(String args[]) {
+		new Principal();
+	}
+
+	public Modelo getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(Modelo modelo) {
+		this.modelo = modelo;
+	}
+
+	public VentanaPpal getVista() {
+		return vista;
+	}
+
+	public void setVista(VentanaPpal vista) {
+		this.vista = vista;
+	}
+
+	public boolean contieneCliente(String dni) {
+		return modelo.contieneCliente(dni);
+	}
+
+	public void addCliente(Cliente cliente) {
+		this.modelo.addCliente(cliente);
+		
+	}
+
+	public boolean removeCliente(String dni) {
+		return this.modelo.removeCliente(dni);
+	}
+
+	public Set<Cliente> getClientes() {
+		return this.modelo.getPagosRealizados().keySet();
+	}
+
+	public TreeMap<Cliente, ArrayList<Pago>> getClientesPagos() {
+		return this.modelo.getPagosRealizados();
+	}
+	
+	public List<Cliente> comboCliente(Cliente cliente){
+		return this.modelo.comboCliente(cliente);
+	}
+	
+	public void guardarPago(Pago pago){
+		return this.modelo.guardarPago(pago);
+	}
+	
+
+}

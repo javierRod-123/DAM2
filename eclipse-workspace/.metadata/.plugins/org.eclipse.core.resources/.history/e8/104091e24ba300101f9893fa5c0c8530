@@ -1,0 +1,23 @@
+package tipoExamenCorto;
+
+import java.util.Scanner;
+
+public class CentroEducativo {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("Introduce la letra del grupo: ");
+		char letraGrupo = sc.next().charAt(0);
+		
+		switch(letraGrupo) {
+		case 'A':
+			for(int i = 1; i <= 25; i++) {
+				System.out.println("Dime la nota del alumno "+i);
+			}
+		}
+		
+		sc.close();
+	}
+
+}

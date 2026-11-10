@@ -1,0 +1,329 @@
+package pokemon;
+
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.GroupLayout.*;
+import javax.swing.LayoutStyle.*;
+import javax.swing.border.*;
+
+
+public class VentanaPpal extends JFrame {
+	private final JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+	private JPanel panelPokemons;
+	private JPanel panelCombate;
+	private JPanel panelListados;
+	private JPanel panelAnyadirPokemon;
+	private JPanel panelBorrarPokemon;
+	private JLabel lblNombre;
+	private JTextField textField;
+	private JLabel lblGeneracion;
+	private JTextField textField_1;
+	private JLabel lblEstadoEvolutivo;
+	private JTextField textField_2;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+
+	public VentanaPpal(Principal principal) {
+
+		String[] tipos = { "Agua", "Fuego", "Planta", "Eléctrico", "Tierra", "Roca", "Hielo", "Lucha", "Psíquico",
+				"Normal" };
+
+		panelPokemons = new JPanel();
+		panelPokemons.setToolTipText("");
+		tabbedPane.addTab("Pokemons", null, panelPokemons, null);
+
+		panelAnyadirPokemon = new JPanel();
+		panelAnyadirPokemon.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null),
+				"Añadir Pokemon", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+
+		panelBorrarPokemon = new JPanel();
+
+		panelBorrarPokemon.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null),
+				"Borrar Pokemon", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+
+		GroupLayout gl_panelPokemons = new GroupLayout(panelPokemons);
+		gl_panelPokemons.setHorizontalGroup(
+			gl_panelPokemons.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelPokemons.createSequentialGroup()
+					.addGap(21)
+					.addGroup(gl_panelPokemons.createParallelGroup(Alignment.LEADING)
+						.addComponent(panelBorrarPokemon, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
+						.addComponent(panelAnyadirPokemon, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(49))
+		);
+		gl_panelPokemons.setVerticalGroup(
+			gl_panelPokemons.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_panelPokemons.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panelAnyadirPokemon, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panelBorrarPokemon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(97, Short.MAX_VALUE))
+		);
+
+		JLabel lblBorrarPokemon = new JLabel("Pokemon a borrar:");
+
+		JComboBox comboBox_1 = new JComboBox();
+
+		JButton btnBorrarPokemon = new JButton("Borrar");
+		GroupLayout gl_panelBorrarPokemon = new GroupLayout(panelBorrarPokemon);
+		gl_panelBorrarPokemon.setHorizontalGroup(gl_panelBorrarPokemon.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelBorrarPokemon.createSequentialGroup().addGap(20)
+						.addGroup(gl_panelBorrarPokemon.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnBorrarPokemon, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+								.addGroup(gl_panelBorrarPokemon.createSequentialGroup().addComponent(lblBorrarPokemon)
+										.addGap(18).addComponent(comboBox_1, 0, 193, Short.MAX_VALUE)))
+						.addContainerGap()));
+		gl_panelBorrarPokemon.setVerticalGroup(gl_panelBorrarPokemon.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelBorrarPokemon.createSequentialGroup().addGap(29)
+						.addGroup(gl_panelBorrarPokemon.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblBorrarPokemon).addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnBorrarPokemon)
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		panelBorrarPokemon.setLayout(gl_panelBorrarPokemon);
+
+		lblNombre = new JLabel("Nombre:");
+
+		textField = new JTextField();
+		textField.setColumns(10);
+
+		JLabel lblTipo = new JLabel("Tipo:");
+		JComboBox<String> comboBox = new JComboBox<>(tipos);
+
+		lblGeneracion = new JLabel("Generación (1-7):");
+
+		lblEstadoEvolutivo = new JLabel("Estado evolutivo: ");
+
+		JRadioButton btnRadioMenor = new JRadioButton("Menor");
+		buttonGroup.add(btnRadioMenor);
+
+		JRadioButton btnRadioMedio = new JRadioButton("Medio");
+		buttonGroup.add(btnRadioMedio);
+
+		JRadioButton btnRadioMayor = new JRadioButton("Mayor");
+		buttonGroup.add(btnRadioMayor);
+
+		JButton btnGuardar = new JButton("Guardar");
+
+		JButton btnCancelar = new JButton("Cancelar");
+
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		GroupLayout gl_panelAnyadirPokemon = new GroupLayout(panelAnyadirPokemon);
+		gl_panelAnyadirPokemon.setHorizontalGroup(
+			gl_panelAnyadirPokemon.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelAnyadirPokemon.createSequentialGroup()
+					.addGap(25)
+					.addGroup(gl_panelAnyadirPokemon.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelAnyadirPokemon.createSequentialGroup()
+							.addComponent(lblNombre)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textField, GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE))
+						.addGroup(gl_panelAnyadirPokemon.createSequentialGroup()
+							.addGroup(gl_panelAnyadirPokemon.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(lblGeneracion, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(lblEstadoEvolutivo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panelAnyadirPokemon.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panelAnyadirPokemon.createSequentialGroup()
+									.addComponent(btnRadioMenor)
+									.addGap(18)
+									.addComponent(btnRadioMedio)
+									.addGap(18)
+									.addComponent(btnRadioMayor))
+								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))))
+					.addGap(18)
+					.addComponent(lblTipo)
+					.addGap(18)
+					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+				.addGroup(gl_panelAnyadirPokemon.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnGuardar, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+					.addComponent(btnCancelar, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE)
+					.addGap(39))
+		);
+		gl_panelAnyadirPokemon.setVerticalGroup(
+			gl_panelAnyadirPokemon.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelAnyadirPokemon.createSequentialGroup()
+					.addGap(8)
+					.addGroup(gl_panelAnyadirPokemon.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNombre)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblTipo))
+					.addGap(6)
+					.addGroup(gl_panelAnyadirPokemon.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblGeneracion)
+						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(7)
+					.addGroup(gl_panelAnyadirPokemon.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblEstadoEvolutivo)
+						.addComponent(btnRadioMenor)
+						.addComponent(btnRadioMedio)
+						.addComponent(btnRadioMayor))
+					.addGap(11)
+					.addGroup(gl_panelAnyadirPokemon.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnGuardar)
+						.addComponent(btnCancelar))
+					.addContainerGap(30, Short.MAX_VALUE))
+		);
+		panelAnyadirPokemon.setLayout(gl_panelAnyadirPokemon);
+
+		panelPokemons.setLayout(gl_panelPokemons);
+
+		panelCombate = new JPanel();
+		tabbedPane.addTab("Combates", null, panelCombate, null);
+
+		JLabel luchador1 = new JLabel("Luchador 1:");
+
+		JComboBox comboBox_2 = new JComboBox();
+
+		JLabel lblLuchador2 = new JLabel("Luchador 2:");
+
+		JComboBox comboBox_3 = new JComboBox();
+
+		JRadioButton rdbtnLuchador1 = new JRadioButton("");
+		rdbtnLuchador1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (rdbtnLuchador1.isSelected()) {
+					JOptionPane.showMessageDialog(null, "!Ganador¡");
+				}
+			}
+		});
+		rdbtnLuchador1.setToolTipText("");
+
+		JRadioButton rdbtnLuchador2 = new JRadioButton("");
+		rdbtnLuchador2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (rdbtnLuchador2.isSelected()) {
+					JOptionPane.showMessageDialog(null, "!Ganador¡");
+				}
+			}
+		});
+
+		JButton btnGuardarCombate = new JButton("Guardar Combate");
+
+		JButton btnCancelarCombate = new JButton("Cancelar");
+		GroupLayout gl_panelCombate = new GroupLayout(panelCombate);
+		gl_panelCombate.setHorizontalGroup(gl_panelCombate.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelCombate.createSequentialGroup().addGroup(gl_panelCombate
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelCombate.createSequentialGroup().addGap(73).addComponent(rdbtnLuchador1,
+								GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panelCombate.createSequentialGroup().addGap(19)
+								.addGroup(gl_panelCombate.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(btnGuardarCombate, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addGroup(gl_panelCombate.createSequentialGroup().addComponent(luchador1)
+												.addGap(18).addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, 88,
+														GroupLayout.PREFERRED_SIZE)))))
+						.addGap(47)
+						.addGroup(gl_panelCombate.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_panelCombate.createSequentialGroup().addComponent(lblLuchador2).addGap(18)
+										.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, 95,
+												GroupLayout.PREFERRED_SIZE))
+								.addComponent(rdbtnLuchador2).addComponent(btnCancelarCombate, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addContainerGap(224, Short.MAX_VALUE)));
+		gl_panelCombate.setVerticalGroup(gl_panelCombate
+				.createParallelGroup(Alignment.LEADING).addGroup(gl_panelCombate.createSequentialGroup().addGap(54)
+						.addGroup(gl_panelCombate.createParallelGroup(Alignment.BASELINE).addComponent(luchador1)
+								.addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblLuchador2).addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGap(18)
+						.addGroup(gl_panelCombate.createParallelGroup(Alignment.BASELINE)
+								.addComponent(rdbtnLuchador1, GroupLayout.PREFERRED_SIZE, 15,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(rdbtnLuchador2))
+						.addGap(138)
+						.addGroup(gl_panelCombate.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnGuardarCombate).addComponent(btnCancelarCombate))
+						.addContainerGap(62, Short.MAX_VALUE)));
+		panelCombate.setLayout(gl_panelCombate);
+
+		panelListados = new JPanel();
+		tabbedPane.addTab("Listados", null, panelListados, null);
+
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Tipo de listado",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
+
+		JTextArea textArea = new JTextArea();
+		GroupLayout gl_panelListados = new GroupLayout(panelListados);
+		gl_panelListados.setHorizontalGroup(
+			gl_panelListados.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panelListados.createSequentialGroup()
+					.addContainerGap(11, Short.MAX_VALUE)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textArea, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(28))
+		);
+		gl_panelListados.setVerticalGroup(
+			gl_panelListados.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelListados.createSequentialGroup()
+					.addGroup(gl_panelListados.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelListados.createSequentialGroup()
+							.addGap(241)
+							.addComponent(textArea, GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
+						.addGroup(gl_panelListados.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 282, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
+		);
+
+		JRadioButton rdbtnTodosLosPokemon = new JRadioButton("Todos los datos de todos los Pokemon ");
+
+		JRadioButton rdbtnPokemonConPuntos = new JRadioButton("Sólo los Pokemon con más puntos de:");
+
+		JRadioButton rdbtnTodosLosCombates = new JRadioButton("Todos los Combates");
+
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+
+		JCheckBox chckbxAlfabetico = new JCheckBox("Alfábetico");
+
+		JButton btnListar = new JButton("Listar");
+
+		JButton btnLimpiarCampos = new JButton("Limpiar campos");
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_1
+				.createSequentialGroup().addContainerGap()
+				.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING).addComponent(rdbtnTodosLosPokemon)
+						.addComponent(rdbtnTodosLosCombates)
+						.addGroup(gl_panel_1.createSequentialGroup()
+								.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(btnListar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(rdbtnPokemonConPuntos, Alignment.LEADING,
+												GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panel_1.createSequentialGroup().addGap(6)
+												.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 72,
+														GroupLayout.PREFERRED_SIZE)
+												.addGap(28).addComponent(chckbxAlfabetico))
+										.addGroup(gl_panel_1.createSequentialGroup()
+												.addPreferredGap(ComponentPlacement.UNRELATED)
+												.addComponent(btnLimpiarCampos, GroupLayout.PREFERRED_SIZE, 201,
+														GroupLayout.PREFERRED_SIZE)))))
+				.addContainerGap(28, Short.MAX_VALUE)));
+		gl_panel_1.setVerticalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup().addContainerGap().addComponent(rdbtnTodosLosPokemon)
+						.addGap(18)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE).addComponent(rdbtnPokemonConPuntos)
+								.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(chckbxAlfabetico))
+						.addGap(18).addComponent(rdbtnTodosLosCombates).addGap(42)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE).addComponent(btnListar)
+								.addComponent(btnLimpiarCampos))
+						.addContainerGap(26, Short.MAX_VALUE)));
+		panel_1.setLayout(gl_panel_1);
+		panelListados.setLayout(gl_panelListados);
+
+	}
+}

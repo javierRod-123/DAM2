@@ -1,0 +1,29 @@
+package colecciones;
+
+import java.util.HashSet;
+import java.util.Scanner;
+
+public class Act4 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		HashSet<String> conjRepetidas = new HashSet<>();
+		HashSet<String> conjNoRepetidas = new HashSet<String>();
+		
+		System.out.print("Introduzca frase: ");
+		String frase = sc.next();
+		String palabras[] = frase.split("");
+		
+		for(int i = 0; i < palabras.length;i++) {
+			if(!conjNoRepetidas.add(palabras[i])) {
+				conjRepetidas.add(palabras[i]);
+			}
+		}
+		conjNoRepetidas.removeAll(conjRepetidas);
+		
+		System.out.println("Repetidas: "+conjRepetidas);
+		System.out.println("No repetidas: "+conjNoRepetidas);
+	}
+
+}

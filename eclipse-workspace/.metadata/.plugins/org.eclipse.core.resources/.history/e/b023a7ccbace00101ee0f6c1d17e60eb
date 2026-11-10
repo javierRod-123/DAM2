@@ -1,0 +1,23 @@
+package tarea1OrientadoObjetos;
+
+public class Banco {
+    public static void main(String[] args) {
+        // Crear una cuenta
+        CuentaCorriente cuenta1 = new CuentaCorriente("Javier", "12345678A");
+
+        // Mostrar información inicial
+        cuenta1.mostrarInformacion();
+
+        // Ingresar dinero
+        cuenta1.ingresarDinero(100);
+
+        // Intentar sacar dinero válido
+        cuenta1.sacarDinero(50);
+
+        // Intentar sacar más dinero del permitido
+        cuenta1.sacarDinero(200);
+
+        // Mostrar información final
+        cuenta1.mostrarInformacion();
+    }
+}

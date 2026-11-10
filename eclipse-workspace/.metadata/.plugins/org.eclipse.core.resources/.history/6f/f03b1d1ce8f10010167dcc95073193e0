@@ -1,0 +1,27 @@
+package boletin2;
+
+public class Hilo implements Runnable {
+	private int array[];
+	private int inicio;
+	private int fin;
+	private int maxValor;
+	
+	public Hilo(int[] array, int inicio, int fin, int maxValor) {
+		this.array = array;
+		this.inicio = inicio;
+		this.fin = fin;
+		this.maxValor = Integer.MIN_VALUE;
+	}
+
+	public void run() {
+		for (int i = inicio; i < fin; i++) {
+			if(array[i] > maxValor) {
+				maxValor = array[i];
+			}
+		}
+	}
+	
+	public int getMaxValor() {
+		return maxValor;
+	}
+}

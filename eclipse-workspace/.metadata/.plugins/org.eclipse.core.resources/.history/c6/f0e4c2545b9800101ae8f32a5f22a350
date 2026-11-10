@@ -1,0 +1,23 @@
+package bol1;
+
+import java.util.Scanner;
+
+public class Ej6 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Di 4 números decimales para mostrar su media aritmética: ");
+		float num1 = sc.nextFloat();
+		float num2 = sc.nextFloat();
+		float num3 = sc.nextFloat();
+		float num4 = sc.nextFloat();
+		
+		
+		float media = (float) num1 + num2 + num3 + num4 / 4;
+		
+		System.out.println("La media aritmética es: "+media);
+		sc.close();
+	}
+
+}

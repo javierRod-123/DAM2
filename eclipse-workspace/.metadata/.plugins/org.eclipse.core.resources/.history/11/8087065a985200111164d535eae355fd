@@ -1,0 +1,51 @@
+package evalucion2objetos;
+
+public class Estadisticas implements Comparable<Estadisticas> {
+
+	private String tipo;
+	private char clasificacion;
+
+	public Estadisticas(String estadistica, char clasificacion) {
+
+		this.tipo = estadistica;
+		this.clasificacion = clasificacion;
+	}
+
+	public String getEstadistica() {
+		return tipo;
+	}
+
+	public void setEstadistica(String estadistica) {
+		this.tipo = estadistica;
+	}
+
+	public char getClasificacion() {
+		return clasificacion;
+	}
+
+	public void setClasificacion(char clasificacion) {
+		this.clasificacion = clasificacion;
+	}
+
+	public int getValor() {
+		return valorClasificacion();
+	}
+
+	private int valorClasificacion() {
+		return switch (Character.toUpperCase(clasificacion)) {
+		case 'A' -> 5;
+		case 'B' -> 4;
+		case 'C' -> 3;
+		case 'D' -> 2;
+		case 'E' -> 1;
+		default -> 0;
+		};
+	}
+
+	@Override
+	public int compareTo(Estadisticas o) {
+
+		return Integer.compare(this.getValor(), o.getValor());
+	}
+
+}

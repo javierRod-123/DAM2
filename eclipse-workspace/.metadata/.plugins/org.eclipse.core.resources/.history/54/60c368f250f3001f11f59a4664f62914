@@ -1,0 +1,10 @@
+package colecciones;
+
+public class Act6 {
+
+	public static void main(String[] args) {
+		Set<String> name = new LinkedHashSet<>();
+
+	}
+
+}

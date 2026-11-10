@@ -1,0 +1,21 @@
+package bol2Condicional;
+
+import java.util.Scanner;
+
+public class Ej1 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		System.out.print("Introduce el número de un mes: ");
+		int mes = sc.nextInt();
+
+		switch (mes) {
+		case 1:
+
+		}
+
+		sc.close();
+	}
+
+}

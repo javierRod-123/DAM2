@@ -1,0 +1,19 @@
+package ejerciciosFicheros;
+
+import java.util.Scanner;
+
+public class Ejercicio1 {
+
+	public static void main(String[] args) {
+		
+		System.out.println("Introduce un directorio");
+
+		Scanner sc = new Scanner(System.in);
+		
+		String directorio = sc.next();
+		
+		sc.close();
+		
+	}
+
+}

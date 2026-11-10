@@ -1,0 +1,41 @@
+package junit;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+class CalculadoraQueDivideTest {
+
+	@Test
+	void testCalculadoraQueDivideExcepcion() {
+		assertThrows(IllegalArgumentException.class, () -> new CalculadoraQueDivide(0));
+	}
+	
+	@ParameterizedTest
+	@CsvSource({
+		"5",
+		"10",
+		"2"
+	})
+	
+	void testEsDivisibleTrue(int numero) {
+		CalculadoraQueDivide c = new CalculadoraQueDivide(2);
+		assertTrue(c.esDivisible(numero));
+	}
+
+	
+	@ParameterizedTest
+	@CsvSource({
+		"3",
+		"6",
+		"9"
+	})
+	
+	void testEsDivisibleFalse(int numero) {
+		CalculadoraQueDivide c = new CalculadoraQueDivide(numero);
+		assertFalse(c.esDivisible(numero));
+	}
+}

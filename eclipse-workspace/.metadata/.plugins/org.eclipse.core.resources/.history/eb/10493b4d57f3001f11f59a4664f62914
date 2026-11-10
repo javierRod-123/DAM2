@@ -1,0 +1,19 @@
+package colecciones;
+
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.List;
+
+public class Act8 {
+
+	public static void main(String[] args) {
+		List<String> nombres = Arrays.asList("Pepe", "Juan", "Jose");
+		List<String> nameSinRepetir = eliminaRepetidos(nombres);
+		System.out.println(nameSinRepetir);
+	}
+	
+	public static List<String> eliminaRepetidos(List<String> c){
+		LinkedHashSet<String> conjuntoSinRepetidos = new LinkedHashSet();
+	}
+
+}

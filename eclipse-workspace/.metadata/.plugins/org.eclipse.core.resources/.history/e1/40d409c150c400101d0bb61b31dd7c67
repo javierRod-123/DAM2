@@ -1,0 +1,197 @@
+package tipoExamenArrays;
+
+import java.util.Scanner;
+
+public class CarreraCaballos {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String caballos[] = new String[15];
+		String ciudades[] = new String[10];
+		int carreras[][] = new int[15][10];
+		float velocidades[][] = new float[15][10];
+		int contCaballo = 0;
+
+		System.out.println("1- Introducir caballo, carrera, ciudad y velocidad.\r\n" + "2- Listar todos los datos\r\n"
+				+ "3- Indicar en qué ciudad ha habido más carreras.\r\n"
+				+ "4- Listado de carreras junto con el caballo ha quedado en última\r\n" + "posición.\r\n"
+				+ "5- Listado -ordenado por caballo- de velocidades medias.\r\n" + "6- Fin");
+		int option = sc.nextInt();
+
+		while (option != 6) {
+
+			switch (option) {
+			case 1:
+				System.out.print("Nombre caballo: ");
+				String nombreCaballo = sc.next();
+
+				System.out.print("Número de la carrera que ha corrido: ");
+				int numCarrera = sc.nextInt();
+
+				int indexCarrera = getIndexOf2(carreras, contCaballo, numCarrera);
+
+				if (indexCarrera == -1) {
+					System.out.print("Nombre ciudad: ");
+					ciudades[numCarrera] = sc.next();
+				}
+
+				System.out.print("Velocidad media del caballo: ");
+				float velocidadMedia = sc.nextFloat();
+
+				caballos[contCaballo] = nombreCaballo;
+				carreras[contCaballo][0] = numCarrera;
+				velocidades[contCaballo][0] = velocidadMedia;
+
+				contCaballo++;
+
+				break;
+			case 2:
+
+				for (int i = 0; i < contCaballo; i++) {
+					System.out.println("Caballo: " + caballos[i]);
+
+					for (int j = 0; j < carreras[i].length; j++) {
+						if (velocidades[i][j] != 0.0) {
+							int numCarreraActual = carreras[i][j];
+							String ciudadActual = ciudades[numCarreraActual];
+							float velocidadActual = velocidades[i][j];
+
+							System.out.println(
+									"Carrera: " + numCarreraActual + "(" + ciudadActual + "): " + velocidadActual);
+						}
+					}
+				}
+
+				break;
+			case 3:
+				int contCarrerasPorCiudad[] = new int[10];
+
+				for (int i = 0; i < contCaballo; i++) {
+					for (int j = 0; j < carreras[i].length; j++) {
+						int numCarreraActual = carreras[i][j];
+
+						if (velocidades[i][j] != 0) {
+							contCarrerasPorCiudad[numCarreraActual]++;
+						}
+					}
+				}
+
+				int maxCarreras = Integer.MIN_VALUE;
+				int indiceCiudadMasCarreras = -1;
+
+				for (int i = 0; i < contCarrerasPorCiudad.length; i++) {
+					if (contCarrerasPorCiudad[i] > maxCarreras) {
+						maxCarreras = contCarrerasPorCiudad[i];
+						indiceCiudadMasCarreras = i;
+					}
+				}
+
+				if (indiceCiudadMasCarreras != -1) {
+					System.out.println("La ciudad con más carreras es: " + ciudades[indiceCiudadMasCarreras] + " con "
+							+ maxCarreras + " carreras.");
+				} else {
+					System.out.println("No se han registrado carreras aún.");
+				}
+
+				break;
+			case 4:
+				for (int recorridoCarrera = 0; recorridoCarrera < 10; recorridoCarrera++) {
+					float velocidadMinimo = Float.MAX_VALUE;
+					String caballoMasLento = "";
+
+					for (int i = 0; i < contCaballo; i++) {
+						for (int j = 0; j < carreras[i].length; j++) {
+							if (carreras[i][j] == recorridoCarrera && velocidades[i][j] != 0.0f) {
+								if (velocidades[i][j] < velocidadMinimo) {
+									velocidadMinimo = velocidades[i][j];
+									caballoMasLento = caballos[i];
+								}
+							}
+						}
+					}
+
+					if (caballoMasLento != null) {
+						System.out.println("En la carrera " + recorridoCarrera + " (" + ciudades[recorridoCarrera]
+								+ ") el caballo más lento fue: " + caballoMasLento + " con velocidad "
+								+ velocidadMinimo);
+					}
+				}
+				break;
+			case 5:
+				
+				float medias[] = new float[contCaballo];
+				
+				for(int i = 0; i < contCaballo; i++) {
+					float suma = 0;
+					int contador = 0;
+					
+					for(int j = 0; j < velocidades[i].length; j++) {
+						if(velocidades[i][j] != 0) {
+							suma+= velocidades[i][j];
+							contador++;
+						}
+					}
+					
+					if(contador > 0) {
+						medias[i] = suma / contador;
+					} else {
+						medias[i] = 0;
+					}
+				}
+				
+				ordenarAlfabeticamente(caballos, medias, contCaballo);
+				
+				for (int i = 0; i < contCaballo; i++) {
+				    System.out.println("Caballo: " + caballos[i] + " - Velocidad media: " + medias[i]);
+				}				
+				break;
+
+			}
+
+			System.out.println("1- Introducir caballo, carrera, ciudad y velocidad.\r\n"
+					+ "2- Listar todos los datos\r\n" + "3- Indicar en qué ciudad ha habido más carreras.\r\n"
+					+ "4- Listado de carreras junto con el caballo ha quedado en última\r\n" + "posición.\r\n"
+					+ "5- Listado -ordenado por caballo- de velocidades medias.\r\n" + "6- Fin");
+			option = sc.nextInt();
+		}
+
+		sc.close();
+	}
+
+	public static int getIndexOf2(int[][] array, int numElemen, int elemBuscar) {
+		if (array == null || numElemen <= 0) {
+			return -1;
+		}
+
+		for (int i = 0; i < numElemen && i < array.length; i++) {
+			for (int j = 0; j < array[i].length; j++) {
+				if (array[i][j] == elemBuscar) {
+					return i; // Devuelve el índice de la fila donde se encontró
+				}
+			}
+		}
+
+		return -1; // No se encontró
+	}
+	
+	public static void ordenarAlfabeticamente(String[] Elemento1, float[] Elemento2, int cantidad) {
+	    // Usamos un algoritmo sencillo: burbuja
+	    for (int i = 0; i < cantidad - 1; i++) {
+	        for (int j = i + 1; j < cantidad; j++) {
+	            if (Elemento1[i].compareToIgnoreCase(Elemento1[j]) > 0) {
+	                // Intercambiamos nombres
+	                String tempNombre = Elemento1[i];
+	                Elemento1[i] = Elemento1[j];
+	                Elemento1[j] = tempNombre;
+
+	                // Intercambiamos también las velocidades medias
+	                float tempVelocidad = Elemento2[i];
+	                Elemento2[i] = Elemento2[j];
+	                Elemento2[j] = tempVelocidad;
+	            }
+	        }
+	    }
+	}
+
+
+}

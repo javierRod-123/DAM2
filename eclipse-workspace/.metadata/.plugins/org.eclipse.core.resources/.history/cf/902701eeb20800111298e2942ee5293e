@@ -1,0 +1,17 @@
+package tareas;
+
+import java.util.*;
+
+public class Actividad4 {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Introduce una frase: ");
+        String frase = sc.nextLine();
+        
+        String palabrasArray[] = frase.split(" ");
+
+        sc.close();
+    }
+}

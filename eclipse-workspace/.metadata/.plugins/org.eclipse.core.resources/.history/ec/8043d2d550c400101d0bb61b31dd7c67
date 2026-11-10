@@ -1,0 +1,213 @@
+package arraysTipoExamen;
+
+import java.util.Scanner;
+
+public class Partidos {
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+
+		int goles[][][] = new int[20][20][2];
+		String equipos[] = new String[20];
+		int numEquipoLocal = 0;
+		int numEquipoVisitante = 0;
+
+		System.out.println("1- Introducir resultado de un partido.");
+		System.out.println("2- Mostrar todos los partidos introducidos.");
+		System.out.println("3- Mostrar el equipo ganador de la liga.");
+		System.out.println("4- Mostrar el porcentaje de partidos en los que perdió el equipo local");
+		System.out.println("5- Introducir nombre de equipo y mostrar los resultados de todos sus partidos");
+		System.out.println("6. Finalizar");
+		int option = sc.nextInt();
+
+		while (option != 6) {
+			switch (option) {
+			case 1:
+				System.out.print("Nombre del equipo local: ");
+				String nombreLocal = sc.next();
+
+				int indexLocal = getIndexOf(equipos, numEquipoLocal, nombreLocal);
+
+				if (indexLocal == -1) {
+					equipos[numEquipoLocal] = nombreLocal;
+					indexLocal = numEquipoLocal;
+					numEquipoLocal++;
+				}
+
+				System.out.print("Nombre del equipo visitante: ");
+				String nombreVisitante = sc.next();
+
+				int indexVisitante = getIndexOf(equipos, numEquipoVisitante, nombreVisitante);
+
+				if (indexVisitante == -1) {
+					equipos[numEquipoVisitante] = nombreVisitante;
+					indexVisitante = numEquipoVisitante;
+					numEquipoVisitante++;
+				}
+
+				System.out.println("Goles del equipo local: ");
+				int golesLocal = sc.nextInt();
+
+				System.out.println("Goles del equipo visitante: ");
+				int golesVisitante = sc.nextInt();
+
+				goles[indexLocal][indexVisitante][0] = golesLocal;
+
+				goles[indexLocal][indexVisitante][1] = golesVisitante;
+
+				break;
+			case 2:
+
+				String copiaEquiposPartido[] = copyOf(equipos, numEquipoLocal);
+
+				for (int i = 0; i < copiaEquiposPartido.length; i++) {
+					for (int j = 0; j < copiaEquiposPartido.length; j++) {
+						if (goles[i][j][0] != 0 || goles[i][j][1] != 0) {
+							System.out.println(copiaEquiposPartido[i] + " " + goles[i][j][0] + " - "
+									+ copiaEquiposPartido[j] + " " + goles[i][j][1]);
+
+						}
+					}
+				}
+
+				break;
+			case 3:
+
+				String copiaEquiposPuntos[] = copyOf(equipos, numEquipoLocal);
+				int puntos[] = new int[copiaEquiposPuntos.length];
+
+				for (int i = 0; i < copiaEquiposPuntos.length; i++) {
+					for (int j = 0; j < copiaEquiposPuntos.length; j++) {
+						int golesEquipoLocal = goles[i][j][0];
+						int golesEquipoVisitante = goles[i][j][1];
+
+						if (golesEquipoLocal != 0 || golesEquipoVisitante != 0) {
+							if (golesEquipoLocal > golesEquipoVisitante) {
+								puntos[i] += 3;
+							} else if (golesEquipoLocal < golesEquipoVisitante) {
+								puntos[j] += 3;
+							} else {
+								puntos[i] += 1;
+								puntos[j] += 1;
+							}
+						}
+					}
+
+				}
+
+				int maxPuntos = -1;
+				int indexGanador = -1;
+
+				for (int i = 0; i < puntos.length; i++) {
+					if (puntos[i] > maxPuntos) {
+						maxPuntos = puntos[i];
+						indexGanador = i;
+					}
+				}
+
+				System.out.println("El equipo con más puntos es: " + copiaEquiposPuntos[indexGanador] + " con "
+						+ maxPuntos + " puntos.");
+
+				break;
+			case 4:
+				String copiaEquiposPorcentaje[] = copyOf(equipos, numEquipoLocal);
+				int totalPartidos = 0;
+				int localPerdidos = 0;
+
+				for (int i = 0; i < copiaEquiposPorcentaje.length; i++) {
+					for (int j = 0; j < copiaEquiposPorcentaje.length; j++) {
+						int golesLocalPorcentaje = goles[i][j][0];
+						int golesVisitantePorcentaje = goles[i][j][1];
+
+						if (golesLocalPorcentaje != 0 || golesVisitantePorcentaje != 0) {
+							totalPartidos++;
+
+							if (golesLocalPorcentaje < golesVisitantePorcentaje) {
+								localPerdidos++;
+							}
+						}
+					}
+				}
+
+				if (totalPartidos > 0) {
+					double porcentaje = (localPerdidos * 100.0) / totalPartidos;
+					System.out.printf("Porcentaje de partidos en los que perdió el equipo local: %.2f%%\n", porcentaje);
+				} else {
+					System.out.println("No hay partidos registrados.");
+				}
+				break;
+			case 5:
+				
+				System.out.println("Introduce el nombre del equipo a buscar: ");
+				String equipoBusqueda = sc.next();
+				
+				String copiaEquiposBusqueda[] = copyOf(equipos, numEquipoLocal);
+				String[] rivalesLocal = new String[20];
+				String[] rivalesVisitante = new String[20];
+				int contLocal = 0;
+				int contVisitante = 0;
+
+				
+				for(int i = 0; i < copiaEquiposBusqueda.length; i++) {
+					for(int j = 0; j < copiaEquiposBusqueda.length; j++) {
+						int golesLocalBusqueda = goles[i][j][0];
+						int golesVisitanteBusqueda = goles[i][j][1];
+						
+						if(golesLocalBusqueda != 0 || golesVisitanteBusqueda != 0) {
+							if(copiaEquiposBusqueda[i].equals(equipoBusqueda)) {
+								rivalesLocal[contLocal] = copiaEquiposBusqueda[j];
+								contLocal++;
+							}
+							
+							if(copiaEquiposBusqueda[j].equals(equipoBusqueda)) {
+								rivalesVisitante[contVisitante] = copiaEquiposBusqueda[i];
+								contVisitante++;
+							}
+						}
+					}
+				}
+				
+				System.out.println("Como local ha jugado con: ");
+				for(int i = 0; i < contLocal; i++) {
+					System.out.println(" "+rivalesLocal[i]);
+				}
+				
+				System.out.println("Como visitante ha jugado con: ");
+				for(int i = 0; i < contVisitante; i++) {
+					System.out.println(" "+rivalesVisitante[i]);
+				}
+				
+				break;
+			}
+		}
+
+		sc.close();
+	}
+
+	public static int getIndexOf(String[] array, int numElemen, String elemBuscar) {
+		if (array == null || elemBuscar == null || numElemen <= 0) {
+			return -1;
+		}
+
+		for (int i = 0; i < numElemen && i < array.length; i++) {
+			if (elemBuscar.equals(array[i])) {
+				return i;
+			}
+		}
+
+		return -1; // No encontrado
+	}
+
+	public static String[] copyOf(String[] original, int newLength) {
+		if (original == null || newLength < 0) {
+			return null; // Manejo básico de errores
+		}
+		String[] copia = new String[newLength];
+		for (int i = 0; i < newLength && i < original.length; i++) {
+			copia[i] = original[i];
+		}
+		return copia;
+	}
+
+}

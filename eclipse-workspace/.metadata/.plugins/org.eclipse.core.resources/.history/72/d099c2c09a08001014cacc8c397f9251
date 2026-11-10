@@ -1,0 +1,12 @@
+package u5.controles.reservaanimales.fuentes;
+
+public class Reserva 
+{
+
+	public void anyadeArea(String string, float f) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+}

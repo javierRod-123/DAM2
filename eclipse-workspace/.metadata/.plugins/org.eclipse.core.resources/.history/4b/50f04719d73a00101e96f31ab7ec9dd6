@@ -1,0 +1,447 @@
+package examen3;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JComboBox;
+import javax.swing.JToggleButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JCheckBox;
+import javax.swing.DefaultComboBoxModel;
+
+public class VentanaPpal extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private Principal controlador;
+	private JTabbedPane tabbedPane;
+	private JPanel panelBusqueda;
+	private JPanel panelFicheros;
+	private JPanel panelClientes;
+	private JLabel lblDni;
+	private JLabel lblNombre;
+	private JLabel lblTelefono;
+	private JTextField campoDni;
+	private JTextField campoNombre;
+	private JTextField campoTelefono;
+	private JLabel lblDniCliente;
+	private JTextField campoDniABuscar;
+	private JButton botonMostrarBusqueda;
+	private JScrollPane scrollPane_1;
+	private JTextArea areaBusquedas;
+	private JButton botonNuevoContacto;
+	private JButton botonBorrarContacto;
+	private JButton botonCargarClientesTxt;
+	private JButton botonGuardarClientesTxt;
+	private JButton botonCargarClientesPagosBin;
+	private JButton botonGuardarClientesPagosBIN;
+	private JButton botonGuardarContacto;
+	private FileNameExtensionFilter filtroSerializado;
+	private JFileChooser selectorFicheroSerializado;
+	private JButton btnListarTodos;
+	private FileNameExtensionFilter filtroTxt;
+	private JFileChooser selectorFicheroTxt;
+	private JPanel panelPago;
+	private JLabel lblCliente;
+	private JComboBox comboBoxCliente;
+	private JLabel lblMes;
+	private JComboBox comboBox_Mes;
+	private JLabel lblImporte;
+	private JTextField textField;
+	private JButton btnGuardarPago;
+
+	public VentanaPpal(Principal controlador) {
+
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
+		this.filtroSerializado = new FileNameExtensionFilter("Ficheros de agendas serializadas", "ser");
+
+		this.selectorFicheroSerializado = new JFileChooser();
+		this.selectorFicheroSerializado.setFileFilter(this.filtroSerializado);
+
+		this.filtroTxt = new FileNameExtensionFilter("Ficheros TXT", "txt");
+		this.selectorFicheroTxt = new JFileChooser();
+		this.selectorFicheroTxt.setFileFilter(this.filtroTxt);
+
+		setTitle("Gesti\u00F3n de Pagos de clientes");
+		this.controlador = controlador;
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 655, 410);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		contentPane.add(tabbedPane, BorderLayout.CENTER);
+
+		panelClientes = new JPanel();
+		tabbedPane.addTab("Clientes", null, panelClientes, null);
+
+		lblDni = new JLabel("DNI:");
+
+		lblNombre = new JLabel("Nombre:");
+
+		lblTelefono = new JLabel("Teléfono:");
+
+		campoDni = new JTextField();
+		campoDni.setColumns(10);
+
+		campoNombre = new JTextField();
+		campoNombre.setColumns(10);
+
+		campoTelefono = new JTextField();
+		campoTelefono.setColumns(10);
+
+		botonNuevoContacto = new JButton("Limpiar campos");
+		botonNuevoContacto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				botonLimpiarDatosContacto();
+
+			}
+		});
+
+		botonBorrarContacto = new JButton("Borrar contacto");
+		botonBorrarContacto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonQuitarContactoPulsado();
+			}
+		});
+
+		botonGuardarContacto = new JButton("Guardar contacto");
+		botonGuardarContacto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonGuardarContactoPulsado();
+			}
+		});
+		GroupLayout gl_panelClientes = new GroupLayout(panelClientes);
+		gl_panelClientes.setHorizontalGroup(
+			gl_panelClientes.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelClientes.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelClientes.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelClientes.createSequentialGroup()
+							.addComponent(lblDni, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(campoDni, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panelClientes.createSequentialGroup()
+							.addComponent(lblNombre, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(campoNombre, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panelClientes.createParallelGroup(Alignment.TRAILING)
+							.addComponent(botonNuevoContacto, GroupLayout.PREFERRED_SIZE, 313, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_panelClientes.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panelClientes.createSequentialGroup()
+									.addComponent(lblTelefono, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(campoTelefono, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE))
+								.addComponent(botonBorrarContacto, GroupLayout.PREFERRED_SIZE, 313, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(botonGuardarContacto, GroupLayout.PREFERRED_SIZE, 313, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(511, Short.MAX_VALUE))
+		);
+		gl_panelClientes.setVerticalGroup(
+			gl_panelClientes.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelClientes.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelClientes.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblDni)
+						.addComponent(campoDni, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panelClientes.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNombre)
+						.addComponent(campoNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panelClientes.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblTelefono)
+						.addComponent(campoTelefono, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(37)
+					.addComponent(botonNuevoContacto)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(botonGuardarContacto)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(botonBorrarContacto)
+					.addContainerGap(137, Short.MAX_VALUE))
+		);
+		panelClientes.setLayout(gl_panelClientes);
+		
+		panelPago = new JPanel();
+		tabbedPane.addTab("Pago", null, panelPago, null);
+		
+		lblCliente = new JLabel("Cliente:");
+		
+		comboBoxCliente = new JComboBox();
+		
+		lblMes = new JLabel("Mes:");
+		
+		comboBox_Mes = new JComboBox();
+		comboBox_Mes.setModel(new DefaultComboBoxModel(Mes.values()));
+		comboBox_Mes.setBackground(UIManager.getColor("Button.darkShadow"));
+		comboBox_Mes.setToolTipText("\r\n");
+		
+		lblImporte = new JLabel("Importe:");
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		
+		btnGuardarPago = new JButton("Guardar Pago");
+		btnGuardarPago.setToolTipText("");
+		btnGuardarPago.setBackground(UIManager.getColor("Button.darkShadow"));
+		GroupLayout gl_panelPago = new GroupLayout(panelPago);
+		gl_panelPago.setHorizontalGroup(
+			gl_panelPago.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelPago.createSequentialGroup()
+					.addGap(55)
+					.addGroup(gl_panelPago.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblCliente, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblMes, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panelPago.createSequentialGroup()
+							.addComponent(lblImporte, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+							.addGap(123)
+							.addComponent(btnGuardarPago)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelPago.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(textField)
+						.addComponent(comboBox_Mes, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(comboBoxCliente, 0, 180, Short.MAX_VALUE))
+					.addContainerGap(378, Short.MAX_VALUE))
+		);
+		gl_panelPago.setVerticalGroup(
+			gl_panelPago.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelPago.createSequentialGroup()
+					.addGap(28)
+					.addGroup(gl_panelPago.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblCliente)
+						.addComponent(comboBoxCliente, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(10)
+					.addGroup(gl_panelPago.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblMes)
+						.addComponent(comboBox_Mes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(6)
+					.addGroup(gl_panelPago.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelPago.createSequentialGroup()
+							.addComponent(lblImporte)
+							.addGap(87)
+							.addComponent(btnGuardarPago))
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(126))
+		);
+		panelPago.setLayout(gl_panelPago);
+
+		panelBusqueda = new JPanel();
+		tabbedPane.addTab("Busquedas", null, panelBusqueda, null);
+
+		lblDniCliente = new JLabel("DNI del cliente: ");
+
+		campoDniABuscar = new JTextField();
+		campoDniABuscar.setColumns(10);
+
+		botonMostrarBusqueda = new JButton("Mostrar");
+		botonMostrarBusqueda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonMostrarBusquedaPulsado();
+			}
+		});
+
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+		btnListarTodos = new JButton("Listar todos");
+		btnListarTodos.setActionCommand("Listar todos");
+		btnListarTodos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonListarTodoPulsado();
+			}
+		});
+		GroupLayout gl_panelBusqueda = new GroupLayout(panelBusqueda);
+		gl_panelBusqueda
+				.setHorizontalGroup(gl_panelBusqueda.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelBusqueda.createSequentialGroup().addContainerGap()
+								.addGroup(gl_panelBusqueda.createParallelGroup(Alignment.LEADING)
+										.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
+										.addGroup(gl_panelBusqueda.createSequentialGroup()
+												.addComponent(lblDniCliente, GroupLayout.PREFERRED_SIZE, 127,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(campoDniABuscar, GroupLayout.PREFERRED_SIZE, 210,
+														GroupLayout.PREFERRED_SIZE)
+												.addGap(18).addComponent(botonMostrarBusqueda)
+												.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(
+														btnListarTodos, GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)))
+								.addContainerGap()));
+		gl_panelBusqueda.setVerticalGroup(gl_panelBusqueda.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelBusqueda.createSequentialGroup().addContainerGap()
+						.addGroup(gl_panelBusqueda.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblDniCliente)
+								.addComponent(campoDniABuscar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(botonMostrarBusqueda).addComponent(btnListarTodos))
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE).addContainerGap()));
+
+		areaBusquedas = new JTextArea();
+		scrollPane_1.setViewportView(areaBusquedas);
+		panelBusqueda.setLayout(gl_panelBusqueda);
+
+		panelFicheros = new JPanel();
+		tabbedPane.addTab("Ficheros", null, panelFicheros, null);
+
+		botonCargarClientesTxt = new JButton("Leer clientes de TXT y cargarlos en el modelo");
+
+		botonGuardarClientesTxt = new JButton("Escribir clientes en TXT");
+
+		botonCargarClientesPagosBin = new JButton("Leer clientes y pagos de BIN y cargarlos en el modelo");
+
+		botonGuardarClientesPagosBIN = new JButton("Escribir clientes y pagos en BIN");
+
+		GroupLayout gl_panelFicheros = new GroupLayout(panelFicheros);
+		gl_panelFicheros.setHorizontalGroup(gl_panelFicheros.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelFicheros.createSequentialGroup().addGap(179)
+						.addGroup(gl_panelFicheros.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(botonGuardarClientesPagosBIN, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(botonCargarClientesTxt, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(botonGuardarClientesTxt, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(botonCargarClientesPagosBin, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGap(276)));
+		gl_panelFicheros.setVerticalGroup(gl_panelFicheros.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelFicheros.createSequentialGroup().addGap(94).addComponent(botonCargarClientesTxt)
+						.addPreferredGap(ComponentPlacement.RELATED).addComponent(botonGuardarClientesTxt)
+						.addPreferredGap(ComponentPlacement.RELATED).addComponent(botonCargarClientesPagosBin)
+						.addPreferredGap(ComponentPlacement.RELATED).addComponent(botonGuardarClientesPagosBIN)
+						.addContainerGap(136, Short.MAX_VALUE)));
+		panelFicheros.setLayout(gl_panelFicheros);
+	}
+
+	protected void botonListarTodoPulsado() {
+
+		this.areaBusquedas.setText("");
+		for (Cliente c : this.controlador.getModelo().getPagosRealizados().keySet()) {
+
+			this.areaBusquedas.append("  CLIENTE: \n");
+			this.areaBusquedas.append("       DNI...: " + c.getDni() + "\n");
+			this.areaBusquedas.append("       PAGOS...: \n");
+
+			for (Pago p : this.controlador.getModelo().getPagosRealizados().get(c))
+				this.areaBusquedas.append("                       " + p + "\n");
+		}
+
+	}
+
+
+
+	protected void botonMostrarBusquedaPulsado() {
+		if (this.campoDniABuscar.getText().isEmpty())
+			this.error("No se puede dejar el nombre vacio");
+		else {
+			Cliente c=new Cliente(this.campoDniABuscar.getText());
+			if (!this.controlador.getModelo().getPagosRealizados().containsKey(c))
+				this.error("Ese cliente no esta en el modelo.");
+			else {
+				ArrayList<Pago> pagosCliente = this.controlador.getModelo().getPagosRealizados().get(c);
+				this.areaBusquedas.setText("");
+				this.areaBusquedas.append("  CLIENTE: \n");
+				this.areaBusquedas.append("       DNI...: " + c.getDni() + "\n");
+				this.areaBusquedas.append("       PAGOS...: \n");
+
+				for (Pago p : this.controlador.getModelo().getPagosRealizados().get(c))
+					this.areaBusquedas.append("                       " + p + "\n");
+			}
+			
+		}
+	}
+
+	protected void botonQuitarContactoPulsado() {
+		if (this.campoDni.getText().isEmpty())
+			this.error("No se puede dejar el dni vacio");
+		else {
+			if (!this.controlador.contieneCliente(this.campoDni.getText()))
+				this.error("Ese dni no esta en el modelo.");
+			else {
+
+				this.controlador.removeCliente(this.campoDni.getText());
+				this.mensaje("Cliente borrado.");
+			}
+		}
+
+	}
+
+	protected void botonLimpiarDatosContacto() {
+		this.campoNombre.setEnabled(true);
+		this.campoTelefono.setEnabled(true);
+		this.campoDni.setEnabled(true);
+		this.campoNombre.setText("");
+		this.campoTelefono.setText("");
+		this.campoDni.setText("");
+		this.botonGuardarContacto.setEnabled(true);
+		this.botonBorrarContacto.setEnabled(true);
+	}
+
+	protected void botonGuardarContactoPulsado() {
+		if (this.campoDni.getText().isEmpty() || this.campoNombre.getText().isEmpty()
+				|| this.campoTelefono.getText().isEmpty()) {
+			this.error("No se pueden dejar campos vacios");
+		} else {
+			if (this.controlador.contieneCliente(this.campoDni.getText()))
+				this.error("Ese cliente ya esta en el modelo.");
+			else {
+
+				this.controlador.addCliente(
+						new Cliente(this.campoDni.getText(), this.campoNombre.getText(), this.campoTelefono.getText()));
+				this.campoDni.setEnabled(false);
+				this.campoTelefono.setEnabled(false);
+				this.campoNombre.setEnabled(false);
+				this.botonGuardarContacto.setEnabled(false);
+				this.botonBorrarContacto.setEnabled(false);
+				this.campoTelefono.setEnabled(false);
+			}
+		}
+	}
+
+
+	private void error(String msg) {
+		JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+
+	private void mensaje(String msg) {
+		JOptionPane.showMessageDialog(this, msg, "Correcto", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+
+	
+}

@@ -1,0 +1,59 @@
+package examen;
+
+import java.util.Scanner;
+
+public class ExamenJavier {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String tabla [][] = new String [15][3];
+		String caballo [] = new String [15];
+		
+		System.out.println("1- Introducir caballo, carrera, ciudad y velocidad");
+		System.out.println("2- Listar todos los datos");
+		System.out.println("3- Indicar en qué ciudad ha habido más carreras.");
+		System.out.println("4- Listado de carreras junto con el caballo ha quedado en última posición");
+		System.out.println("5- Listado -ordenado por caballo- de velocidades medias.");
+		System.out.println("6- Fin.");
+		int option = sc.nextInt();
+
+		while (option < 6) {
+			switch (option) {
+			
+			// 1
+			case 1: 
+				System.out.print("Nombre del caballo: ");
+				String nombreCaballo = sc.next();
+				System.out.print("Número de la carrera que ha corrido: ");
+				int carreraCorrido = sc.nextInt();
+				System.out.print("Nombre de la ciudad en la que se ha realizado: ");
+				String nombreCiudad = sc.next();
+				
+				
+				
+				
+			}
+			System.out.println("1- Introducir caballo, carrera, ciudad y velocidad");
+			System.out.println("2- Listar todos los datos");
+			System.out.println("3- Indicar en qué ciudad ha habido más carreras.");
+			System.out.println("4- Listado de carreras junto con el caballo ha quedado en última posición");
+			System.out.println("5- Listado -ordenado por caballo- de velocidades medias.");
+			System.out.println("6- Fin.");
+			option = sc.nextInt();
+		}
+
+		sc.close();
+	}
+	public static int getIndexOf(String[] tablaString, String elemABuscar, int numElementos) {
+		int indice = -1;
+
+		for (int i = 0; i < numElementos && indice == -1; i++) {
+			if (tablaString[i] != null && tablaString[i].equals(elemABuscar)) {
+				indice = i;
+			}
+		}
+
+		return indice;
+	}
+
+}

@@ -1,0 +1,30 @@
+package bol1;
+
+import java.util.Scanner;
+
+public class Ej8 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("Dime una cantidad de horas, minutos y segundos: ");
+		int horas = sc.nextInt();
+		int minutos = sc.nextInt();
+		int segundos = sc.nextInt();
+
+		int minutoC = segundos / 60;
+		int segundoC = segundos % 60;
+
+		int minutoTotal = minutoC + minutos;
+		int horaC = minutoTotal / 60;
+		int minutoTotalFinal = minutoTotal % 60;
+
+		int horaFinalTotal = horaC + horas;
+
+		System.out.println("La hora convencional sería: " + horaFinalTotal + " horas, " + minutoTotalFinal
+				+ " minutos y " + segundoC + " segundos");
+
+		sc.close();
+	}
+
+}

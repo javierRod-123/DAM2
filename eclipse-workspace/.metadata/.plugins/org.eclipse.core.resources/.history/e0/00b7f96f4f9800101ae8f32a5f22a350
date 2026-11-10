@@ -1,0 +1,18 @@
+package bol1;
+
+import java.util.Scanner;
+
+public class Ej4 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("Dime una longitud en millas (por ejemplo, 3) ");
+		int milla = sc.nextInt();
+		
+		
+		
+		sc.close();
+	}
+
+}

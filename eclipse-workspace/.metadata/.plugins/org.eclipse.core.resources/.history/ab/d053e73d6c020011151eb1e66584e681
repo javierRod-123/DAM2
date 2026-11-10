@@ -1,0 +1,11 @@
+package boletin4.naranjas;
+
+public class Main {
+
+	public static void main(String[] args) {
+		int recoleccionNaranjasJuan[] = {20, 40, 60, 80};
+		int recoleccionNaranjasMaria[] = {10, 30, 50, 70};
+
+	}
+
+}

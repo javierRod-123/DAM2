@@ -1,0 +1,14 @@
+package junit;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class CalculadoraQueDivideTest {
+
+	@Test
+	void testCalculadoraQueDivideExcepcion() {
+		CalculadoraQueDivide calculator = new CalculadoraQueDivide(-1);
+	}
+
+}

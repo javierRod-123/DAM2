@@ -1,0 +1,84 @@
+package tipoExamenArrays;
+
+import java.util.Scanner;
+
+public class NotasEvaluacion {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		float notas[][] = new float[30][2];
+		String alumnos[] = new String[30];
+		int positivos[] = new int[30];
+		int numAlumnos = 0;
+
+		System.out.println("1- Introducir alumno, nota del control y nota del examen final del alumno.\r\n"
+				+ "2- Poner un positivo a un alumno.\r\n"
+				+ "3- Listar todos los alumnos con su nota final de evaluación ordenado por\r\n" + "nota.\r\n"
+				+ "4- Mostrar estadísticas de la evaluación.\r\n" + "5- Fin.");
+		int option = sc.nextInt();
+		
+		while(option != 5) {
+			switch(option) {
+			case 1:
+				
+				System.out.print("Nombre alumno: ");
+				String nombreAlumno = sc.next();
+				
+				int indexAlumno = getIndexOf(alumnos, numAlumnos, nombreAlumno);
+				
+				if(indexAlumno == -1) {
+					alumnos[numAlumnos] = nombreAlumno;
+					indexAlumno = numAlumnos;
+					numAlumnos++;
+				}
+				
+				System.out.print("Nota del control: ");
+				float notaControl = sc.nextFloat();
+				
+				System.out.print("Nota del examen final: ");
+				float notaExamenFinal = sc.nextFloat();
+				
+				notas[indexAlumno][0] = notaControl;
+				notas[indexAlumno][1] = notaExamenFinal;
+				break;
+			case 2:
+				
+				System.out.print("Nombre del alumno que hay que añadir positivo: ");
+				String nombreAlumnoPositivo = sc.next();
+				
+				for(int i = 0; i < numAlumnos; i++) {
+					if(alumnos[i].equals(nombreAlumnoPositivo)) {
+						
+					}
+				}
+				
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			}
+		}
+		sc.close();
+	}
+	
+	public static int getIndexOf(String[] array, int numElemen, String elemBuscar) {
+		if (array == null || elemBuscar == null || numElemen <= 0) {
+			return -1;
+		}
+
+		for (int i = 0; i < numElemen && i < array.length; i++) {
+			if (elemBuscar.equals(array[i])) {
+				return i;
+			}
+		}
+
+		return -1; // No encontrado
+	}
+	
+}
+
+
+
+

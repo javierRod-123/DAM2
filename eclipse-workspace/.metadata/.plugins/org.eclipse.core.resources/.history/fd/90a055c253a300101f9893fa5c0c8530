@@ -1,0 +1,47 @@
+package tipoExamenCorto;
+
+import java.util.Scanner;
+
+public class CentroEducativo {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String nombreAlumno = "";
+		float notaPrimerParcial = 0;
+		float notaSegundoParial = 0;
+		float notaTercerParcial = 0;
+		float notaMedia = 0;
+		float notaMediaMayor = 0;
+		String nombreAlumnoMayorNotaMedia = "";
+
+		System.out.print("Introduce la letra del grupo: ");
+		char letraGrupo = sc.next().charAt(0);
+
+		switch (letraGrupo) {
+		case 'A':
+			for (int i = 1; i <= 25; i++) {
+				System.out.print("Nombre del alumno: ");
+				nombreAlumno = sc.next();
+				System.out.print("Dime la nota primer parcial del alumno " + i + ": ");
+				notaPrimerParcial = sc.nextFloat();
+				System.out.print("Dime la nota del segundo parcial del alumno " + i + ": ");
+				notaSegundoParial = sc.nextFloat();
+				System.out.print("Dime la nota del tercer parcial del alumno " + i + ": ");
+				notaTercerParcial = sc.nextFloat();
+
+				notaMedia = notaPrimerParcial + notaSegundoParial + notaTercerParcial / 3;
+
+				if (notaMedia > notaMediaMayor) {
+					notaMediaMayor = notaMedia;
+					nombreAlumnoMayorNotaMedia = nombreAlumno;
+				}
+				
+				
+
+			}
+		}
+
+		sc.close();
+	}
+
+}

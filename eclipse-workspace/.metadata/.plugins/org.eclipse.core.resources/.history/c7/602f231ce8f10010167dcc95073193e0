@@ -1,0 +1,22 @@
+package boletin2;
+
+public class Principal {
+
+	public static void main(String[] args) {
+		int clasificacion [] = new int[Integer.parseInt(args[0])];
+		
+		int divididoArray [] = new int[Integer.parseInt(args[1])];
+		
+		for (int i = 0; i < clasificacion.length; i++) {
+			clasificacion[i] = (int)(Math.random() * 500) +1;
+		}
+		
+		int divisor = Integer.parseInt(args[2]);
+		
+		// Hay que buscar de cada hilo 
+		for (int i = 0; i < clasificacion.length / divisor; i++) {
+			
+		}
+	}
+
+}

@@ -1,0 +1,15 @@
+package bol1;
+
+import java.util.Scanner;
+
+public class Ej5 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("Dime una temperatura en grados centígrados: ");
+
+		sc.close();
+	}
+
+}

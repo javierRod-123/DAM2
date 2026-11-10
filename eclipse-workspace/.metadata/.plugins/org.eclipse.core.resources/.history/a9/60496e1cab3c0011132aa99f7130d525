@@ -1,0 +1,7 @@
+java.io.FileNotFoundException: 22K-General_ST.txt (El sistema no puede encontrar el archivo especificado)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:219)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:159)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:112)
+	at java.base/java.io.FileReader.<init>(FileReader.java:60)
+	at trail.BuscarClub.main(BuscarClub.java:15)

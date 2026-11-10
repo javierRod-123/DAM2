@@ -1,0 +1,47 @@
+package tipoExamenCorto;
+
+import java.util.Scanner;
+
+public class Biologos {
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		
+
+		System.out.println("Introduce el número de árboles que va a introducir datos ");
+		int numArbol = sc.nextInt();
+
+		for (int i = 1; i <= numArbol; i++) {
+			float diametro = 0;
+			float altura = 0;
+			int edad = 0;
+			int suma = 0;
+			
+			System.out.print("Introduce el tipo de árbol (A o B) ");
+			char tipoArbol = sc.next().charAt(0);
+			
+			if(tipoArbol == 'A') {
+				System.out.print("Diámetro: ");
+				diametro = sc.nextFloat();
+				
+				System.out.print("Altura: ");
+				altura = sc.nextFloat();
+			} else if(tipoArbol == 'B') {
+				System.out.print("Diámetro: ");
+				diametro = sc.nextFloat();
+				
+				System.out.print("Altura: ");
+				altura = sc.nextFloat();
+				
+				System.out.print("Edad: ");
+				edad = sc.nextInt();
+			}
+			
+			
+		}
+
+		sc.close();
+	}
+
+}

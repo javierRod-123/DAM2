@@ -1,0 +1,14 @@
+package tareas;
+
+java.util.*;
+
+public class Interseccion {
+	public static Set<Integer> interseccion(Set<Integer> conjunto1, Set<Integer> conjunto2) {
+	    Set<Integer> resultado = new HashSet<>();
+
+	    
+
+	    return resultado;
+	}
+
+}

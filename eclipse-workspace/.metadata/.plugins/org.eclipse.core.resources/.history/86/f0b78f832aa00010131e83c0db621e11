@@ -1,0 +1,41 @@
+package tiposExamen;
+
+import java.util.Scanner;
+
+public class Ej2 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int numAlumnos = 0;
+		double notaAlumno = 0;
+		int contAlumnosMenor8 = 0;
+		double suma = 0;
+		double mediaCurso = 0;
+		
+		System.out.println("Introduce un curso: ");
+		String curso = sc.next();
+		
+		while(!curso.equals("fin")) {
+			System.out.println("¿Cuántos alumnos tiene el curso?");
+			numAlumnos = sc.nextInt();
+			
+			for(int i = 0; i <= numAlumnos; i++) {
+				System.out.println("Dime la nota del alumno "+i+": ");
+				notaAlumno = sc.nextDouble();
+				
+				suma += notaAlumno;
+				
+				if(numAlumnos < 8) {
+					contAlumnosMenor8++;
+				}
+				
+				mediaCurso = suma / i;
+			}
+		}
+		
+		
+		
+		sc.close();
+	}
+
+}

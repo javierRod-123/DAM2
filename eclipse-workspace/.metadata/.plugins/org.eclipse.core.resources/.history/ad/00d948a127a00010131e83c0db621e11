@@ -1,0 +1,58 @@
+package tiposExamen;
+
+import java.util.Scanner;
+
+public class Ej1 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int numMayor = 0;
+		int numMenor = 0;
+		boolean numMayor100 = false;
+		int cont = 1;
+		int contNumMenor5 = 0;
+		int suma = 0;
+
+		System.out.print("Introduce un número positivo");
+		int num = sc.nextInt();
+
+		while (num < 0) {
+			if (num > numMayor) {
+				numMayor = num;
+			}
+
+			if (num < numMayor) {
+				numMenor = num;
+			}
+
+			if (numMayor > 100) {
+				numMayor100 = true;
+			}
+
+			if (num < 5) {
+				contNumMenor5++;
+			}
+			
+			suma += num;
+			System.out.print("Introduce un número positivo");
+			num = sc.nextInt();
+		}
+		
+		System.out.print("La media aritmética es: "+suma / cont);
+		
+		System.out.println("El valor mínimo es: " + numMenor);
+		
+		System.out.println("El valor máximo es: " + numMayor);
+
+		System.out.println("El porcentaje de valores menores de 5: " + 100 * contNumMenor5 / cont);
+
+		if(numMayor100) {
+			System.out.println("Si hay algún número mayor que 100");
+		} else {
+			System.out.println("No hay ningún número mayor que 100");
+		}
+		
+		sc.close();
+	}
+
+}

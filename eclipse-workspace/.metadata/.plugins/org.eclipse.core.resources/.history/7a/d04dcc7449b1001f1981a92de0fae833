@@ -1,0 +1,21 @@
+package examen;
+
+import java.util.Scanner;
+
+public class ExamenJavier {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("1- Introducir caballo, carrera, ciudad y velocidad");
+		System.out.println("2- Listar todos los datos");
+		System.out.println("3- Indicar en qué ciudad ha habido más carreras.");
+		System.out.println("4- Listado de carreras junto con el caballo ha quedado en última posición");
+		System.out.println("5- Listado -ordenado por caballo- de velocidades medias.");
+		System.out.println("6- Fin.");
+		
+		
+		sc.close();
+	}
+
+}

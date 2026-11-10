@@ -1,0 +1,122 @@
+package examen;
+
+import java.util.Scanner;
+
+public class ExamenJavier {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int tabla[][] = new int[15][3];
+		int carreraCorrido = 0;
+		String nombreCaballo = "";
+		String nombreCiudad = "";
+		float velocidadMedia = 0;
+		String caballo[] = new String[15];
+		String ciudades[] = new String[15];
+		int numCiudades = 0;
+		int numCaballos = 0;
+		int numCarrera = 0;
+
+		System.out.println("1- Introducir caballo, carrera, ciudad y velocidad");
+		System.out.println("2- Listar todos los datos");
+		System.out.println("3- Indicar en qué ciudad ha habido más carreras.");
+		System.out.println("4- Listado de carreras junto con el caballo ha quedado en última posición");
+		System.out.println("5- Listado -ordenado por caballo- de velocidades medias.");
+		System.out.println("6- Fin.");
+		int option = sc.nextInt();
+
+		while (option < 6) {
+			switch (option) {
+
+			// 1
+			case 1:
+				System.out.print("Nombre del caballo: ");
+				nombreCaballo = sc.next();
+				System.out.print("Número de la carrera que ha corrido: ");
+				carreraCorrido = sc.nextInt();
+				System.out.print("Nombre de la ciudad en la que se ha realizado: ");
+				nombreCiudad = sc.next();
+				System.out.print("Velocidad media: ");
+				velocidadMedia = sc.nextFloat();
+				
+				int indiceCaballos = getIndexOf(caballo, nombreCiudad, numCaballos);
+				int columnaCiudad = getIndexOf(ciudades, nombreCiudad, numCiudades);
+				
+				tabla[carreraCorrido][numCarrera] = (int) velocidadMedia;
+
+				break;
+			// 2
+			case 2:
+				for (int i = 0; i < tabla.length; i++) {
+					if (datos(i, tabla)) {
+						for (int a = 0; a < tabla[0].length; a++) {
+							if (tabla[i][a] > 0) {
+								System.out.println("Caballo: " + i + "Carrerass " + a + " : " + tabla[i][a]);
+							}
+						}
+					}
+				}
+				break;
+			// 3
+			case 3:
+				int mayorCarreras = 0;
+				String nombreCiudadMayor = "";
+
+				if (carreraCorrido > mayorCarreras) {
+					nombreCiudadMayor = nombreCiudad;
+				}
+
+				System.out.println(nombreCiudadMayor);
+				break;
+			// 4
+			case 4:
+				for (int i = 0; i < tabla.length; i++) {
+					if (datos(i, tabla)) {
+						for (int a = 0; a < tabla[0].length; a++) {
+							if (tabla[i][a] > 0) {
+								System.out.println("Caballo: " + i + "Carrerass " + a + " : " + tabla[i][a]);
+							}
+						}
+					}
+				}
+
+			}
+			System.out.println("1- Introducir caballo, carrera, ciudad y velocidad");
+			System.out.println("2- Listar todos los datos");
+			System.out.println("3- Indicar en qué ciudad ha habido más carreras.");
+			System.out.println("4- Listado de carreras junto con el caballo ha quedado en última posición");
+			System.out.println("5- Listado -ordenado por caballo- de velocidades medias.");
+			System.out.println("6- Fin.");
+			option = sc.nextInt();
+		}
+
+		sc.close();
+	}
+
+	// 1
+	public static int getIndexOf(String[] tablaString, String elemABuscar, int numElementos) {
+		int indice = -1;
+
+		for (int i = 0; i < numElementos && indice == -1; i++) {
+			if (tablaString[i] != null && tablaString[i].equals(elemABuscar)) {
+				indice = i;
+			}
+		}
+
+		return indice;
+	}
+
+	// 2
+	public static boolean datos(int carrera, int t[][]) {
+		boolean resultado = false;
+		if (carrera >= 0 && carrera < t.length) {
+			for (int i = 0; i < t[carrera].length; i++) {
+				if (t[carrera][i] > 0) {
+					resultado = true;
+				}
+			}
+		}
+		return resultado;
+	}
+
+}

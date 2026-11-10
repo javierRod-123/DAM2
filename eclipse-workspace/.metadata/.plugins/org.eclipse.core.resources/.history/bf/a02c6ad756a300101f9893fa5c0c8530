@@ -1,0 +1,17 @@
+package tipoExamenCorto;
+
+import java.util.Scanner;
+
+public class Biologos {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+
+		System.out.print("Introduce el tipo de árbol (A o B) ");
+		char tipoArbol = sc.next().charAt(0);
+		
+		sc.close();
+	}
+
+}

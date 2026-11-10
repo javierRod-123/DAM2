@@ -1,0 +1,16 @@
+package boletin4.semaforos;
+
+public class Alumno extends Thread {
+	Bienvenida saludo;
+	String nombre;
+	
+	public Alumno (Bienvenida bienvenida, String nombre, int num_alumno) {
+		super(String.valueOf(num_alumno));
+		this.saludo = bienvenida;	
+		this.nombre = nombre;
+	}
+	
+	public void run(){		
+		saludo.saludarProfesor();
+	}
+}

@@ -1,0 +1,71 @@
+package evalucion2objetos;
+
+public class Principal {
+
+    public static void main(String[] args) {
+
+        Agencia agencia = new Agencia();
+
+        Estadisticas[] starStats = {
+            new Estadisticas("Poder Destructivo", 'A'),
+            new Estadisticas("Velocidad", 'A'),
+            new Estadisticas("Rango", 'C'),
+            new Estadisticas("Durabilidad", 'A'),
+            new Estadisticas("Precisión", 'A'),
+            new Estadisticas("Potencial de Desarrollo", 'C')
+        };
+        
+        Stand starPlatinum = new Stand("Star Platinum", starStats);
+
+        Estadisticas[] worldStats = {
+            new Estadisticas("Poder Destructivo", 'A'),
+            new Estadisticas("Velocidad", 'A'),
+            new Estadisticas("Rango", 'C'),
+            new Estadisticas("Durabilidad", 'A'),
+            new Estadisticas("Precisión", 'A'),
+            new Estadisticas("Potencial de Desarrollo", 'B')
+        };
+        
+        Stand theWorld = new Stand("The World", worldStats);
+
+        Estadisticas[] crazyStats = {
+            new Estadisticas("Poder Destructivo", 'A'),
+            new Estadisticas("Velocidad", 'A'),
+            new Estadisticas("Rango", 'D'),
+            new Estadisticas("Durabilidad", 'A'),
+            new Estadisticas("Precisión", 'B'),
+            new Estadisticas("Potencial de Desarrollo", 'B')
+        };
+        Stand crazyDiamond = new Stand("Crazy Diamond", crazyStats);
+
+        Estadisticas[] killerStats = {
+            new Estadisticas("Poder Destructivo", 'A'),
+            new Estadisticas("Velocidad", 'B'),
+            new Estadisticas("Rango", 'D'),
+            new Estadisticas("Durabilidad", 'B'),
+            new Estadisticas("Precisión", 'B'),
+            new Estadisticas("Potencial de Desarrollo", 'A')
+        };
+        Stand killerQueen = new Stand("Killer Queen", killerStats);
+
+        Portador jotaro = new Portador("Jotaro Kujo", starPlatinum);
+        Portador dio = new Portador("Dio", theWorld);
+        Portador josuke = new Portador("Josuke Higashikata", crazyDiamond);
+        Portador kira = new Portador("Yoshikage Kira", killerQueen);
+
+
+        // ====== AÑADIR A LA AGENCIA ======
+
+        agencia.anyadePortador(jotaro);
+        agencia.anyadePortador(dio);
+        agencia.anyadePortador(josuke);
+        agencia.anyadePortador(kira);
+
+
+        // ====== PRUEBAS ======
+
+        agencia.standMasPoderoso();
+        
+        
+    }
+}

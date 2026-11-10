@@ -1,0 +1,12 @@
+package colecciones;
+
+import java.util.Arrays;
+
+public class Act8 {
+
+	public static void main(String[] args) {
+		List<String> nombres = Arrays.asList("Pepe", "Juan", "Jose");
+
+	}
+
+}

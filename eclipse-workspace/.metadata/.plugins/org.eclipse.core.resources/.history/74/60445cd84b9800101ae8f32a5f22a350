@@ -1,0 +1,14 @@
+package bol1;
+
+public class Ej2 {
+
+	public static void main(String[] args) {
+		int num1 = 5;
+		int num2 = 72;
+		float div = num2 / num1;
+
+		System.out.println("La division entre el número 1 y el número 2 es "+div);
+	}
+
+}
+s

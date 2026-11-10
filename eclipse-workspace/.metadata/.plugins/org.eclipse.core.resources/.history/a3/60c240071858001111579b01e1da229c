@@ -1,0 +1,77 @@
+package examen;
+
+import java.util.Arrays;
+
+public class GestionHospitalaria {
+	private Clinica[] clinicas;
+	private int numClinicas;
+
+	public GestionHospitalaria() {
+		this.clinicas = new Clinica[10];
+		this.numClinicas = 0;
+	}
+
+	public Clinica[] getClinicas() {
+		return clinicas;
+	}
+
+	public int getNumClinicas() {
+		return numClinicas;
+	}
+
+	public void addClinica(Clinica c) {
+		if (numClinicas >= this.clinicas.length) {
+			clinicas = Arrays.copyOf(clinicas, numClinicas + 1);
+		}
+		clinicas[numClinicas++] = c;
+	}
+
+	// D.
+	public Paciente[] getPacientesDelGrupo() {
+
+		Paciente pacienteDelGrupo[] = new Paciente[10];
+		int tamanyo = 0;
+
+		for (int i = 0; i < numClinicas; i++) {
+			Clinica clinica = clinicas[i];
+
+			for (int j = 0; j < clinica.getNumPacientes(); j++) {
+				Paciente pacienteActual = clinica.getPacientes()[j];
+
+				if (pacienteActual != null && !pacienteAnyadido(pacienteDelGrupo, tamanyo, pacienteActual)) {
+					if(tamanyo >= pacienteDelGrupo.length) {
+						pacienteDelGrupo = Arrays.copyOf(pacienteDelGrupo, tamanyo + 10);
+					}
+				}
+			}
+		}
+
+		return pacienteDelGrupo;
+	}
+
+	// E.
+	public boolean hayClinicaMasNPacientes(int numPacientes) {
+
+		for (int i = 0; i < numClinicas; i++) {
+			Clinica clinica = clinicas[i];
+
+			if (clinica.getNumPacientes() > numPacientes) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public boolean pacienteAnyadido(Paciente[] tPaciente, int tamanyo, Paciente e) {
+
+		for (int i = 0; i < tamanyo; i++) {
+			if (tPaciente[i].equals(e)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+}

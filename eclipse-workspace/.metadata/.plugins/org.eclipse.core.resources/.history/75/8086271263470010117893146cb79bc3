@@ -1,0 +1,22 @@
+package junit;
+
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+class CalculadoraQueDivideTest {
+
+	@ParameterizedTest
+	@CsvSource({
+		"-2",
+		"-1"
+	})
+	void testCalculadoraQueDivideExcepcion(int divisor) {
+		CalculadoraQueDivide calculator = new CalculadoraQueDivide(divisor);
+		assertThrows(IllegalArgumentException.class, () -> calculator.getClass());
+	}
+
+}

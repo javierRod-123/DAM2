@@ -1,0 +1,61 @@
+package tipoexamen;
+
+import java.util.Arrays;
+import java.util.Objects;
+
+public class Pais {
+	private String nombre; // nombre del pais
+	private Guerra tablaGuerras[]; // guerras en las que ha participado este pais.
+	private int nGuerras; // numero de elementos en la tabla.
+	public static final int MAX_GUERRAS = 10; // constante con el maximo de guerras permitido en un pais.
+
+	public Pais(String nombre) {
+		this.nombre = nombre;
+		this.tablaGuerras = new Guerra[Pais.MAX_GUERRAS];
+		this.nGuerras = 0;
+	}
+
+	@Override
+	public String toString() {
+		return nombre;
+	}
+
+	public void participoEn(Guerra guerra) {
+		this.tablaGuerras[this.nGuerras++] = guerra;
+
+	}
+
+	public Pais[] posiblesEnemigos() {
+		Pais paisesEnemigos[] = new Pais[10];
+		return paisesEnemigos;
+	}
+
+	private static boolean contiene(Pais[] paisesEnemigos, int numPaisesInsertados, Pais pais) {
+		boolean esta = false;
+		for (int i = 0; i < numPaisesInsertados && !esta; i++) {
+			if (paisesEnemigos[i].equals(pais)) {
+				esta = true;
+			}
+		}
+
+		return esta;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(nombre);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pais other = (Pais) obj;
+		return Objects.equals(nombre, other.nombre);
+	}
+
+}

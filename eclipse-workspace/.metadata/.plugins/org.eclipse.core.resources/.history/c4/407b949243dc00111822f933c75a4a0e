@@ -1,0 +1,5 @@
+package com.accesodatos.hibernate.otrareuninmas.dao;
+
+public class Dao<T> extends DirectMethodHandle {
+
+}

@@ -1,0 +1,147 @@
+package tipoExamenSerios;
+
+import java.util.Scanner;
+
+public class ControlRobot {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int temperatura = 0;
+        double presion = 0;
+        double radiacion = 0;
+        int numDias = 0;
+        int contJaxa = 0;
+        int contNasa = 0;
+        int contEsa = 0;
+        int sumaDiasTotales = 0;
+        int temperaturaMaxima = 0;
+        int misionMaxTemperatura = 0;
+        String robotMaxTemperatura = "";
+        double presionMediaMenor = Double.MAX_VALUE;
+        String robotMenorPresionMedia = "";
+        int numMision = 1;
+        double radiacionMenor = Double.MAX_VALUE;
+        double radiacionSegundoMenor = 0;
+        int totalMisiones = 0;
+        int misionesMasDe5Dias = 0;
+        String planetaNombreMasLargo = "";
+        int longitudMaximaNombre = 0;
+        int misionesEnPlanetaMasLargo = 0;
+
+        System.out.print("Número de robots: ");
+        int numRobots = sc.nextInt();
+
+        for (int i = 1; i <= numRobots; i++) {
+            numMision = 1;
+            System.out.print("Nombre del robot: ");
+            String nombreRobot = sc.next();
+            System.out.print("Nombre del planeta que visita: ");
+            String nombrePlaneta = sc.next();
+
+            // Actualizamos el planeta más largo
+            if (nombrePlaneta.length() > longitudMaximaNombre) {
+                longitudMaximaNombre = nombrePlaneta.length();
+                planetaNombreMasLargo = nombrePlaneta;
+                misionesEnPlanetaMasLargo = 0;
+            }
+
+            // Variables para presión media por robot
+            int sumaPresionRobot = 0;
+            int contPresionRobot = 0;
+
+            System.out.print("Número de días de registro para la misión 1: ");
+            numDias = sc.nextInt();
+
+            while (numDias != -1) {
+                totalMisiones++;
+                sumaDiasTotales += numDias;
+
+                if (numDias > 5) {
+                    misionesMasDe5Dias++;
+                }
+
+                if (nombrePlaneta.equals(planetaNombreMasLargo)) {
+                    misionesEnPlanetaMasLargo++;
+                }
+
+                for (int j = 1; j <= numDias; j++) {
+                    System.out.println("-- Día " + j + ": ");
+
+                    System.out.print("-- Temperatura para el día " + j + ": ");
+                    temperatura = sc.nextInt();
+
+                    System.out.print("-- Presión para el día " + j + ": ");
+                    presion = sc.nextDouble();
+                    sumaPresionRobot += presion;
+                    contPresionRobot++;
+
+                    System.out.print("-- Nivel de radiación para el día " + j + ": ");
+                    radiacion = sc.nextDouble();
+
+                    switch (nombreRobot.charAt(0)) {
+                        case 'J':
+                            contJaxa++;
+                            break;
+                        case 'N':
+                            contNasa++;
+                            break;
+                        case 'E':
+                            contEsa++;
+                            break;
+                    }
+
+                    if (temperatura > temperaturaMaxima) {
+                        temperaturaMaxima = temperatura;
+                        misionMaxTemperatura = numMision;
+                        robotMaxTemperatura = nombreRobot;
+                    }
+
+                    if (radiacion < radiacionMenor) {
+                        radiacionSegundoMenor = radiacionMenor;
+                        radiacionMenor = radiacion;
+                    } else if (radiacion < radiacionSegundoMenor) {
+                        radiacionSegundoMenor = radiacion;
+                    }
+                }
+
+                numMision++;
+                System.out.print("Número de días de registro para la misión " + numMision + ": ");
+                numDias = sc.nextInt();
+            }
+
+            // Al terminar todas las misiones del robot, calculamos su presión media
+                double presionMediaRobot = (double) sumaPresionRobot / contPresionRobot;
+                if (presionMediaRobot < presionMediaMenor) {
+                    presionMediaMenor = presionMediaRobot;
+                    robotMenorPresionMedia = nombreRobot;
+                
+            }
+        }
+
+        System.out.println("--- Estadísticas ---");
+
+        if (totalMisiones > 0) {
+            System.out.printf("El número de días promedio que dura una misión es: "+ (double) sumaDiasTotales / totalMisiones);
+        } else {
+            System.out.println("No se han registrado misiones.");
+        }
+
+        if (contJaxa > 1 && contNasa > 1 && contEsa > 1) {
+            System.out.println("¿Se han detectado robots de NASA, ESA y JAXA? Sí");
+        } else {
+            System.out.println("¿Se han detectado robots de NASA, ESA y JAXA? No");
+        }
+
+        System.out.println("La temperatura máxima registrada: " + temperaturaMaxima + "ºC (Robot: " + robotMaxTemperatura + " Misión: " + misionMaxTemperatura + ")");
+        System.out.println("Robot que ha registrado la menor presión media: " + robotMenorPresionMedia);
+        System.out.println("Valores mínimos de radiación registrados: " + radiacionSegundoMenor + ", " + radiacionMenor);
+
+        if (totalMisiones > 0) {
+            System.out.printf("Porcentaje de misiones de más de 5 días: "+(double) misionesMasDe5Dias * 100 / totalMisiones);
+        }
+
+        System.out.println("El número de misiones del planeta con el nombre más largo: " + misionesEnPlanetaMasLargo);
+
+        sc.close();
+    }
+}

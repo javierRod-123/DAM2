@@ -1,0 +1,146 @@
+package tipoExamenCorto;
+
+import java.util.Scanner;
+
+public class CentroEducativo {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String nombreAlumno = "";
+		float notaPrimerParcial = 0;
+		float notaSegundoParial = 0;
+		float notaTercerParcial = 0;
+		float notaMediaMayor = 0;
+		String nombreAlumnoMayorNotaMedia = "";
+		int contSuspensos = 0;
+		boolean sobresalientes = false;
+
+		System.out.print("Introduce la letra del grupo: ");
+		char letraGrupo = sc.next().charAt(0);
+
+		switch (letraGrupo) {
+		case 'A':
+			for (int i = 1; i <= 25; i++) {
+				System.out.print("Nombre del alumno: ");
+				nombreAlumno = sc.next();
+				System.out.print("Dime la nota primer parcial del alumno " + i + ": ");
+				notaPrimerParcial = sc.nextFloat();
+				System.out.print("Dime la nota del segundo parcial del alumno " + i + ": ");
+				notaSegundoParial = sc.nextFloat();
+				System.out.print("Dime la nota del tercer parcial del alumno " + i + ": ");
+				notaTercerParcial = sc.nextFloat();
+
+				float notaMedia = notaPrimerParcial + notaSegundoParial + notaTercerParcial / 3;
+
+				if (notaMedia > notaMediaMayor) {
+					notaMediaMayor = notaMedia;
+					nombreAlumnoMayorNotaMedia = nombreAlumno;
+				}
+				
+				if(notaMedia < 5) {
+					contSuspensos++;
+				}
+				
+				if(notaMedia >= 9) {
+					sobresalientes = true;
+				}
+
+			}
+			break;
+		case 'B':
+			for (int i = 1; i <= 28; i++) {
+				System.out.print("Nombre del alumno: ");
+				nombreAlumno = sc.next();
+				System.out.print("Dime la nota primer parcial del alumno " + i + ": ");
+				notaPrimerParcial = sc.nextFloat();
+				System.out.print("Dime la nota del segundo parcial del alumno " + i + ": ");
+				notaSegundoParial = sc.nextFloat();
+				System.out.print("Dime la nota del tercer parcial del alumno " + i + ": ");
+				notaTercerParcial = sc.nextFloat();
+
+				float notaMedia = notaPrimerParcial + notaSegundoParial + notaTercerParcial / 3;
+
+				if (notaMedia > notaMediaMayor) {
+					notaMediaMayor = notaMedia;
+					nombreAlumnoMayorNotaMedia = nombreAlumno;
+				}
+				
+				if(notaMedia < 5) {
+					contSuspensos++;
+				}
+				
+				if(notaMedia >= 9) {
+					sobresalientes = true;
+				}
+
+			}
+			break;
+		case 'C':
+			for (int i = 1; i <= 31; i++) {
+				System.out.print("Nombre del alumno: ");
+				nombreAlumno = sc.next();
+				System.out.print("Dime la nota primer parcial del alumno " + i + ": ");
+				notaPrimerParcial = sc.nextFloat();
+				System.out.print("Dime la nota del segundo parcial del alumno " + i + ": ");
+				notaSegundoParial = sc.nextFloat();
+				System.out.print("Dime la nota del tercer parcial del alumno " + i + ": ");
+				notaTercerParcial = sc.nextFloat();
+
+				float notaMedia = notaPrimerParcial + notaSegundoParial + notaTercerParcial / 3;
+
+				if (notaMedia > notaMediaMayor) {
+					notaMediaMayor = notaMedia;
+					nombreAlumnoMayorNotaMedia = nombreAlumno;
+				}
+				
+				if(notaMedia < 5) {
+					contSuspensos++;
+				}
+				
+				if(notaMedia >= 9) {
+					sobresalientes = true;
+				}
+
+			}
+			break;
+		case 'D':
+			for (int i = 1; i <= 29; i++) {
+				System.out.print("Nombre del alumno: ");
+				nombreAlumno = sc.next();
+				System.out.print("Dime la nota primer parcial del alumno " + i + ": ");
+				notaPrimerParcial = sc.nextFloat();
+				System.out.print("Dime la nota del segundo parcial del alumno " + i + ": ");
+				notaSegundoParial = sc.nextFloat();
+				System.out.print("Dime la nota del tercer parcial del alumno " + i + ": ");
+				notaTercerParcial = sc.nextFloat();
+
+				float notaMedia = notaPrimerParcial + notaSegundoParial + notaTercerParcial / 3;
+
+				if (notaMedia > notaMediaMayor) {
+					notaMediaMayor = notaMedia;
+					nombreAlumnoMayorNotaMedia = nombreAlumno;
+				}
+				
+				if(notaMedia < 5) {
+					contSuspensos++;
+				}
+				
+				if(notaMedia >= 9) {
+					sobresalientes = true;
+				}
+
+			}
+			break;
+		}
+		
+		System.out.println("El nombre del alumno con mayor nota media es: "+nombreAlumnoMayorNotaMedia);
+		System.out.println("Hay un total de "+contSuspensos+" alumnos suspensos");
+		
+		if(sobresalientes) {
+			System.out.println("Existen sobresalientes");
+		}
+
+		sc.close();
+	}
+
+}

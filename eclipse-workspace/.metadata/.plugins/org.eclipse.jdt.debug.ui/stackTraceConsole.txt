@@ -1,0 +1,23 @@
+public String getListadoProblemas() {
+    String salida = "";
+
+    for (Area area : this.keySet()) {
+
+        ListaAnimales lista = this.get(area);
+
+        for (Animal a : lista) {
+
+            for (Animal presa : a.getPresas()) {
+
+                if (lista.contains(presa)) {
+
+                    salida += "Problema en área " + area.getNombre()
+                           + ": " + a.getNombre()
+                           + " puede comerse a " + presa.getNombre() + "\n";
+                }
+            }
+        }
+    }
+
+    return salida;
+}

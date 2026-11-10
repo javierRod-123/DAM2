@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Encapsulate field &apos;tema7Pokemon.Pokedex.controlador&apos; in &apos;tema7Pokemon.Pokedex&apos;&#x0D;&#x0A;- Original project: &apos;PrimerProyecto&apos;&#x0D;&#x0A;- Original element: &apos;tema7Pokemon.Pokedex.controlador&apos;&#x0D;&#x0A;- Getter method name: &apos;getControlador&apos;&#x0D;&#x0A;- Setter method name: &apos;setControlador&apos;&#x0D;&#x0A;- Field visibility: &apos;public&apos;&#x0D;&#x0A;- Use getter and setter methods in declaring type" comments="false" declaring="true" description="Encapsulate field &apos;controlador, ...&apos;" flags="589830" getter="getControlador" id="org.eclipse.jdt.ui.self.encapsulate" input="/src&lt;tema7Pokemon{Pokedex.java[Pokedex^controlador" insertion="11" setter="setControlador" stamp="1745830278137" version="1.0" visibility="1"/>
+</session>

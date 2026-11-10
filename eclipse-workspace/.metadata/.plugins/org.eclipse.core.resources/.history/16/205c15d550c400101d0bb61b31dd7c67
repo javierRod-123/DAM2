@@ -1,0 +1,213 @@
+package arraysTipoExamen;
+
+import java.util.Scanner;
+
+public class OficinaEstudios {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int votos[][] = new int[30][20];
+		String partido[] = new String[20];
+		String localidad[] = new String[30];
+		int numLocalidad = 0;
+		int numPartido = 0;
+
+		System.out.println("1- Introducir votos obtenidos en una ciudad por un partido.");
+		System.out.println("2- Listado alfabético por partidos de todos los datos introducidos");
+		System.out.println("3- Listado de mejores resutados de cada partido.");
+		System.out.println("4- Listado de localidades de menor a mayor participación.");
+		System.out.println("5- Porcentajes de votos obtenidos por cada partido en la comunidad.");
+		System.out.println("6- Fin");
+		int option = sc.nextInt();
+
+		while (option != 6) {
+			switch (option) {
+			case 1:
+
+				System.out.print("Nombre de la localidad: ");
+				String nombreLocalidad = sc.next();
+
+				int indexLoc = getIndexOf(localidad, numLocalidad, nombreLocalidad);
+
+				if (indexLoc == -1) {
+					localidad[numLocalidad] = nombreLocalidad;
+					indexLoc = numLocalidad;
+					numLocalidad++;
+				}
+
+				System.out.print("Nombre del partido: ");
+				String nombrePartido = sc.next();
+
+				int indexPar = getIndexOf(partido, numPartido, nombrePartido);
+				if (indexPar == -1) {
+					partido[numPartido] = nombrePartido;
+					indexPar = numPartido;
+					numPartido++;
+				}
+
+				System.out.print("Número de votos: ");
+				votos[indexLoc][indexPar] = sc.nextInt();
+
+				System.out.println("Datos almacenados");
+				break;
+			case 2:
+				int[][] copiaVotos = copyOf(votos, numLocalidad, numPartido);
+				String[] partidoAux = new String[numPartido];
+
+				// Copiar nombres de partidos
+				for (int i = 0; i < numPartido; i++) {
+					partidoAux[i] = partido[i];
+				}
+
+				// Ordenar partidos alfabéticamente
+				ordenarAlfabeticamente2(partidoAux, numPartido);
+
+				// Mostrar votos por partido y localidad
+				for (int i = 0; i < numPartido; i++) {
+					String namePartido = partidoAux[i];
+					int indexPartido = getIndexOf(partido, numPartido, namePartido);
+
+					System.out.println("Partido: " + namePartido);
+
+					for (int j = 0; j < numLocalidad; j++) {
+						int votosPartido = copiaVotos[j][indexPartido];
+						if (votosPartido > 0) {
+							System.out.println("  " + localidad[j] + ": " + votosPartido + " votos");
+						}
+					}
+
+					System.out.println(); // Espacio entre partidos
+				}
+				break;
+
+			case 3:
+				for (int i = 0; i < numPartido; i++) {
+					int maxVotos = Integer.MIN_VALUE;
+					String mejorLocalidad = "";
+
+					for (int j = 0; j < numLocalidad; j++) {
+						if (votos[j][i] > maxVotos) {
+							maxVotos = votos[j][i];
+							mejorLocalidad = localidad[j];
+						}
+					}
+
+					System.out.println("El partido " + partido[i] + " obtuvo su mejor resultado en " + mejorLocalidad);
+				}
+				break;
+			case 4:
+
+				String localidadActual[] = new String[numLocalidad];
+				int votosPorLocalidad[] = new int[numLocalidad];
+
+				for (int i = 0; i < numLocalidad; i++) {
+					localidadActual[i] = localidad[i];
+					int suma = 0;
+					for (int j = 0; j < numPartido; j++) {
+						suma += votos[i][j];
+					}
+
+					votosPorLocalidad[i] = suma;
+				}
+
+				ordenarPorCantidad(localidadActual, votosPorLocalidad, numLocalidad);
+
+				for (int i = 0; i < numLocalidad; i++) {
+					System.out.println(localidadActual[i] + ": " + votosPorLocalidad[i] + " votos");
+				}
+
+				break;
+			case 5:
+				int votosPorPartido[] = new int[numPartido];
+				int totalVotos = 0;
+
+				for (int i = 0; i < numLocalidad; i++) {
+					for (int j = 0; j < numPartido; j++) {
+						votosPorPartido[j] += votos[i][j];
+						totalVotos += votos[i][j];
+					}
+				}
+
+				if (totalVotos == 0) {
+					System.out.println("No se han registrado votos en la comunidad");
+				} else {
+					for (int i = 0; i < numPartido; i++) {
+						float porcentaje = (votosPorPartido[i] * 100f) / totalVotos;
+						System.out.println("Partido: " + partido[i] + ". Porcentaje de votos: " + porcentaje + "%");
+					}
+				}
+
+				break;
+			}
+
+			System.out.println("1- Introducir votos obtenidos en una ciudad por un partido.");
+			System.out.println("2- Listado alfabético por partidos de todos los datos introducidos");
+			System.out.println("3- Listado de mejores resutados de cada partido.");
+			System.out.println("4- Listado de localidades de menor a mayor participación.");
+			System.out.println("5- Porcentajes de votos obtenidos por cada partido en la comunidad.");
+			System.out.println("6- Fin");
+			option = sc.nextInt();
+		}
+
+		sc.close();
+	}
+
+	public static int getIndexOf(String[] array, int numElemen, String elemBuscar) {
+		if (array == null || elemBuscar == null || numElemen <= 0) {
+			return -1;
+		}
+
+		for (int i = 0; i < numElemen && i < array.length; i++) {
+			if (elemBuscar.equals(array[i])) {
+				return i;
+			}
+		}
+
+		return -1; // No encontrado
+	}
+
+	public static void ordenarAlfabeticamente2(String[] principal, int longitud) {
+		for (int i = 0; i < longitud - 1; i++) {
+			for (int j = i + 1; j < longitud; j++) {
+				if (principal[i] != null && principal[j] != null && principal[i].compareTo(principal[j]) > 0) {
+					// Intercambiar principal
+					String tempPrincipal = principal[i];
+					principal[i] = principal[j];
+					principal[j] = tempPrincipal;
+
+				}
+			}
+		}
+	}
+
+	public static void ordenarPorCantidad(String[] etiquetas, int[] cantidades, int longitud) {
+		for (int i = 0; i < longitud - 1; i++) {
+			for (int j = i + 1; j < longitud; j++) {
+				if (cantidades[i] > cantidades[j]) {
+					// Intercambiar cantidades
+					int tempCant = cantidades[i];
+					cantidades[i] = cantidades[j];
+					cantidades[j] = tempCant;
+
+					// Intercambiar etiquetas
+					String tempEtiqueta = etiquetas[i];
+					etiquetas[i] = etiquetas[j];
+					etiquetas[j] = tempEtiqueta;
+				}
+			}
+		}
+	}
+
+	public static int[][] copyOf(int[][] original, int filas, int columnas) {
+		int[][] copia = new int[filas][columnas];
+
+		for (int i = 0; i < filas; i++) {
+			for (int j = 0; j < columnas; j++) {
+				copia[i][j] = original[i][j];
+			}
+		}
+
+		return copia;
+	}
+
+}

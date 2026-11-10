@@ -1,0 +1,83 @@
+package tipoExamenCorto;
+
+import java.util.Scanner;
+
+public class Biologos {
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		int suma = 0;
+		float alturaMaxima = 0;
+		float alturaMinima = Float.MAX_VALUE;
+		float diametroMaximo = 0;
+		float diametroMinimo = Float.MAX_VALUE;
+		int sumaEdad = 0;
+		int contB = 0;
+		boolean arbolMas30M = false;
+
+		System.out.println("Introduce el número de árboles que va a introducir datos ");
+		int numArbol = sc.nextInt();
+
+		for (int i = 1; i <= numArbol; i++) {
+			float diametro = 0;
+			float altura = 0;
+			int edad = 0;
+
+			System.out.print("Introduce el tipo de árbol (A o B) ");
+			char tipoArbol = sc.next().charAt(0);
+
+			if (tipoArbol == 'A') {
+				System.out.print("Diámetro: ");
+				diametro = sc.nextFloat();
+
+				System.out.print("Altura: ");
+				altura = sc.nextFloat();
+			} else if (tipoArbol == 'B') {
+				System.out.print("Diámetro: ");
+				diametro = sc.nextFloat();
+
+				System.out.print("Altura: ");
+				altura = sc.nextFloat();
+
+				System.out.print("Edad: ");
+				edad = sc.nextInt();
+
+				sumaEdad += edad;
+				contB++;
+			}
+
+			suma += altura;
+
+			if (altura > alturaMaxima) {
+				alturaMaxima = altura;
+			} else if (altura < alturaMinima) {
+				alturaMinima = altura;
+			}
+
+			if (diametro < diametroMinimo) {
+				diametroMinimo = diametro;
+			} else if (diametro > diametroMaximo) {
+				diametroMaximo = diametro;
+			}
+
+			if (altura > 30) {
+				arbolMas30M = true;
+			}
+		}
+
+		System.out.println("La media de las alturas de los árboles es: " + suma / numArbol);
+
+		System.out.println("La altura máxima es: "+alturaMaxima);
+		
+		System.out.println("La altura mínima es: "+alturaMinima);
+		
+		System.out.println("El diámetro máximo es: "+diametroMaximo);
+
+		System.out.println("El diámetro mínimo es: "+diametroMinimo);
+		
+		System.out.println("La media de las edades de árboles tipo B es de: "+sumaEdad / contB);
+		sc.close();
+	}
+
+}

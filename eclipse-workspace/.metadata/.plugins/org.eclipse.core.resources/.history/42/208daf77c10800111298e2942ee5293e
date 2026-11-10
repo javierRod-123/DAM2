@@ -1,0 +1,14 @@
+package tareas;
+
+import java.util.*;
+
+public class Diferencia {
+	public static Set<Integer> diferencia(Set<Integer> conjunto1, Set<Integer> conjunto2){
+		Set<Integer> resultado = new HashSet<Integer>();
+		
+		
+		return resultado;
+	}
+	
+	
+}

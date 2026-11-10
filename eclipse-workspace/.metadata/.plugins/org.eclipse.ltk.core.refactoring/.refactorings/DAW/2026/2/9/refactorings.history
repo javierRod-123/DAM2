@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;a&apos; to &apos;comercial&apos;&#x0D;&#x0A;- Original project: &apos;DAW&apos;&#x0D;&#x0A;- Original element: &apos;DAW/Evaluacion3/a&apos;&#x0D;&#x0A;- Renamed element: &apos;DAW/Evaluacion3/comercial&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;a&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/Evaluacion3&lt;a" name="comercial" qualified="false" references="true" stamp="1771920513533" textual="false" version="1.0"/>
+</session>

@@ -1,0 +1,5 @@
+package com.accesodatos.hibernate.otrareunionmas.utiles;
+
+public class EntityManagerUtil {
+
+}

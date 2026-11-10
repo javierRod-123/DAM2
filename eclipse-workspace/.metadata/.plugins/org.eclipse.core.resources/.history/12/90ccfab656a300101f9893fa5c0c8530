@@ -1,0 +1,15 @@
+package tipoExamenCorto;
+
+import java.util.Scanner;
+
+public class Biologos {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+
+		
+		sc.close();
+	}
+
+}

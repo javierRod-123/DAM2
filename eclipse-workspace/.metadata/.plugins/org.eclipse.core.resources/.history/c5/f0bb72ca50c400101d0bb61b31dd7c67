@@ -1,0 +1,186 @@
+package arraysTipoExamen;
+
+import java.util.Scanner;
+
+public class AprenderJava {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		float notas[][] = new float[20][20];
+		int sesiones[] = new int[20];
+		String usuarios[] = new String[20];
+		int numUsuarios = 0;
+
+		System.out.print("Nombre del curso: ");
+		String nombreCurso = sc.next();
+
+		System.out.print("Número de la sesión: ");
+		int numSesion = sc.nextInt();
+
+		int tiempo[] = new int[numSesion];
+
+		for (int i = 0; i < numSesion; i++) {
+			System.out.print("Duración estimada de la sesión " + i + ": ");
+			tiempo[i] = sc.nextInt();
+
+		}
+
+		System.out.println("1. Registrar la calificación de un usuario en cierta sesión de aprendizaje.\r\n"
+				+ "2. Listar todas las sesiones, junto con su duración y notas.\r\n"
+				+ "3. Indicar cuál es la sesión en la que se ha sacado mejor nota media.\r\n"
+				+ "4. Mostrar los usuarios que han estudiado solo una sesión.\r\n"
+				+ "5. Listar usuarios (ordenados alfabéticamente) con su nota media.\r\n" + "6. Salir.\r\n" + "");
+		int option = sc.nextInt();
+
+		while (option != 6) {
+			switch (option) {
+			case 1:
+				System.out.print("Nombre de usuario: ");
+				String nombreUsuario = sc.next();
+
+				int indexUsuario = getIndexOf(usuarios, numUsuarios, nombreUsuario);
+
+				if (indexUsuario == -1) {
+					usuarios[numUsuarios] = nombreUsuario;
+					indexUsuario = numUsuarios;
+					numUsuarios++;
+				}
+
+				System.out.print("Número de sesión que estudió (0 a " + (numSesion - 1) + "): ");
+				int sesionEstudiada = sc.nextInt();
+
+				System.out.print("Nota obtenida: ");
+				float nota = sc.nextFloat();
+
+				notas[indexUsuario][sesionEstudiada] = nota;
+
+				break;
+			case 2:
+				float[][] tablaCopiada = copyOf(usuarios, tiempo, notas, numUsuarios, numSesion);
+
+				System.out.println("\nListado de sesiones:");
+				for (int i = 0; i < numUsuarios; i++) {
+					System.out.println("Usuario: " + usuarios[i]);
+					for (int j = 0; j < numSesion; j++) {
+						if (tablaCopiada[i][j] != 0.0f) {
+							System.out
+									.println("- Sesión " + j + " (" + tiempo[j] + " min): Nota: " + tablaCopiada[i][j]);
+						}
+					}
+				}
+				break;
+
+			case 3:
+				float mayorNotaMedia = Float.MIN_VALUE;
+				int sesionMejotNotaMedia = -1;
+				for (int j = 0; j < numSesion; j++) {
+					float suma = 0;
+					int cont = 0;
+
+					for (int i = 0; i < numUsuarios; i++) {
+						if (notas[i][j] != 0) {
+							suma += notas[i][j];
+							cont++;
+						}
+					}
+
+					if (cont > 0) {
+						float media = suma / cont;
+						if (media > mayorNotaMedia) {
+							mayorNotaMedia = media;
+							sesionMejotNotaMedia = j;
+						}
+					}
+				}
+
+				System.out.println("La sesión con mejor media es: " + sesionMejotNotaMedia);
+
+				break;
+			case 4:
+				System.out.println("Usuarios que solo han estudiado 1 sesión: ");
+				for (int i = 0; i < numUsuarios; i++) {
+					int sesionesEstudiadas = 0;
+					for (int j = 0; j < numSesion; j++) {
+						if (notas[i][j] != 0) {
+							sesionesEstudiadas++;
+						}
+
+						if (sesionesEstudiadas == 1) {
+							System.out.println("- " + usuarios[i]);
+						}
+					}
+				}
+
+				break;
+			case 5:
+
+				int[] minutos = new int[numUsuarios];
+				for (int i = 0; i < numUsuarios; i++) {
+					for (int j = 0; j < numSesion; j++) {
+						if (notas[i][j] != 0.0f) {
+							minutos[i] += tiempo[j];
+						}
+					}
+				}
+
+				ordenarAlfabeticamente(usuarios, minutos, numUsuarios);
+
+				System.out.println("Usuarios ordenados alfabéticamente con minutos dedicados:");
+				for (int i = 0; i < numUsuarios; i++) {
+					System.out.println("- " + usuarios[i] + ": " + minutos[i] + " minutos");
+				}
+
+				break;
+			}
+			System.out.println("Saliendo del programa...");
+		}
+		sc.close();
+	}
+
+	public static int getIndexOf(String[] array, int numElemen, String elemBuscar) {
+		if (array == null || elemBuscar == null || numElemen <= 0) {
+			return -1;
+		}
+
+		for (int i = 0; i < numElemen && i < array.length; i++) {
+			if (elemBuscar.equals(array[i])) {
+				return i;
+			}
+		}
+
+		return -1; // No encontrado
+	}
+
+	public static float[][] copyOf(String[] usuarios, int[] duraciones, float[][] notas, int numUsuarios,
+			int numSesiones) {
+		float[][] copia = new float[numUsuarios][numSesiones];
+
+		for (int i = 0; i < numUsuarios; i++) {
+			for (int j = 0; j < numSesiones; j++) {
+				copia[i][j] = notas[i][j];
+			}
+		}
+
+		return copia;
+	}
+
+	public static void ordenarAlfabeticamente(String[] nombres, int[] valores, int longitud) {
+		for (int i = 0; i < longitud - 1; i++) {
+			for (int j = i + 1; j < longitud; j++) {
+				if (nombres[i] != null && nombres[j] != null && nombres[i].compareTo(nombres[j]) > 0) {
+					// Intercambiar nombres
+					String tempNombre = nombres[i];
+					nombres[i] = nombres[j];
+					nombres[j] = tempNombre;
+
+					// Intercambiar valores correspondientes
+					int tempValor = valores[i];
+					valores[i] = valores[j];
+					valores[j] = tempValor;
+				}
+			}
+		}
+	}
+
+}

@@ -1,0 +1,26 @@
+package tiposExamen;
+
+import java.util.Scanner;
+
+public class Ej2 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int numAlumnos = 0;
+		
+		System.out.println("Introduce un curso: ");
+		String curso = sc.next();
+		
+		while(!curso.equals("fin")) {
+			System.out.println("¿Cuántos alumnos tiene el curso?");
+			numAlumnos = sc.nextInt();
+			
+			
+		}
+		
+		
+		
+		sc.close();
+	}
+
+}

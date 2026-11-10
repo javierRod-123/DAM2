@@ -1,0 +1,132 @@
+package tipoExamenArrays;
+
+import java.util.Scanner;
+
+public class OficinaEstudios {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int votos[][] = new int [30][20];
+		String partido[] = new String[20];
+		String localidad[] = new String[30];
+		int numLocalidad = 0;
+		int numPartido = 0;
+
+		System.out.println("1- Introducir votos obtenidos en una ciudad por un partido.");
+		System.out.println("2- Listado alfabético por partidos de todos los datos introducidos");
+		System.out.println("3- Listado de mejores resutados de cada partido.");
+		System.out.println("4- Listado de localidades de menor a mayor participación.");
+		System.out.println("5- Porcentajes de votos obtenidos por cada partido en la comunidad.");
+		System.out.println("6- Fin");
+		int option = sc.nextInt();
+
+		while (option != 6) {
+			switch (option) {
+			case 1:
+				
+				System.out.print("Nombre de la localidad: ");
+				String nombreLocalidad = sc.next();
+
+				if(getIndexOf(localidad, numLocalidad, nombreLocalidad) == -1) {
+					localidad[numLocalidad] = nombreLocalidad;
+					numLocalidad++;
+				}
+				
+				System.out.print("Nombre del partido: ");
+				String nombrePartido = sc.next();
+				
+				if(getIndexOf(partido, numPartido, nombrePartido) == -1) {
+					partido[numPartido] = nombrePartido;
+					numPartido++;
+				}
+
+				System.out.print("Número de votos: ");
+				votos[numLocalidad][numPartido] = sc.nextInt();
+				
+				
+				System.out.println("Datos almacenados");
+				break;
+			case 2:
+
+				String partidoAux[] = new String[numPartido];
+				String localidadAux[] = new String[numPartido];
+				int votosTotales[] = new int[numPartido];
+				
+				for(int i = 0; i < numLocalidad; i++) {
+					partidoAux[i] = partido[i];
+					int suma = 0;
+					for(int j = 0; j < numPartido; j++) {
+						suma += votos[i][j];
+					}
+					
+					votosTotales[i] = suma;
+				}
+				
+				ordenarAlfabeticamente2(partidoAux, localidadAux, votosTotales, numPartido);
+				
+				for(int i = 0; i < numPartido; i++) {
+					System.out.println("Partido: "+partidoAux[i]);
+					System.out.println(" "+ localidadAux[i]+": "+votosTotales[i]+" votos");
+				}
+				break;
+			case 3:
+			    for (int i = 0; i < numPartido; i++) {
+			        String partidoActual = partido[i];
+			        int votosMayor = Integer.MIN_VALUE;
+			        String localidadMayor = "";
+
+			        for (int j = 0; j < numLocalidad; j++) {
+			            int votosActual = votos[j][i]; // j = localidad, i = partido
+			            if (votosActual > votosMayor) {
+			                votosMayor = votosActual;
+			                localidadMayor = localidad[j];
+			            }
+			        }
+
+			        System.out.println("El partido " + partidoActual + " obtuvo su mejor resultado en " + localidadMayor + " con " + votosMayor + " votos.");
+			    }
+			    break;
+
+			}
+		}
+
+		sc.close();
+	}
+	
+	public static int getIndexOf(String[] array, int numElemen, String elemBuscar) {
+        if (array == null || elemBuscar == null || numElemen <= 0) {
+            return -1;
+        }
+
+        for (int i = 0; i < numElemen && i < array.length; i++) {
+            if (elemBuscar.equals(array[i])) {
+                return i;
+            }
+        }
+
+        return -1; // No encontrado
+    }
+	
+	public static void ordenarAlfabeticamente2(String[] principal, String[] asociado1, int[] asociado2, int longitud) {
+	    for (int i = 0; i < longitud - 1; i++) {
+	        for (int j = i + 1; j < longitud; j++) {
+	            if (principal[i] != null && principal[j] != null && principal[i].compareTo(principal[j]) > 0) {
+	                // Intercambiar principal
+	                String tempPrincipal = principal[i];
+	                principal[i] = principal[j];
+	                principal[j] = tempPrincipal;
+
+	                // Intercambiar asociado1
+	                String tempAsociado1 = asociado1[i];
+	                asociado1[i] = asociado1[j];
+	                asociado1[j] = tempAsociado1;
+
+	                // Intercambiar asociado2
+	                int tempAsociado2 = asociado2[i];
+	                asociado2[i] = asociado2[j];
+	                asociado2[j] = tempAsociado2;
+	            }
+	        }
+	    }
+	}
+}

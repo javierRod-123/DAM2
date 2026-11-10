@@ -1,0 +1,36 @@
+package examenrepaso;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class HiloLeerPares {
+
+	public static void main(String[] args) {
+		String nombreFichero = args[0];
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(nombreFichero)); BufferedWriter bw = new BufferedWriter(new FileWriter("pares.txt"))){
+			
+			String linea;
+			
+			while ((linea = br.readLine()) != null) {
+				int numero = Integer.parseInt(linea);
+				
+				if (numero % 2 == 0) {
+					bw.write(numero);
+					bw.newLine();
+				}
+			}
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}

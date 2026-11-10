@@ -1,0 +1,92 @@
+package examen3;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeMap;
+
+public class Modelo {
+	private TreeMap<Cliente, ArrayList<Pago>> pagosRealizados=new TreeMap<>();
+
+	public Modelo() {
+		super();
+	}
+
+	public TreeMap<Cliente, ArrayList<Pago>> getPagosRealizados() {
+		return pagosRealizados;
+	}
+
+	public void setPagosRealizados(TreeMap<Cliente, ArrayList<Pago>> pagosRealizados) {
+		this.pagosRealizados = pagosRealizados;
+	}
+
+	//TODO
+	public boolean contieneCliente(String dni) {
+		
+		for (Pago cliente : pagosRealizados.get(dni)) {
+			if(pagosRealizados.containsKey(dni)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+	//TODO
+	public void addCliente(Cliente cliente) {
+		ArrayList<Cliente> listaPago = new ArrayList<>();
+		
+		for (Pago recorridoCliente : pagosRealizados.get(cliente)) {
+			if(listaPago == null) {
+				listaPago.add(cliente);
+			}
+		}
+	}
+
+	//TODO
+	public boolean removeCliente(String dni) {
+		ArrayList<Pago> clienteDni = pagosRealizados.get(dni);
+		
+		for(Pago cliente : clienteDni) {
+			Pago clienteEliminar = null;
+			
+			if(clienteDni.contains(dni)) {
+				clienteEliminar = cliente;
+				clienteDni.remove(clienteEliminar);
+			}
+		}
+		
+		return false;
+	}
+	
+	public List<Cliente> comboCliente(Cliente cliente) {
+		List<Cliente> conjunto = new ArrayList<>();
+		for(Pago recorridoCliente : pagosRealizados.get(cliente)) {
+			conjunto.add(cliente);
+		}
+		return conjunto;
+	}
+	
+	public void guardarPago(Pago pago){
+		List<Pago> pagoGuardar = new ArrayList<>();
+		
+		for(Pago recorridoPago : pagosRealizados.get(pago)) {
+			pagoGuardar.add(pago);
+			
+		}
+		
+	}
+
+	public void leerClientes(Cliente cliente) {
+		List<Cliente> listaClientes = pagosRealizados.get(cliente);
+		for(Pago recorridoCliente : pagosRealizados.get(cliente)) {
+			
+		}
+	}
+
+
+
+	
+	
+
+}

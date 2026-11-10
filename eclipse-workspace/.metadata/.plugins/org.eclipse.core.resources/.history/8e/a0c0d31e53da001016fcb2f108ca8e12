@@ -1,0 +1,43 @@
+package herencia;
+
+public class Hora12 extends Hora {
+	private String periodo;
+
+	public Hora12(int hora, int minutos, String periodo) {
+		super(hora, minutos);
+		if (hora < 1 || hora > 12) {
+			super.setHora(12);
+		}
+		if (periodo.equalsIgnoreCase("am") || periodo.equalsIgnoreCase("pm")) {
+			this.periodo = periodo.toLowerCase();
+		} else {
+			this.periodo = "am";
+		}
+	}
+
+	@Override
+	public void setHora(int hora) {
+		if (hora >= 1 && hora <= 12) {
+			super.setHora(hora);
+		}
+	}
+
+	@Override
+	public void inc() {
+		super.setMinutos(getMinutos() + 1);
+		if (super.getMinutos() == 60) {
+			super.setMinutos(0);
+			super.setHora(super.getHora() + 1);
+			if (super.getHora() == 13) {
+				super.setHora(1);
+				this.periodo = this.periodo.equals("am") ? "pm" : "am";
+			}
+		}
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%02d:%02d %s", super.getHora(), super.getMinutos(), this.periodo);
+	}
+
+}

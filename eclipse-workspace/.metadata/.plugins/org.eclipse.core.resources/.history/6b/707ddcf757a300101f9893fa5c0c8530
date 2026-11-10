@@ -1,0 +1,29 @@
+package tipoExamenCorto;
+
+import java.util.Scanner;
+
+public class Biologos {
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		float diametro = 0;
+
+		System.out.println("Introduce el número de árboles que va a introducir datos ");
+		int numArbol = sc.nextInt();
+
+		for (int i = 1; i <= numArbol; i++) {
+			System.out.print("Introduce el tipo de árbol (A o B) ");
+			char tipoArbol = sc.next().charAt(0);
+			
+			if(tipoArbol == 'A') {
+				System.out.println("Diámetro: ");
+				
+				
+			}
+		}
+
+		sc.close();
+	}
+
+}
