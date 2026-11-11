@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.personaappy.tema1.LoginScreen
+import com.example.personaappy.tema1.RegisterScreen
 import com.example.personaappy.ui.theme.MyApplicationTheme
 import tema1.FichaPedidoScreen
 
@@ -21,8 +22,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyApplicationTheme {
+//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+//                    LoginScreen(
+//                        modifier = Modifier.padding(innerPadding)
+//                    )
+//                }
+
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    LoginScreen(
+                    RegisterScreen(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
