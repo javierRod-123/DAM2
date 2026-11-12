@@ -1,6 +1,6 @@
 "use strict";
 
-const rutaBackend = "http://localhost/examen/backend/";
+const rutaBackend = "http://localhost/DINT/JS/Examen_11-2024/php/";
 
 /**
  * Realiza peticiones AJAX de tipo GET

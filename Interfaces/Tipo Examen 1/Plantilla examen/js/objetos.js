@@ -4,104 +4,116 @@
 
 // 1º Creo la clase Libro con su constructor
 class Libro{
+
+    #idlibro;
+    #idgenero;
+    #titulo;
+    #autor;
+    #descripcion;
+    #imagen;
+
     constructor(idlibro, idgenero, titulo, autor, descripcion, imagen){
-        this._idlibro = idlibro;
-        this._idgenero = idgenero;
-        this._titulo = titulo;
-        this._autor = autor;
-        this._descripcion = descripcion;
-        this._imagen = imagen;
+        this.#idlibro = idlibro;
+        this.#idgenero = idgenero;
+        this.#titulo = titulo;
+        this.#autor = autor;
+        this.#descripcion = descripcion;
+        this.#imagen = imagen;
     }
 
 // 2º Creo los get y set por si necesito leer o modificar fuera de la clase
     get idlibro() {
-    return this._idlibro;
+    return this.#idlibro;
     }
 
     get idgenero(){
-        return this._idgenero;
+        return this.#idgenero;
     }
 
     get titulo(){
-        return this._titulo;
+        return this.#titulo;
     }
 
     get autor(){
-        return this.autor;
+        return this.#autor;
     }
 
     get descripcion(){
-        return this._descripcion;
+        return this.#descripcion;
     }
 
     get imagen(){
-        return this._imagen;
+        return this.#imagen;
     }
 
     set idlibro(value){
-        this._idlibro = value;
+        this.#idlibro = value;
     }
 
     set idgenero(value){
-        this._idgenero = value;
+        this.#idgenero = value;
     }
 
     set titulo(value){
-        this._titulo = value;
+        this.#titulo = value;
     }
 
     set autor(value){
-        this._autor = value;
+        this.#autor = value;
     }
 
     set descripcion(value){
-        this._descripcion = value;
+        this.#descripcion = value;
     }
 
     set imagen(value){
-        this._imagen = value;
+        this.#imagen = value;
     }
 
 // 3º Ahora me tocaría crear el toJSON() que sirve para enviar los datos de JS a un script PHP
 
     toJSON(){
         return{
-            idlibro: this.idlibro,
-            idgenero: this.idgenero,
-            titulo: this.titulo,
-            autor: this.autor,
-            descripcion: this.descripcion,
-            imagen: this.imagen
+            idlibro: this.#idlibro,
+            idgenero: this.#idgenero,
+            titulo: this.#titulo,
+            autor: this.#autor,
+            descripcion: this.#descripcion,
+            imagen: this.#imagen
         }
     }
 }
 
 class Genero{
+
+    #idgenero;
+    #genero;
+
     constructor(idgenero, genero){
-        this._idgenero = idgenero;
-        this._genero = genero;
+        this.#idgenero = idgenero;
+        this.#genero = genero;
     }
 
     get idgenero(){
-        return this._idgenero;
+        return this.#idgenero;
     }
 
     get genero(){
-        return this._genero;
+        return this.#genero;
     }
 
     set idgenero(value){
-        this._idgenero = value;
+        this.#idgenero = value;
     }
 
     set genero(value){
-        this._genero = value;
+        this.#genero = value;
     }
 
     toJSON(){
         return{
-            idgenero: this.idgenero,
-            genero: this.genero
+            idgenero: this.#idgenero,
+            genero: this.#genero
         }
     }
 }

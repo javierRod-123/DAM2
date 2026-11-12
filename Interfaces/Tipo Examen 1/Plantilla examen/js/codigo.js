@@ -1,3 +1,55 @@
 "use strict";
 
-// Codificar aquí el programa principal
+// MAIN
+
+var oLibreria = new Libreria();
+
+registrarEventos();
+
+function registrarEventos(){
+    document
+        .getElementById("mnuCrearLibro")
+        .addEventListener("click", mostrarFormulario);
+    document
+        .getElementById("mnuListado")
+        .addEventListener("click", mostrarFormulario);
+}
+
+function mostrarFormulario(oEvento){
+    let opcion = oEvento.target.id;
+
+    ocultarFormularios();
+
+    switch(opcion){
+        case "mnuCrearLibro":
+            cargarDesplegables();
+            frmCrearLibro.classList.remove("d-none");
+            break;
+        case "mnuListado":
+            cargarDesplegables();
+            frmListado.classList.remove("d-none");
+            break;
+    }
+}
+
+function ocultarFormularios(){
+    frmCrearLibro.classList.add("d-none");
+    frmListado.classList.add("d-none");
+}
+
+async function cargarDesplegables(){
+    let respuesta = await oLibreria.getGeneros();
+    let options = "";
+
+    if (respuesta.ok){
+        for (let genero of respuesta.datos){
+            options += `<option value="${genero.idgenero}" >${genero.genero}</option>`;
+        }
+
+        frmCrearLibro.lstGenero.innerHTML = options;
+        frmListado.lstGenero.innerHTML = options;
+
+    } else {
+        alert("No se han podido cargar los generos literarios " + respuesta.mensaje);
+    }
+}
