@@ -1,0 +1,35 @@
+fontWeight = FontWeight.Bold o FontWeight.SemiBold -> Cambia el grosor de la letra para ponerla en negrita o semi-negrita.
+
+fontSize = 20.sp -> Define el tamaño de la fuente usando unidades sp (escalable pixels, perfectos para texto).
+
+textAlign = TextAlign.Center -> Alinea el texto horizontalmente (puedes ponerlo al centro, a la izquierda, etc.).
+
+modifier = Modifier.fillMaxWidth() -> Hace que el elemento o contenedor ocupe todo el ancho disponible de la pantalla.
+
+modifier = Modifier.fillMaxSize() -> Hace que el componente ocupe toda la pantalla (tanto ancho como alto).
+
+modifier = Modifier.height(64.dp) o width(...) -> Fuerza una altura o anchura fija exacta en píxeles de densidad (dp).
+
+modifier = Modifier.padding(16.dp) -> Añade margen interior (espacio de separación entre el borde del elemento y su contenido de dentro).
+
+Spacer(modifier = Modifier.height(16.dp)) -> Crea un espacio vacío vertical de separación entre un elemento y el siguiente de la columna.
+
+Arrangement.spacedBy(12.dp) -> En un Row o Column, sirve para separar automáticamente todos los elementos hijos entre sí por una distancia fija.
+
+Arrangement.Center -> Centra los elementos dentro de un Row o Column.
+
+Alignment.CenterHorizontally -> Alinea un elemento específico de una Column justo en el centro horizontal de la pantalla.
+
+contentAlignment = Alignment.Center -> Centra todo lo que hay dentro de un Box (tanto vertical como horizontalmente).
+
+shape = RoundedCornerShape(12.dp) -> Redondea las esquinas de un contenedor (como un Box o un botón) con el radio de dp que le pidas.
+
+singleLine = true -> Obliga a que un campo de texto (TextField) se escriba en una sola línea y no baje hacia abajo al pulsar enter.
+
+keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number) o Decimal -> Cambia el aspecto del teclado del móvil que se abre al pulsar la caja (para que salgan solo números, puntos decimales, emails, etc.).
+
+visualTransformation = PasswordVisualTransformation() -> Oculta el texto que se escribe convirtiéndolo en puntitos (ideal para contraseñas).
+
+enabled = ... -> Sirve para activar o desactivar un botón (por ejemplo, para que esté gris y no se pueda pulsar hasta que los campos no estén vacíos).
+
+modifier = Modifier.weight(1f) -> Se usa dentro de un Row para repartir el espacio proporcionalmente (por ejemplo, si pones tres botones con weight(1f), cada uno ocupa exactamente un tercio del ancho).
