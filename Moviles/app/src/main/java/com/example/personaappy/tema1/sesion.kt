@@ -17,7 +17,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -29,15 +28,43 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+// =====================================================================
+// COMPONENTE PADRE (Stateful / Controla el Estado)
+// Aloja las variables con rememberSaveable y las pasa hacia abajo junto a sus lambdas
+// =====================================================================
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier){
-
+fun LoginScreenParent(modifier: Modifier = Modifier) {
     var correo by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
     var ocultarPass by rememberSaveable { mutableStateOf(true) }
 
+    LoginScreenContent(
+        correo = correo,
+        onCorreoChange = { correo = it },
+        password = password,
+        onPasswordChange = { password = it },
+        ocultarPass = ocultarPass,
+        onTogglePasswordVisibility = { ocultarPass = !ocultarPass },
+        modifier = modifier
+    )
+}
+
+// =====================================================================
+// COMPONENTE HIJO (Stateless / Visual)
+// Recibe los valores y las funciones lambda para notificar los cambios
+// =====================================================================
+@Composable
+fun LoginScreenContent(
+    modifier: Modifier = Modifier,
+    correo: String,
+    onCorreoChange: (String) -> Unit,
+    password: String,
+    onPasswordChange: (String) -> Unit,
+    ocultarPass: Boolean,
+    onTogglePasswordVisibility: () -> Unit
+) {
     Column(
-        modifier =  modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
@@ -59,28 +86,26 @@ fun LoginScreen(modifier: Modifier = Modifier){
             )
         }
 
-        Spacer( modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(12.dp))
 
         OutlinedTextField(
             value = correo,
-            onValueChange = {correo = it},
+            onValueChange = onCorreoChange, // Envía el cambio hacia arriba mediante la lambda del padre
             modifier = Modifier.fillMaxWidth(),
-            label = {Text("Correo electrónico")},
-            placeholder = {Text("Introduce tu correo")}
+            label = { Text("Correo electrónico") },
+            placeholder = { Text("Introduce tu correo") }
         )
 
         Spacer(modifier = Modifier.height(12.dp))
 
         OutlinedTextField(
             value = password,
-            onValueChange = {password = it},
+            onValueChange = onPasswordChange, // Envía el cambio de contraseña hacia arriba
             modifier = Modifier.fillMaxWidth(),
             singleLine = true,
-            label = {Text("Contraseña")},
-            placeholder = {Text("Introduce tu contraseña")},
-
+            label = { Text("Contraseña") },
+            placeholder = { Text("Introduce tu contraseña") },
             visualTransformation = if (ocultarPass) PasswordVisualTransformation() else VisualTransformation.None,
-
             trailingIcon = {
                 Text(
                     text = if (ocultarPass) "Mostrar" else "Ocultar",
@@ -88,18 +113,20 @@ fun LoginScreen(modifier: Modifier = Modifier){
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
                         .padding(end = 8.dp)
-                        .clickable{ocultarPass = !ocultarPass}
+                        .clickable { onTogglePasswordVisibility() } // Llama a la lambda para alternar visibilidad
                 )
             }
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(onClick = {
-        },
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(100.dp),
-        enabled = correo.isNotBlank() && password.length >= 4
+        Button(
+            onClick = {
+                // Acción al iniciar sesión
+            },
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(100.dp),
+            enabled = correo.isNotBlank() && password.length >= 4
         ) {
             Text(
                 text = "Iniciar sesión",
@@ -109,9 +136,11 @@ fun LoginScreen(modifier: Modifier = Modifier){
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        TextButton(onClick = {
-        },
-        modifier = Modifier.align(Alignment.CenterHorizontally)
+        TextButton(
+            onClick = {
+                // Acción de contraseña olvidada
+            },
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
             Text(
                 text = "¿Has olvidado tu contraseña?",

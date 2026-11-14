@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.blur
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.personaappy.tema1.LoginScreen
 import com.example.personaappy.tema1.RegisterScreen
+import com.example.personaappy.tema1.myBillSpliterParent
 import com.example.personaappy.ui.theme.MyApplicationTheme
 import tema1.FichaPedidoScreen
 
@@ -29,7 +30,7 @@ class MainActivity : ComponentActivity() {
 //                }
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    RegisterScreen(
+                    myBillSpliterParent(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }

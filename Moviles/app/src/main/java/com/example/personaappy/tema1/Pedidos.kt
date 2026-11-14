@@ -17,8 +17,9 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,41 +28,70 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
+// =====================================================================
+// 1. COMPONENTE PADRE (Stateful / Controla el Estado)
+// Aloja los estados persistentes con rememberSaveable y los pasa hacia
+// abajo al componente hijo junto con las lambdas de actualización (UDF).
+// =====================================================================
 @Composable
-fun FichaPedidoScreen(modifier: Modifier) {
+fun FichaPedidoScreen(modifier: Modifier = Modifier) {
+    var nombreProducto by rememberSaveable { mutableStateOf("") }
+    var cantidad by rememberSaveable { mutableIntStateOf(0) } // Optimizado para enteros según teoría[cite: 26, 29]
 
-    var nombreProducto by remember { mutableStateOf("") }
-    var cantidad by remember { mutableStateOf(0) }
+    FichaPedidoContent(
+        nombreProducto = nombreProducto,
+        onNombreProductoChange = { nombreProducto = it },
+        cantidad = cantidad,
+        onIncrement = { cantidad++ },
+        onDecrement = { if (cantidad > 0) cantidad-- },
+        modifier = modifier
+    )
+}
 
+// =====================================================================
+// 2. COMPONENTE HIJO (Stateless / Visual)
+// Recibe los datos de solo lectura y las lambdas para notificar las acciones.
+// No gestiona memoria interna propia, facilitando previsualizaciones y test.
+// =====================================================================
+@Composable
+fun FichaPedidoContent(
+    modifier: Modifier = Modifier,
+    nombreProducto: String,
+    onNombreProductoChange: (String) -> Unit,
+    cantidad: Int,
+    onIncrement: () -> Unit,
+    onDecrement: () -> Unit
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp)
-    ){
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(
-                color = Color(0xFFE3F2FD),
-                shape = RoundedCornerShape(12.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    color = Color(0xFFE3F2FD),
+                    shape = RoundedCornerShape(12.dp)
+                )
+                .padding(16.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "FICHA DE PEDIDO",
+                color = Color(0xFF1565C0),
+                fontSize = 22.sp,
+                fontWeight = FontWeight.SemiBold
             )
-            .padding(16.dp),
-        contentAlignment = Alignment.Center
-    ){
-        Text(
-            text = "FICHA DE PEDIDO",
-            color = Color(0xFF1565C0),
-            fontSize = 22.sp,
-            fontWeight = FontWeight.SemiBold
-        )
-    }
-       Spacer(modifier = Modifier.height(16.dp))
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         OutlinedTextField(
             value = nombreProducto,
-            onValueChange = { nuevoTexto -> nombreProducto = nuevoTexto},
+            onValueChange = onNombreProductoChange, // Notifica el cambio de texto hacia arriba[cite: 31]
             modifier = Modifier.fillMaxWidth(),
-            label = { Text("Nombre del producto")}
+            label = { Text("Nombre del producto") }
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -79,10 +109,8 @@ fun FichaPedidoScreen(modifier: Modifier) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
-        ){
-            Button(onClick = {
-                if (cantidad > 0) cantidad--
-            }){
+        ) {
+            Button(onClick = onDecrement) { // Ejecuta la lambda de decremento del padre[cite: 31]
                 Text(text = "-", fontSize = 18.sp)
             }
 
@@ -96,9 +124,7 @@ fun FichaPedidoScreen(modifier: Modifier) {
 
             Spacer(modifier = Modifier.width(16.dp))
 
-            Button(onClick = {
-                cantidad++
-            }) {
+            Button(onClick = onIncrement) { // Ejecuta la lambda de incremento del padre[cite: 31]
                 Text(
                     text = "+",
                     fontSize = 18.sp
@@ -108,7 +134,7 @@ fun FichaPedidoScreen(modifier: Modifier) {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        if (nombreProducto.isNotBlank() && cantidad > 0){
+        if (nombreProducto.isNotBlank() && cantidad > 0) {
             Text(
                 text = "Resumen: $cantidad unidad(es) de '$nombreProducto'",
                 fontSize = 16.sp,
