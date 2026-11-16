@@ -118,55 +118,18 @@ class Genero{
     }
 }
 
-class GestorNotas{
+class Libreria{
 
     // Metodo para crear un Libro
     async crearLibro(oLibro){
-        let respuesta;
+        let datos = new FormData();
 
-        try {
-            
-            // Convierto el objeto libro a un FormDara o envio su toJSON()
-            let formData = new FormData();
-            FormData.append("idlibro", oLibro.idlibro);
-            FormData.append("idgenero", oLibro.idgenero);
-            FormData.append("titulo", oLibro.titulo);
-            FormData.append("autor", oLibro.autor);
-            FormData.append("descripcion", oLibro.descripcion);
-            FormData.append("imagen", oLibro.imagen);
+        datos.append("libro", JSON.stringify(oLibro));
 
-            let respuestaServidor = await fetch("php/crear_libro.php", {
-                method: "POST",
-                body: FormData
-            });
+        let respuesta = await peticionPOST("crear_libro.php", datos);
 
-            if (!respuestaServidor.ok){
-                respuesta = {
-                    ok: false,
-                    mensaje: "Error al crear el libro en el servidor",
-                    status: respuestaServidor.status,
-                    datos: null
-                };
-            } else {
-                let datosServidor = await respuestaServidor.json();
-                respuesta = {
-                    ok: datosServidor.ok,
-                    mensaje: datosServidor.mensaje || "OK",
-                    status: respuestaServidor.status,
-                    datos: null
-                };
-            }
-
-        } catch (error) {
-            response = {
-                ok: false,
-                mensaje: "Error de red: " + error.message,
-                status: 0,
-                datos: null
-            };
-        }
+        return respuesta;
     }
-
 
     // Metodo que recupera los libros de un género específico
     async getLibrosGenero(idgenero){

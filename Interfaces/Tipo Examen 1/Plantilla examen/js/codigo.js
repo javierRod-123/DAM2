@@ -15,6 +15,8 @@ function registrarEventos(){
         .addEventListener("click", mostrarFormulario);
 }
 
+frmCrearLibro.btnCrearLibro.addEventListener("click", procesarAltaLibro);
+
 function mostrarFormulario(oEvento){
     let opcion = oEvento.target.id;
 
@@ -52,4 +54,24 @@ async function cargarDesplegables(){
     } else {
         alert("No se han podido cargar los generos literarios " + respuesta.mensaje);
     }
+
+async function procesarAltaLibro(){
+    //Recoger campos del formulario
+    let titulo = frmCrearLibro.txtTitulo.value.trim();
+    let autor = frmCrearLibro.txtAutor.value.trim();
+    let descripcion = frmCrearLibro.txtDescripcion.value.trim();
+    let imagen = frmCrearLibro.txtImagen.value.trim();
+    let idgenero = frmCrearLibro.lstGenero.value;
+
+    //validaciones no necesarias en el examen
+
+    let respuesta = await oLibreria.crearLibro(new Libro(null, idgenero, titulo, autor,  descripcion, imagen));
+
+    alert(respuesta.mensaje);
+
+    if(respuesta.ok){
+        frmCrearLibro.reset();
+        frmCrearLibro.classList.add("d-none")
+    }
+}
 }
