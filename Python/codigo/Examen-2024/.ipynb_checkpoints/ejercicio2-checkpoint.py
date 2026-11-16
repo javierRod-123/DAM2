@@ -16,7 +16,7 @@ def entrada_datos():
 # Apartado b)
 def calculo_estadisticas(lista_datos):
     dicc_datos = {}
-    for nombre, p_favor, p_contra, p_jugados in lista_datos:
+    for (nombre, p_favor, p_contra, p_jugados) in lista_datos:
         diferencia = p_favor - p_contra
         tasa_diferencia = diferencia / p_jugados
 
