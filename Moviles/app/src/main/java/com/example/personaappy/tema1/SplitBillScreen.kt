@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -38,7 +39,7 @@ import androidx.compose.ui.unit.sp
 fun CalculadoraPropinaParent(modifier: Modifier){
     var cuentaInput by rememberSaveable { mutableStateOf("") }
     var personasInput by rememberSaveable {mutableStateOf("2") }
-    var propinaSeleccionada by rememberSaveable { mutableStateOf(15) }
+    var propinaSeleccionada by rememberSaveable { mutableIntStateOf(15) }
 
     // LLamo al componente hijo pasandole los valores y lambdas para actualizarlos
     CalculadoraPropinaContent(

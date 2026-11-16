@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.personaappy.tema1.TaquillaCinePadre
 import com.example.personaappy.tema1.CalculadoraPropinaParent
 import com.example.personaappy.tema1.RegisterScreenParent
 import com.example.personaappy.ui.theme.MyApplicationTheme
@@ -29,7 +30,7 @@ class MainActivity : ComponentActivity() {
 //                }
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    RegisterScreenParent(
+                    TaquillaCinePadre(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
