@@ -544,3 +544,23 @@
 2026-11-13 18:49:08.503: [INFO] BookmarksLoadDropped droppedNodes=0
 2026-11-13 18:49:08.503: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
 2026-11-13 19:29:28.334: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-11-17 11:39:56.667: [INFO] CurrentProfilePath: C:\Users\Javier\Documents\GitHub\DAM2\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-11-17 11:39:56.667: [INFO] Profiles total count: 1
+2026-11-17 11:39:56.667: [INFO] Profile: name=Perfil 1 path=C:\Users\Javier\Documents\GitHub\DAM2\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-11-10T17:15:00.488Z
+2026-11-17 11:39:56.667: [INFO] LastUsedProfileDir: C:\Users\Javier\Documents\GitHub\DAM2\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-11-17 11:39:56.667: [INFO] MostRecentlyActiveProfile: name=Perfil 1 path=C:\Users\Javier\Documents\GitHub\DAM2\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-11-10T17:15:00.488Z
+2026-11-17 11:39:56.667: [INFO] OnDoneLoading sync enabled: 0
+2026-11-17 11:39:56.667: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-11-17 11:39:56.667: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-11-17 11:39:56.667: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-11-17 11:50:27.767: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-11-17 11:51:02.640: [INFO] CurrentProfilePath: C:\Users\Javier\Documents\GitHub\DAM2\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-11-17 11:51:02.640: [INFO] Profiles total count: 1
+2026-11-17 11:51:02.640: [INFO] Profile: name=Perfil 1 path=C:\Users\Javier\Documents\GitHub\DAM2\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-11-10T17:15:00.488Z
+2026-11-17 11:51:02.640: [INFO] LastUsedProfileDir: C:\Users\Javier\Documents\GitHub\DAM2\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-11-17 11:51:02.640: [INFO] MostRecentlyActiveProfile: name=Perfil 1 path=C:\Users\Javier\Documents\GitHub\DAM2\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-11-10T17:15:00.488Z
+2026-11-17 11:51:02.640: [INFO] OnDoneLoading sync enabled: 0
+2026-11-17 11:51:02.640: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-11-17 11:51:02.640: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-11-17 11:51:02.640: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-11-17 11:51:03.025: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
