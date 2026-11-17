@@ -73,10 +73,10 @@ fun JuegoPalabrasEstados(modifier: Modifier = Modifier) {
             // TODO 2: Implementa la lógica al pulsar "Comprobar"
             if (palabraUsuario == palabraOrdenadaNivel && nivel == 1 ){
                 mensaje = "¡Correcto! Siguiente palabra"
-                onNivel = 2
+                nivel = 2
             } else if (palabraUsuario == palabraOrdenadaNivel && nivel == 2){
                 mensaje = "¡Correcto! Siguiente palabra"
-                onNivel = 3
+                nivel = 3
             } else if (palabraUsuario == palabraOrdenadaNivel && nivel == 3){
                 mensaje = "¡ENHORABUENA! Has superado el reto"
                 juegoTerminado = true

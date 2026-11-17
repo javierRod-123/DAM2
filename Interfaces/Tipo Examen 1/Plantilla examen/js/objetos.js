@@ -119,89 +119,27 @@ class Genero{
 }
 
 class Libreria{
-
-    // Metodo para crear un Libro
     async crearLibro(oLibro){
         let datos = new FormData();
 
-        datos.append("libro", JSON.stringify(oLibro));
+        datos.append("libro", JSON.stringify(olibro));
 
         let respuesta = await peticionPOST("crear_libro.php", datos);
 
         return respuesta;
     }
 
-    // Metodo que recupera los libros de un género específico
     async getLibrosGenero(idgenero){
+        let datos = new FormData();
 
-        let respuesta;
+        datos.append("idgenero", idgenero);
 
-        try {
-        let formData = new FormData();
-        formData.append("idgenero", idgenero);
-
-        let respuestaServidor = await fetch("php/get_libro_genero.php", {
-            method: "POST",
-            body: FormData
-        });
-
-        if (!respuestaServidor.ok){
-            respuesta = {
-                ok: false,
-                mensaje: "Error al acceder al servidor",
-                status: respuestaServidor.status,
-                datos: null
-            };
-        } else {
-                respuesta = {
-                    ok: true,
-                    mensaje: "OK",
-                    status: respuestaServidor.status,
-                    datos: await respuestaServidor.json()
-                };
-            }
-        } catch (error){
-            respuesta = {
-                ok: false,
-                mensaje: "Error de red: " + error.message,
-                status: 0,
-                datos: null
-            };
-        }
+        let respuesta = await peticionGET("get_libros_genero.php", datos);
 
         return respuesta;
     }
 
-    // Metodo que recupera todos los géneros de la base de datos
-    async getGeneros(){
-        let respuesta;
-
-        try {
-            let respuestaServidor = await fetch("php/get_genero.php", {method: "GET"});
-            
-            if (!respuestaServidor.ok){
-                respuesta = {
-                    ok: false,
-                    mensaje: "Error al acceder al servidor",
-                    status: respuestaServidor.status,
-                    datos: null
-                };
-            } else{
-                respuesta = {
-                    ok: true,
-                    mensaje: "OK",
-                    status: respuestaServidor.status,
-                    datos: await respuestaServidor.json()
-                };
-            }
-
-        } catch (error) {
-            respuesta = {
-                ok: false,
-                mensaje: "Error de red: " + error.message
-            }
-        }
-
-        return respuesta;
+    async getGenero(){
+        return await peticionGET("get_generos.php", new FormData());
     }
 }
