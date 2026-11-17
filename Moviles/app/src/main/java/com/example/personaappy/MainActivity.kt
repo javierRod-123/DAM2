@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.blur
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.personaappy.tema1.TaquillaCinePadre
 import com.example.personaappy.tema1.CalculadoraPropinaParent
+import com.example.personaappy.tema1.JuegoPalabrasEstados
 import com.example.personaappy.tema1.RegisterScreenParent
 import com.example.personaappy.ui.theme.MyApplicationTheme
 import tema1.FichaPedidoScreen
@@ -30,7 +31,7 @@ class MainActivity : ComponentActivity() {
 //                }
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    TaquillaCinePadre(
+                    JuegoPalabrasEstados(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
