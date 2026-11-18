@@ -1,0 +1,275 @@
+1. PROGRAMACION FUNCIONAL (lambda y map)
+
+lambda -> Es una función anónima de una sola línea que no necesita def
+
+map -> Aplica una función a cada elemento de una lista o iterable sin necesidad de hacer un for
+
+
+# Ejemplo de MAP con LAMBDA (convertir lista de textos a float, visto en el ej46)
+numeros_string = ["1.25", "2.75", "21"]
+numeros_reales = map(lambda x: float(x), numeros_string)
+lista_final = list(numeros_reales) # [1.25, 2.75, 21.0]
+
+
+
+
+2. DICCIONARIOS (Recorrer, actualizar, buscar y insertar)
+
+
+# --- 1. CREAR E INSERTAR DATOS ---
+# Diccionario vacío o con datos iniciales (usando tuplas como claves, muy típico)
+mi_diccionario = {}
+
+# Insertar o crear una clave nueva:
+mi_diccionario[("ferry", 1)] = [2500, 350]
+mi_diccionario[("mercante", 2)] = [120000, 6500]
+
+
+# --- 2. BUSCAR / COMPROBAR SI EXISTE ---
+clave_a_buscar = ("ferry", 1)
+
+if clave_a_buscar in mi_diccionario:
+    print("¡La clave existe! Su valor es:", mi_diccionario[clave_a_buscar])
+else:
+    print("La clave no está registrada.")
+
+
+# --- 3. ACTUALIZAR / MODIFICAR UN VALOR ---
+# Si la clave ya existe, reasignamos el valor (o acumulamos si es un contador/importe)
+mi_diccionario[("ferry", 1)] = [3000, 400]  # Modifica los datos anteriores
+
+
+# --- 4. RECORRER UN DICCIONARIO ---
+# Con .items() recorres la clave (k) y el valor (v) a la vez
+for k, v in mi_diccionario.items():
+    print(f"Clave (Tipo e ID): {k}")
+    print(f"Valor (Datos asociados): {v}")
+    
+
+
+
+3. ORDENAR LISTAS CON .sort() y lambda
+
+# CASO A: Lista simple de números
+numeros = [45, 12, 89, 3]
+numeros.sort()                    # De menor a mayor por defecto: [3, 12, 45, 89]
+numeros.sort(reverse=True)        # De mayor a menor: [89, 45, 12, 3]
+
+
+# CASO B: Lista de tuplas (Ej: Equipos de fútbol y sus puntos -> ('Boquerones', 16))
+# Queremos ordenar por los PUNTOS (que están en la posición [1] de la tupla)
+clasificacion = [('Boquerones', 8), ('Verdolagas', 16), ('Palanganas', 12)]
+
+# Ordenar de MENOR A MAYOR por los puntos (posición 1):
+clasificacion.sort(key=lambda x: x[1])
+
+# Ordenar de MAYOR A MENOR (descendente) por los puntos:
+clasificacion.sort(key=lambda x: x[1], reverse=True)
+
+
+# CASO C: ¿Cómo sacar el menor y el mayor una vez ordenada la lista?
+# Si la lista ya está ordenada de MENOR A MAYOR:
+menor_elemento = clasificacion[0]   # El primero de todos (índice 0)
+mayor_elemento = clasificacion[-1]  # El último de todos (índice -1)
+
+
+
+
+4. OPERACIONES MATEMÁTICAS CON LISTAS
+
+# Lista de ejemplo con datos numéricos
+datos = [12.5, 3.2, 45.0, 8.1, 21.0]
+
+# 1. VALOR MÁXIMO (El número más alto)
+valor_maximo = max(datos)    # Resultado: 45.0
+
+# 2. VALOR MÍNIMO (El número más bajo)
+valor_minimo = min(datos)    # Resultado: 3.2
+
+# 3. SUMA TOTAL (Suma de todos los elementos)
+suma_total = sum(datos)      # Resultado: 89.8
+
+# 4. CANTIDAD DE ELEMENTOS (Longitud de la lista)
+cantidad = len(datos)        # Resultado: 5
+
+# 5. MEDIA ARITMÉTICA (Suma total dividida entre la cantidad de elementos)
+media = sum(datos) / len(datos)  # Resultado: 17.96
+
+
+
+
+
+5. FICHEROS TXT Y CSV
+
+# --- LECTURA DE FICHERO ---
+f = open("fichero.txt", "rt", encoding="UTF-8")
+lineas = f.readlines()  # Lee todas las líneas en una lista
+f.close()
+
+for linea in lineas:
+    # Limpiar salto de línea y separar por separador (ej: punto y coma)
+    elementos = linea.strip("\n").split(";")
+
+
+# --- ESCRITURA DE FICHERO ---
+f_out = open("salida.txt", "wt", encoding="UTF-8")
+f_out.write("Texto a escribir en el fichero\n")
+f_out.close()
+
+
+
+
+
+6. PROGRAMACIÓN ORIENTADA A OBJETOS (POO)
+
+# ---------------------------------------------------------
+# 1. CLASE PADRE (Superclase)
+# ---------------------------------------------------------
+class Animal:
+    def __init__(self, id_animal, especie):
+        # Atributos privados (con doble guion bajo __)
+        self.__id_animal = id_animal
+        self.__especie = especie
+
+    # Getters con @property para acceder a los atributos privados de forma segura
+    @property
+    def id_animal(self):
+        return self.__id_animal
+
+    @property
+    def especie(self):
+        return self.__especie
+
+    # Método __str__ para que al hacer print() del objeto devuelva una cadena limpia
+    def __str__(self):
+        return f"ID: {self.__id_animal}, Especie: {self.__especie}"
+
+
+# ---------------------------------------------------------
+# 2. CLASE HIJA (Subclase que HEREDA de Animal)
+# ---------------------------------------------------------
+# Se pone entre paréntesis (Animal) para indicar la herencia
+class Herbivoro(Animal):
+    def __init__(self, id_animal, especie, kg_dia):
+        # super().__init__ llama al constructor de la clase padre (Animal)
+        super().__init__(id_animal, especie)
+        self.__kg_dia = kg_dia  # Atributo propio de la clase hija
+
+    @property
+    def kg_dia(self):
+        return self.__kg_dia
+
+    # Sobrescribimos el método __str__ (o lo ampliamos)
+    def __str__(self):
+        # Usamos super().__str__() para aprovechar la cadena del padre y le añadimos lo del hijo
+        return f"{super().__str__()}, Kg de pasto al día: {self.__kg_dia}"
+
+
+# ---------------------------------------------------------
+# 3. CLASE CONTENEDORA (Gestor con lista de objetos)
+# ---------------------------------------------------------
+class Zoologico:
+    def __init__(self):
+        self.animales = []  # Lista que guardará objetos de tipo Animal / Herbivoro / Carnivoro
+
+    def alta_animal(self, o_animal):
+        # Comprobar si ya existe por ID para evitar duplicados
+        for a in self.animales:
+            if a.id_animal == o_animal.id_animal:
+                return "Animal repetido"
+        
+        self.animales.append(o_animal)
+        return "Alta OK"
+
+    def baja_animal(self, id_buscado):
+        for a in self.animales:
+            if a.id_animal == id_buscado:
+                self.animales.remove(a)
+                return "Animal dado de baja"
+        return "Animal no localizado"
+        
+
+
+
+
+
+
+
+
+
+7. BASE DE DATOS
+
+import sqlite3
+
+def altura_media():
+    # 1. Conectar a la base de datos SQLite
+    conexion = sqlite3.connect("equipo.db")
+    cursor = conexion.cursor()
+
+    # 2. Ejecutar consulta SQL
+    cursor.execute("SELECT AVG(altura) FROM jugadores WHERE fecha_baja IS NULL")
+    
+    # 3. Obtener el resultado
+    resultado = cursor.fetchone()[0] # Pilla el primer valor de la tupla resultado
+
+    # 4. Cerrar la conexión
+    conexion.close()
+    
+    return resultado
+
+
+
+
+
+
+
+
+
+8. PROGRAMACION FUNCIONAL AVANZADA
+
+from functools import reduce
+
+# Diccionario de ejemplo complejo (claves que son tuplas, valores que son listas/tuplas)
+diccionario = { 
+    ("ferry", 1) : [2500, 350],      # [carga, pasajeros]
+    ("mercante", 2) : [120000, 6500], # [carga, autonomía]
+    ("mercante", 3) : [200000, 3200], # [carga, pasajeros]
+    ("ferry", 4) : [3520, 420]        # [carga, pasajeros]
+}
+
+# -------------------------------------------------------------------------
+# PATRÓN A: FILTER + MAP (Filtrar elementos y transformar sus valores)
+# Ejemplo: Obtener una tupla con los pasajeros de cada ferry
+# -------------------------------------------------------------------------
+def obtener_pasajeros(d):
+    # 1. FILTER: Filtramos los items donde la clave [0][0] sea "ferry"
+    # Ojo: item es una tupla entera -> ( (tipo, id), [carga, dato] )
+    # item[0] es la clave ("ferry", 1) -> item[0][0] es "ferry"
+    ferrys = filter(lambda item: item[0][0] == "ferry", d.items()) 
+
+    # 2. MAP: De esos ferrys filtrados, extraemos los pasajeros (que están en el valor [1][1])
+    pasajeros = map(lambda item: item[1][1], ferrys)
+
+    # 3. Devolvemos el resultado convertido en tupla
+    return tuple(pasajeros)
+
+print(obtener_pasajeros(diccionario))  # Salida: (350, 420)
+
+
+# -------------------------------------------------------------------------
+# PATRÓN B: FILTER + REDUCE (Buscar máximos o mínimos en diccionarios)
+# Ejemplo: Encontrar el id_barco del mercante con mayor carga
+# -------------------------------------------------------------------------
+def mayor_carga(d):
+    # 1. FILTER: Nos quedamos solo con los elementos que sean "mercante"
+    mercantes = filter(lambda item: item[0][0] == "mercante", d.items())
+
+    # 2. REDUCE: Compara de dos en dos (it1 e it2) para quedarse con el que tenga mayor carga
+    # item[1][0] es la carga del mercante.
+    mercante_mayor = reduce(lambda it1, it2: it1 if it1[1][0] > it2[1][0] else it2, mercantes)
+
+    # 3. Extraemos el ID del barco que está en la clave (mercante_mayor[0][1]) y lo metemos en lista
+    return [mercante_mayor[0][1]]
+
+print(mayor_carga(diccionario))  # Salida: [3]
+
