@@ -263,4 +263,3 @@ def mayor_carga(d):
     return [mercante_mayor[0][1]]
 
 print(mayor_carga(diccionario))  # Salida: [3]
-

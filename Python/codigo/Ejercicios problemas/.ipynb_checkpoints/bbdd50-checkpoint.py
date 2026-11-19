@@ -23,7 +23,7 @@ def bd_to_diccionario():
         )
     return d_jugadores
 
-def diccionario_to_fichero():
+def diccionario_to_fichero(diccionario):
     f = open("jugadores.txt", "wt", encoding="UTF-8")
 
     for dni, fecha_baja, peso, altura in diccionario.items():

@@ -71,4 +71,36 @@ class Zoologico:
         filas = []
         for animal in self.animales:
             if isinstance(animal, Carnivoro) and animal.peligroso:
+                filas.append(str(animal))
         return "\n".join(filas)
+
+# --- PROGRAMA PRINCIPAL DE DEMOSTRACIÓN ---
+zoo = Zoologico()
+
+# 1. Creamos herbívoros y carnívoros de prueba
+h1 = Herbivoro(1, "Cebra", 15)
+h2 = Herbivoro(2, "Elefante", 80)
+c1 = Carnivoro(3, "León", True)
+c2 = Carnivoro(4, "Suricata", False)
+
+# 2. Probamos altas y duplicados
+print(zoo.altaAnimal(h1))  # "Alta OK"
+print(zoo.altaAnimal(h2))  # "Alta OK"
+print(zoo.altaAnimal(c1))  # "Alta OK"
+print(zoo.altaAnimal(c2))  # "Alta OK"
+print(zoo.altaAnimal(h1))  # "Animal repetido"
+
+# 3. Probamos kilos de pasto y listado de peligrosos
+print("\n--- Kilos de pasto al día ---")
+print(zoo.numKilosPasto())  # Debería sumar 15 + 80 = 95
+
+print("\n--- Animales peligrosos ---")
+print(zoo.listadoPeligrosos())  # Debería mostrar solo el león
+
+# 4. Probamos bajas (existente y no existente)
+print("\n--- Bajas ---")
+print(zoo.baja_animal(2))  # "Animal dado de baja"
+print(zoo.baja_animal(99))  # "Animal no localizado"
+
+# Volvemos a comprobar los kilos de pasto tras dar de baja al elefante (id 2)
+print("Kilos de pasto tras baja:", zoo.numKilosPasto())  # Debería ser 15
