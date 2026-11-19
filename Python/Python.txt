@@ -194,29 +194,20 @@ class Zoologico:
 
 
 
-
-
-
 7. BASE DE DATOS
 
-import sqlite3
+import pymysql
 
-def altura_media():
-    # 1. Conectar a la base de datos SQLite
-    conexion = sqlite3.connect("equipo.db")
-    cursor = conexion.cursor()
+    conn = pymysql.connect(
+        host="db", user = "root", password = "test", database = "equipo"
+    )
 
-    # 2. Ejecutar consulta SQL
-    cursor.execute("SELECT AVG(altura) FROM jugadores WHERE fecha_baja IS NULL")
-    
-    # 3. Obtener el resultado
-    resultado = cursor.fetchone()[0] # Pilla el primer valor de la tupla resultado
+    cursor = conn.cursor()
 
-    # 4. Cerrar la conexión
-    conexion.close()
-    
-    return resultado
-
+    sql = "SELECT dni, fecha_baja, peso, altura FROM jugadores"
+    cursor.execute(sql)
+    filas = cursor.fetchall() # Lista de tuplas
+    conn.close()
 
 
 

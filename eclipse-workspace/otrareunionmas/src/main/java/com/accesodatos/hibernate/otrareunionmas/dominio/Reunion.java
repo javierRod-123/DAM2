@@ -3,9 +3,11 @@ package com.accesodatos.hibernate.otrareunionmas.dominio;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -49,5 +51,20 @@ public class Reunion {
 	public void setAsunto(String asunto) {
 		this.asunto = asunto;
 	}
+
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Sala sala;
 	
+	
+	public Sala getSala() {
+		return sala;
+	}
+	
+	public void setSala(Sala sala) {
+		this.sala = sala;
+		if (sala != null && !sala.getReuniones().contains(this)) {
+			sala.addReunion(this);
+		}
+	}
 }

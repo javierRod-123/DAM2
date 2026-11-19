@@ -33,13 +33,13 @@ def insertar_reservas_bbdd(reservas):
         cursor.execute(sql, ( reserva[0], reserva[1]['nombre'], reserva[1]['telefono'], reserva[1]['fecha'], reserva[1]['personas'], reserva[1]['mesa']))
 
         conn.commit()
-        conn.close()
+    conn.close()
 
 insertar_reservas_bbdd(diccionario)
                              
 def mostrar_reservas_fecha(fecha):
     
-    conn = pymysql.connect(host = 'php-db-1', user ='root', password = 'test', database = 'examen')
+    conn = pymysql.connect(host = 'db', user ='root', password = 'test', database = 'examen')
 
     cursor = conn.cursor()
 
@@ -51,9 +51,9 @@ def mostrar_reservas_fecha(fecha):
     conn.close()
 
     listado = f"RESERVAS PARA {fecha}:"
-    listado += "=========================="
-    personas = 0
-    reservas = 0
+    listado += "==========================\n"
+    num_personas = 0
+    num_reservas = 0
            
     for row in rows:
         listado += f"Mesa {row[5]}: {row[1]} ({row[4]} personas) - Tel: {row[2]}\n"
@@ -62,4 +62,4 @@ def mostrar_reservas_fecha(fecha):
     
     listado += f"Total {num_reservas} reservas, {num_personas} personas"
     
-    return listados
+    return listado
