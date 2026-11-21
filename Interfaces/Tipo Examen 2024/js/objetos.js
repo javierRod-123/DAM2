@@ -122,7 +122,7 @@ class Libreria{
     async crearLibro(oLibro){
         let datos = new FormData();
 
-        datos.append("libro", JSON.stringify(olibro));
+        datos.append("libro", JSON.stringify(oLibro));
 
         let respuesta = await peticionPOST("crear_libro.php", datos);
 
@@ -139,7 +139,7 @@ class Libreria{
         return respuesta;
     }
 
-    async getGenero(){
+    async getGeneros(){
         return await peticionGET("get_generos.php", new FormData());
     }
 }

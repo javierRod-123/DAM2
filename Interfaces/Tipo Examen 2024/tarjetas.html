@@ -16,8 +16,12 @@
 
         </div>
     </div>
-    <script src="bootstrap/bootstrap.min.js"></script>
+<script src="bootstrap/bootstrap.min.js"></script>
+    <script src="js/ajax.js"></script>
+    <script src="js/objetos.js"></script>
     <script>
+        const oLibreria = new Libreria();
+
         // Obtengo la URL actual de esta ventana
         let oURL = new URL(location.href);
 
@@ -27,25 +31,23 @@
 
         // Escribimos el nombre del género en mayúsculas dentro del <span> del título
         // Si no llegara "genero" por URL, evitamos errores poniendo una cadena vacía
-        
         document.querySelector("#nombreGenero").textContent = genero ? genero.toUpperCase() : "";
 
         generarTarjetas(idgenero);
 
         async function generarTarjetas(idgenero) {
-            
-            let respuesta = await opener.oLibreria.getLibrosGenero(idgenero);
+            let respuesta = await oLibreria.getLibrosGenero(idgenero);
 
             let tarjetas = document.querySelector("#tarjetas");
 
-            if(respuesta.ok){
-                if (respuesta.datos.length == 0){
+            if (respuesta.ok) {
+                if (respuesta.datos.length == 0) {
                     tarjetas.innerHTML = "<h3>No hay libros de este genero</h3>";
                 } else {
                     let cards = "";
 
-                    for (let tarjeta of respuesta.datos){
-                        cards +=`<div class="col-12 col-md-4 col-lg-3 mb-3">
+                    for (let tarjeta of respuesta.datos) {
+                        cards += `<div class="col-12 col-md-4 col-lg-3 mb-3">
                 <img src="${tarjeta.imagen}" class="card-img-top" alt="${tarjeta.titulo}">
                 <div class="card-body">
                     <h5 class="card-title">${tarjeta.titulo}</h5>
@@ -57,8 +59,9 @@
                     }
                     tarjetas.innerHTML = cards;
                 }
+            } else {
+                tarjetas.innerHTML = `<p class="text-danger">${respuesta.mensaje}</p>`;
             }
-
         }
     </script>
 </body>
