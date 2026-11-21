@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/config.php';
+require_once ('config.php');
 
 $libro = json_decode($_POST["libro"]);
 

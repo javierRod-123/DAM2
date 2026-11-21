@@ -79,8 +79,8 @@ class Libro{
             titulo: this.#titulo,
             autor: this.#autor,
             descripcion: this.#descripcion,
-            imagen: this.#imagen
-        }
+            imagen: this.#imagen,
+        };
     }
 }
 
@@ -113,8 +113,8 @@ class Genero{
     toJSON(){
         return{
             idgenero: this.#idgenero,
-            genero: this.#genero
-        }
+            genero: this.#genero,
+        };
     }
 }
 

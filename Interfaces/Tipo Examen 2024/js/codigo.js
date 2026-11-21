@@ -54,7 +54,7 @@ async function cargarDesplegables(){
     } else {
         alert("No se han podido cargar los generos literarios " + respuesta.mensaje);
     }
-
+}
 async function procesarAltaLibro(){
     //Recoger campos del formulario
     let titulo = frmCrearLibro.txtTitulo.value.trim();
@@ -80,5 +80,4 @@ async function procesarListado(){
     let genero = frmListado.lstGenero.options[frmListado.lstGenero.selectedIndex].textContent;
 
     open("tarjetas.html?idgenero=" + idgenero + "&genero=" + genero);
-}
 }
