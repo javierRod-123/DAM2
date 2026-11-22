@@ -1,5 +1,8 @@
 {
-    "editor.formatOnSave": true,
-    "files.autoSave": "afterDelay",
-    "html.format.wrapLineLength": 999
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "html.format.wrapLineLength": 200,
+    "html.format.wrapAttributes": "preserve",
+    "html.format.indentInnerHtml": true
 }
