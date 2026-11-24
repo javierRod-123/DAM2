@@ -42,7 +42,7 @@ public class Experto {
 	public Experto(String nombre, Especialidad especialidad, Usuario usuario) {
 		super();
 		this.nombre = nombre;
-//		setEspecialidad(especialidad);
+		setEspecialidad(especialidad);
 		setUsuario(usuario);
 	}
 
@@ -63,12 +63,12 @@ public class Experto {
 	}
 
 	// Mantiene sincronizada la relación bidireccional con Especialidad
-//	public void setEspecialidad(Especialidad especialidad) {
-//		this.especialidad = especialidad;
-//		if (especialidad != null && (especialidad.getExperto() == null || !especialidad.getExperto().equals(this))) {
-//			especialidad.setExperto(this);
-//		}
-//	}
+	public void setEspecialidad(Especialidad especialidad) {
+		this.especialidad = especialidad;
+		if (especialidad != null && (especialidad.getExperto() == null || !especialidad.getExperto().equals(this))) {
+			especialidad.setExperto(this);
+		}
+	}
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -99,11 +99,11 @@ public class Experto {
 		return Objects.equals(especialidad, other.especialidad) && Objects.equals(nombre, other.nombre);
 	}
 
-//	@Override
-//	public String toString() {
-//		// Comprobamos nulos para evitar NullPointerException si aún no se asignaron
-//		String nombreEsp = (especialidad != null) ? especialidad.getNombre() : "sin especialidad";
-//		String userName = (usuario != null) ? usuario.getUsername() : "sin usuario";
-//		return "Experto [id=" + id + ", nombre=" + nombre + ", especialidad=" + nombreEsp + ", usuario=" + userName + "]";
-//	}
+	@Override
+	public String toString() {
+		// Comprobamos nulos para evitar NullPointerException si aún no se asignaron
+		String nombreEsp = (especialidad != null) ? especialidad.getNombre() : "sin especialidad";
+		String userName = (usuario != null) ? usuario.getUsername() : "sin usuario";
+		return "Experto [id=" + id + ", nombre=" + nombre + ", especialidad=" + nombreEsp + ", usuario=" + userName + "]";
+	}
 }
