@@ -30,6 +30,13 @@ public class Autor {
 	public Autor(String nombre) {
 		this.nombre = nombre;
 	}
+	
+
+	public Autor(String nombre, Set<Libro> libros) {
+		super();
+		this.nombre = nombre;
+		this.libros = libros;
+	}
 
 	public int getId() {
 		return id;

@@ -1,0 +1,199 @@
+====================================================================
+CHULETA 4: RELACIÓN N:M CON ATRIBUTOS + CLAVE COMPUESTA
+Ejemplo: Usuario (N) <---> (M) Ejemplar (Atributos: fechaPrestamo, fechaDevolucion)
+¿Cuándo usar esto?
+Cuando el rombo de la relación TIENE atributos propios (ej. fecha, nota, puntuacion).
+Se rompe el N:M creando:
+1. Una clase clave compuesta (@Embeddable) con los dos IDs.
+2. Una clase entidad intermedia (@Entity) con @EmbeddedId, @MapsId y los atributos extra.
+3. Un @OneToMany en cada una de las dos entidades originales.
+====================================================================
+
+-------------------- 1. CLAVE COMPUESTA: UsuarioEjemplarId.java --------------------
+package dominio;
+
+import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class UsuarioEjemplarId implements Serializable {
+
+    private int usuarioId;
+    private int ejemplarId;
+
+    public UsuarioEjemplarId() {}
+
+    public UsuarioEjemplarId(int usuarioId, int ejemplarId) {
+        this.usuarioId = usuarioId;
+        this.ejemplarId = ejemplarId;
+    }
+
+    public int getUsuarioId() { return usuarioId; }
+    public void setUsuarioId(int usuarioId) { this.usuarioId = usuarioId; }
+    public int getEjemplarId() { return ejemplarId; }
+    public void setEjemplarId(int ejemplarId) { this.ejemplarId = ejemplarId; }
+
+    @Override
+    public int hashCode() { return Objects.hash(usuarioId, ejemplarId); }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        UsuarioEjemplarId other = (UsuarioEjemplarId) obj;
+        return usuarioId == other.usuarioId && ejemplarId == other.ejemplarId;
+    }
+}
+
+-------------------- 2. ENTIDAD INTERMEDIA: Prestamo.java --------------------
+package dominio;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Objects;
+import javax.persistence.*;
+
+@Entity
+@Table(name = "prestamo")
+public class Prestamo implements Serializable {
+
+    @EmbeddedId
+    private UsuarioEjemplarId id = new UsuarioEjemplarId();
+
+    @ManyToOne
+    @MapsId("usuarioId") // Enlaza con el campo usuarioId de UsuarioEjemplarId
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+
+    @ManyToOne
+    @MapsId("ejemplarId") // Enlaza con el campo ejemplarId de UsuarioEjemplarId
+    @JoinColumn(name = "ejemplar_id", nullable = false)
+    private Ejemplar ejemplar;
+
+    // Atributos propios de la relación
+    @Column(name = "fecha_prestamo")
+    private LocalDateTime fechaPrestamo;
+
+    @Column(name = "fecha_devolucion")
+    private LocalDateTime fechaDevolucion;
+
+    public Prestamo() {}
+
+    public Prestamo(Usuario usuario, Ejemplar ejemplar, LocalDateTime fechaPrestamo, LocalDateTime fechaDevolucion) {
+        this.usuario = usuario;
+        this.ejemplar = ejemplar;
+        this.fechaPrestamo = fechaPrestamo;
+        this.fechaDevolucion = fechaDevolucion;
+        if (usuario != null && ejemplar != null) {
+            this.id = new UsuarioEjemplarId(usuario.getId(), ejemplar.getId());
+        }
+        asociarExtremos();
+    }
+
+    public void asociarExtremos() {
+        if (this.usuario != null && !this.usuario.containsPrestamo(this)) {
+            this.usuario.addPrestamo(this);
+        }
+        if (this.ejemplar != null && !this.ejemplar.containsPrestamo(this)) {
+            this.ejemplar.addPrestamo(this);
+        }
+    }
+
+    public UsuarioEjemplarId getId() { return id; }
+    public void setId(UsuarioEjemplarId id) { this.id = id; }
+    public Usuario getUsuario() { return usuario; }
+    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+    public Ejemplar getEjemplar() { return ejemplar; }
+    public void setEjemplar(Ejemplar ejemplar) { this.ejemplar = ejemplar; }
+    public LocalDateTime getFechaPrestamo() { return fechaPrestamo; }
+    public void setFechaPrestamo(LocalDateTime fechaPrestamo) { this.fechaPrestamo = fechaPrestamo; }
+    public LocalDateTime getFechaDevolucion() { return fechaDevolucion; }
+    public void setFechaDevolucion(LocalDateTime fechaDevolucion) { this.fechaDevolucion = fechaDevolucion; }
+
+    @Override
+    public int hashCode() { return Objects.hash(usuario, ejemplar); }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Prestamo other = (Prestamo) obj;
+        return Objects.equals(usuario, other.usuario) && Objects.equals(ejemplar, other.ejemplar);
+    }
+}
+
+-------------------- 3. EXTREMO A: Usuario.java --------------------
+package dominio;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import javax.persistence.*;
+
+@Entity
+public class Usuario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(unique = true, nullable = false)
+    private String nombre;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Prestamo> prestamos = new HashSet<>();
+
+    public Usuario() {}
+    public Usuario(String nombre) { this.nombre = nombre; }
+
+    public int getId() { return id; }
+    public String getNombre() { return nombre; }
+    public Set<Prestamo> getPrestamos() { return prestamos; }
+
+    public void addPrestamo(Prestamo p) {
+        if (p != null) {
+            this.prestamos.add(p);
+            if (p.getUsuario() != this) p.setUsuario(this);
+        }
+    }
+
+    public void removePrestamo(Prestamo p) {
+        if (p != null && this.prestamos.remove(p)) {
+            if (p.getUsuario() == this) p.setUsuario(null);
+        }
+    }
+
+    public boolean containsPrestamo(Prestamo p) { return this.prestamos.contains(p); }
+
+    @Override
+    public int hashCode() { return Objects.hash(nombre); }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Usuario other = (Usuario) obj;
+        return Objects.equals(nombre, other.nombre);
+    }
+}
+
+-------------------- 4. EXTREMO B: Ejemplar.java (fragmento de préstamos) --------------------
+// Dentro de la clase Ejemplar, añades exactamente lo mismo apuntando a "ejemplar":
+@OneToMany(mappedBy = "ejemplar", cascade = CascadeType.ALL, orphanRemoval = true)
+private Set<Prestamo> prestamos = new HashSet<>();
+
+public void addPrestamo(Prestamo p) {
+    if (p != null) {
+        this.prestamos.add(p);
+        if (p.getEjemplar() != this) p.setEjemplar(this);
+    }
+}
+
+public void removePrestamo(Prestamo p) {
+    if (p != null && this.prestamos.remove(p)) {
+        if (p.getEjemplar() == this) p.setEjemplar(null);
+    }
+}
+
+public boolean containsPrestamo(Prestamo p) { return this.prestamos.contains(p); }

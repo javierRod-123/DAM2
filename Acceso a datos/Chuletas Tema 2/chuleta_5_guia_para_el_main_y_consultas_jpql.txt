@@ -1,0 +1,103 @@
+====================================================================
+CHULETA 5: CÓMO HACER EL MAIN Y CONSULTAS JPQL EN LOS DAOs
+====================================================================
+
+-------------------- 1. CONSULTAS EN LOS DAOs (Ejemplos típicos) --------------------
+
+// En PrestamoDao.java:
+public List<Prestamo> getPrestamosNoDevueltos() {
+    String jpql = "FROM Prestamo p WHERE p.fechaDevolucion IS NULL";
+    return getEntityManager().createQuery(jpql, Prestamo.class).getResultList();
+}
+
+public List<Prestamo> getPrestamosDevueltos() {
+    String jpql = "FROM Prestamo p WHERE p.fechaDevolucion IS NOT NULL";
+    return getEntityManager().createQuery(jpql, Prestamo.class).getResultList();
+}
+
+// En EjemplarDao.java (navegando por atributos sin JOIN explícito):
+public List<Ejemplar> getEjemplaresLibrosMasPaginas(int paginas) {
+    String jpql = "FROM Ejemplar e WHERE e.libro.paginas > :paginas";
+    TypedQuery<Ejemplar> query = getEntityManager().createQuery(jpql, Ejemplar.class);
+    query.setParameter("paginas", paginas);
+    return query.getResultList();
+}
+
+
+-------------------- 2. ESQUEMA DEL MAIN (App.java) --------------------
+package principal;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import dao.*;
+import dominio.*;
+
+public class App {
+
+    public static void main(String[] args) {
+        // 1. Instanciar los DAOs
+        AutorDao autorDao = new AutorDao();
+        LibroDao libroDao = new LibroDao();
+        EjemplarDao ejemplarDao = new EjemplarDao();
+        UsuarioDao usuarioDao = new UsuarioDao();
+        PrestamoDao prestamoDao = new PrestamoDao();
+
+        // 2. CREAR Y ASOCIAR (N:M simple) -> Guardar primero entidades independientes
+        Autor a1 = new Autor("Autor 1");
+        Autor a2 = new Autor("Autor 2");
+        Libro libro = new Libro("Editorial X", "111-222", 150, "Libro Prueba");
+        
+        libro.addAutor(a1);
+        libro.addAutor(a2);
+
+        autorDao.save(a1);
+        autorDao.save(a2);
+        libroDao.save(libro);
+
+        // 3. CREAR EN 1:N -> El libro ya existe, le asociamos ejemplares
+        Ejemplar ej1 = new Ejemplar("COD-1", "Sevilla", libro);
+        Ejemplar ej2 = new Ejemplar("COD-2", "Málaga", libro);
+        ejemplarDao.save(ej1);
+        ejemplarDao.save(ej2);
+
+        // 4. CREAR EN N:M CON CLAVE COMPUESTA -> Guardar primero Usuario y Ejemplar para que tengan ID
+        Usuario u1 = new Usuario("Ana");
+        Usuario u2 = new Usuario("Luis");
+        usuarioDao.save(u1);
+        usuarioDao.save(u2);
+
+        // Al tener ya IDs en BD, creamos el objeto intermedio Prestamo
+        Prestamo p1 = new Prestamo(u1, ej1, LocalDateTime.now().minusDays(5), LocalDateTime.now()); // Devuelto
+        Prestamo p2 = new Prestamo(u2, ej2, LocalDateTime.now().minusDays(2), null); // No devuelto
+        prestamoDao.save(p1);
+        prestamoDao.save(p2);
+
+        // 5. RECUPERAR POR ID Y BORRAR
+        Optional<Autor> recuperado = autorDao.get(a2.getId());
+        if (recuperado.isPresent()) {
+            Autor autorBD = recuperado.get();
+            System.out.println("Recuperado: " + autorBD.getNombre());
+            
+            // OJO: Si tiene relaciones bidireccionales en memoria, desvincular antes de borrar si es necesario
+            libro.removeAutor(autorBD);
+            libroDao.update(libro);
+            autorDao.delete(autorBD);
+        }
+
+        // 6. ACTUALIZAR UN OBJETO
+        u1.setNombre("Ana María");
+        usuarioDao.update(u1);
+
+        // 7. CONSULTAR Y MOSTRAR LISTAS
+        List<Prestamo> devueltos = prestamoDao.getPrestamosDevueltos();
+        for (Prestamo p : devueltos) {
+            System.out.println("Préstamo devuelto de: " + p.getUsuario().getNombre());
+        }
+
+        List<Ejemplar> ejemplares = ejemplarDao.getEjemplaresLibrosMasPaginas(30);
+        for (Ejemplar e : ejemplares) {
+            System.out.println("Ejemplar: " + e.getCodigo() + " - Libro: " + e.getLibro().getTitulo());
+        }
+    }
+}

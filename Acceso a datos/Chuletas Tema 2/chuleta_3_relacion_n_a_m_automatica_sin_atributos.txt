@@ -1,0 +1,146 @@
+====================================================================
+CHULETA 3: RELACIÓN N:M AUTOMÁTICA (SIN ATRIBUTOS EN LA RELACIÓN)
+Ejemplo: Autor (N) <---> (M) Libro
+¿Cuándo usar esto? 
+Cuando el rombo de la relación NO tiene atributos propios (solo une IDs).
+NO se crea clase intermedia; Hibernate genera la tabla "autor_libro" solo.
+====================================================================
+
+-------------------- CLASE 1: Libro.java (Lado Propietario con @JoinTable) --------------------
+package dominio;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import javax.persistence.*;
+
+@Entity
+public class Libro {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(unique = true, nullable = false)
+    private String isbn;
+
+    private String titulo;
+
+    // Define la tabla intermedia automática
+    @ManyToMany
+    @JoinTable(
+        name = "autor_libro",
+        joinColumns = @JoinColumn(name = "libros_id"),
+        inverseJoinColumns = @JoinColumn(name = "autores_id")
+    )
+    private Set<Autor> autores = new HashSet<>();
+
+    public Libro() {}
+
+    public Libro(String isbn, String titulo) {
+        this.isbn = isbn;
+        this.titulo = titulo;
+    }
+
+    public int getId() { return id; }
+    public String getIsbn() { return isbn; }
+    public String getTitulo() { return titulo; }
+    public Set<Autor> getAutores() { return autores; }
+
+    public void addAutor(Autor autor) {
+        if (autor != null) {
+            this.autores.add(autor);
+            if (!autor.containsLibro(this)) {
+                autor.addLibro(this);
+            }
+        }
+    }
+
+    public void removeAutor(Autor autor) {
+        if (autor != null && this.autores.remove(autor)) {
+            if (autor.containsLibro(this)) {
+                autor.removeLibro(this);
+            }
+        }
+    }
+
+    public boolean containsAutor(Autor autor) {
+        return this.autores.contains(autor);
+    }
+
+    @Override
+    public int hashCode() { return Objects.hash(isbn); }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Libro other = (Libro) obj;
+        return Objects.equals(isbn, other.isbn);
+    }
+}
+
+-------------------- CLASE 2: Autor.java (Lado Inverso con mappedBy) --------------------
+package dominio;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import javax.persistence.*;
+
+@Entity
+public class Autor {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(unique = true, nullable = false)
+    private String nombre;
+
+    // "autores" es el nombre del Set en la clase Libro
+    @ManyToMany(mappedBy = "autores")
+    private Set<Libro> libros = new HashSet<>();
+
+    public Autor() {}
+
+    public Autor(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getId() { return id; }
+    public String getNombre() { return nombre; }
+    public Set<Libro> getLibros() { return libros; }
+
+    public void addLibro(Libro libro) {
+        if (libro != null) {
+            this.libros.add(libro);
+            if (!libro.containsAutor(this)) {
+                libro.addAutor(this);
+            }
+        }
+    }
+
+    public void removeLibro(Libro libro) {
+        if (libro != null && this.libros.remove(libro)) {
+            if (libro.containsAutor(this)) {
+                libro.removeAutor(this);
+            }
+        }
+    }
+
+    public boolean containsLibro(Libro libro) {
+        return this.libros.contains(libro);
+    }
+
+    @Override
+    public int hashCode() { return Objects.hash(nombre); }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Autor other = (Autor) obj;
+        return Objects.equals(nombre, other.nombre);
+    }
+}

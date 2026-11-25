@@ -1,0 +1,107 @@
+====================================================================
+CHULETA 1: RELACIÓN 1:1 (UNO A UNO)
+Ejemplo: Experto (1) <---> (1) Usuario
+Regla: NO llevan List ni Set. Uno lleva @JoinColumn (dueño) y el otro mappedBy.
+====================================================================
+
+-------------------- CLASE 1: Experto.java (Lado Propietario / Dueño de la FK) --------------------
+package dominio;
+
+import java.util.Objects;
+import javax.persistence.*;
+
+@Entity
+public class Experto {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(unique = true)
+    private String nombre;
+
+    // Lado propietario: crea la columna usuario_id (FK) en la tabla Experto
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    public Experto() {}
+
+    public Experto(String nombre, Usuario usuario) {
+        this.nombre = nombre;
+        setUsuario(usuario);
+    }
+
+    public int getId() { return id; }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public Usuario getUsuario() { return usuario; }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+        if (usuario != null && (usuario.getExperto() == null || !usuario.getExperto().equals(this))) {
+            usuario.setExperto(this);
+        }
+    }
+
+    @Override
+    public int hashCode() { return Objects.hash(nombre); }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Experto other = (Experto) obj;
+        return Objects.equals(nombre, other.nombre);
+    }
+}
+
+-------------------- CLASE 2: Usuario.java (Lado Inverso) --------------------
+package dominio;
+
+import java.util.Objects;
+import javax.persistence.*;
+
+@Entity
+public class Usuario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(unique = true)
+    private String username;
+
+    // Lado inverso: "usuario" es el nombre del atributo en la clase Experto
+    @OneToOne(mappedBy = "usuario", optional = true)
+    private Experto experto;
+
+    public Usuario() {}
+
+    public Usuario(String username) {
+        this.username = username;
+    }
+
+    public int getId() { return id; }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
+    public Experto getExperto() { return experto; }
+
+    public void setExperto(Experto experto) {
+        this.experto = experto;
+        if (experto != null && (experto.getUsuario() == null || !experto.getUsuario().equals(this))) {
+            experto.setUsuario(this);
+        }
+    }
+
+    @Override
+    public int hashCode() { return Objects.hash(username); }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Usuario other = (Usuario) obj;
+        return Objects.equals(username, other.username);
+    }
+}

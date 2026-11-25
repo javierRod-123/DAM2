@@ -1,0 +1,130 @@
+====================================================================
+CHULETA 2: RELACIÓN 1:N (UNO A MUCHOS)
+Ejemplo: Libro (1) <---> (N) Ejemplar
+Regla: 
+- El lado "1" (Libro) lleva @OneToMany(mappedBy="...") y una colección (Set o List).
+- El lado "N" (Ejemplar) lleva @ManyToOne y @JoinColumn (la clave foránea).
+====================================================================
+
+-------------------- CLASE 1: Libro.java (Lado del 1) --------------------
+package dominio;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import javax.persistence.*;
+
+@Entity
+public class Libro {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(unique = true, nullable = false)
+    private String isbn;
+
+    private String titulo;
+
+    // Lado del "1": "libro" es el nombre del atributo en Ejemplar
+    @OneToMany(mappedBy = "libro", cascade = CascadeType.ALL)
+    private Set<Ejemplar> ejemplares = new HashSet<>();
+
+    public Libro() {}
+
+    public Libro(String isbn, String titulo) {
+        this.isbn = isbn;
+        this.titulo = titulo;
+    }
+
+    public int getId() { return id; }
+    public String getIsbn() { return isbn; }
+    public void setIsbn(String isbn) { this.isbn = isbn; }
+    public String getTitulo() { return titulo; }
+    public void setTitulo(String titulo) { this.titulo = titulo; }
+    public Set<Ejemplar> getEjemplares() { return ejemplares; }
+
+    public void addEjemplar(Ejemplar ejemplar) {
+        if (ejemplar != null) {
+            this.ejemplares.add(ejemplar);
+            if (ejemplar.getLibro() != this) {
+                ejemplar.setLibro(this);
+            }
+        }
+    }
+
+    public void removeEjemplar(Ejemplar ejemplar) {
+        if (ejemplar != null && this.ejemplares.remove(ejemplar)) {
+            if (ejemplar.getLibro() == this) {
+                ejemplar.setLibro(null);
+            }
+        }
+    }
+
+    public boolean containsEjemplar(Ejemplar ejemplar) {
+        return this.ejemplares.contains(ejemplar);
+    }
+
+    @Override
+    public int hashCode() { return Objects.hash(isbn); }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Libro other = (Libro) obj;
+        return Objects.equals(isbn, other.isbn);
+    }
+}
+
+-------------------- CLASE 2: Ejemplar.java (Lado de los N) --------------------
+package dominio;
+
+import java.util.Objects;
+import javax.persistence.*;
+
+@Entity
+public class Ejemplar {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(unique = true, nullable = false)
+    private String codigo;
+
+    // Lado de los "N": guarda la clave foránea libro_id
+    @ManyToOne
+    @JoinColumn(name = "libro_id", nullable = false)
+    private Libro libro;
+
+    public Ejemplar() {}
+
+    public Ejemplar(String codigo, Libro libro) {
+        this.codigo = codigo;
+        setLibro(libro);
+    }
+
+    public int getId() { return id; }
+    public String getCodigo() { return codigo; }
+    public void setCodigo(String codigo) { this.codigo = codigo; }
+    public Libro getLibro() { return libro; }
+
+    public void setLibro(Libro libro) {
+        this.libro = libro;
+        if (libro != null && !libro.containsEjemplar(this)) {
+            libro.addEjemplar(this);
+        }
+    }
+
+    @Override
+    public int hashCode() { return Objects.hash(codigo); }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Ejemplar other = (Ejemplar) obj;
+        return Objects.equals(codigo, other.codigo);
+    }
+}
