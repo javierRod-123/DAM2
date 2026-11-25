@@ -10,4 +10,9 @@ public class EjemplarDao extends AbstractDao<Ejemplar> {
 		setClazz(Ejemplar.class);
 	}
 
+	public List<Ejemplar> getEjemplaresLibrosMasPaginas(int paginas) {
+		String jpql = "SELECT e FROM Ejemplar e WHERE e.libro.paginas > :paginas";
+		return getEntityManager().createQuery(jpql, Ejemplar.class).setParameter("paginas", paginas).getResultList();
+	}
+
 }

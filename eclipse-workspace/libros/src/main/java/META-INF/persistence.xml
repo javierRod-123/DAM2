@@ -12,9 +12,12 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 				value="jdbc:mysql://localhost:3306/bibliotecas?serverTimezone=UTC" />
 			<property name="javax.persistence.jdbc.user" value="libro" />
 			<property name="javax.persistence.jdbc.driver"
-				value="com.mysql.jdbc.Driver" />
+				value="com.mysql.cj.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.password"
 				value="test" />
+			<!-- Dialecto necesario para que Hibernate sepa generar SQL de MySQL -->
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQL8Dialect" />
 			<!-- update: el propio Hibernate se encargará de actualizar la BD si hacemos 
 				cambios por código -->
 			<property

@@ -844,3 +844,22 @@
 2026-11-25 07:52:20.512: [INFO] BookmarksLoadDropped droppedNodes=0
 2026-11-25 07:52:20.512: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
 2026-11-25 08:29:19.516: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-11-25 14:51:59.933: [INFO] CurrentProfilePath: C:\Users\Usuario\OneDrive\Documentos\DAM2\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-11-25 14:51:59.933: [INFO] Profiles total count: 1
+2026-11-25 14:51:59.933: [INFO] Profile: name=Perfil 1 path=C:\Users\Usuario\OneDrive\Documentos\DAM2\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-11-23T13:36:49.046Z
+2026-11-25 14:51:59.933: [INFO] LastUsedProfileDir: C:\Users\Usuario\OneDrive\Documentos\DAM2\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-11-25 14:51:59.933: [INFO] MostRecentlyActiveProfile: name=Perfil 1 path=C:\Users\Usuario\OneDrive\Documentos\DAM2\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-11-23T13:36:49.046Z
+2026-11-25 14:51:59.933: [INFO] OnDoneLoading sync enabled: 0
+2026-11-25 14:51:59.933: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-11-25 14:51:59.933: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-11-25 14:51:59.933: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-11-25 15:29:34.093: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-11-25 15:29:43.651: [INFO] CurrentProfilePath: C:\Users\Usuario\OneDrive\Documentos\DAM2\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-11-25 15:29:43.651: [INFO] Profiles total count: 1
+2026-11-25 15:29:43.651: [INFO] Profile: name=Perfil 1 path=C:\Users\Usuario\OneDrive\Documentos\DAM2\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-11-23T13:36:49.046Z
+2026-11-25 15:29:43.651: [INFO] LastUsedProfileDir: C:\Users\Usuario\OneDrive\Documentos\DAM2\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-11-25 15:29:43.651: [INFO] MostRecentlyActiveProfile: name=Perfil 1 path=C:\Users\Usuario\OneDrive\Documentos\DAM2\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-11-23T13:36:49.046Z
+2026-11-25 15:29:43.651: [INFO] OnDoneLoading sync enabled: 0
+2026-11-25 15:29:43.651: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-11-25 15:29:43.651: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-11-25 15:29:43.651: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1

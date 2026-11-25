@@ -84,7 +84,7 @@ public class Autor {
 	}
 	
 	public boolean containsLibro(Libro libro) {
-		return this.libros != null && this.containsLibro(libro);
+	    return this.libros != null && this.libros.contains(libro);
 	}
 
 	@Override

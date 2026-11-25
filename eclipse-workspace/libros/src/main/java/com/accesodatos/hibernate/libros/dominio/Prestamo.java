@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
@@ -19,13 +19,11 @@ public class Prestamo implements Serializable {
 	@EmbeddedId
 	private UsuarioEjemplarId id = new UsuarioEjemplarId();
 
-	@ManyToOne
-	@MapsId("usuarioId")
+	@ManyToOne(cascade = {CascadeType.MERGE})
 	@JoinColumn(name = "usuario_id", nullable = false)
 	private Usuario usuario;
 
-	@ManyToOne
-	@MapsId("ejemplarId")
+	@ManyToOne(cascade = {CascadeType.MERGE})
 	@JoinColumn(name = "ejemplar_id", nullable = false)
 	private Ejemplar ejemplar;
 
