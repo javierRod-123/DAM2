@@ -26,6 +26,7 @@
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
+			<item value="com.accesodatos.hibernate.gimnasio"/>
 			<item value="com.accesodatos.hibernate.libros"/>
 			<item value="com.accesodatos.hibernate.otrareunionmas"/>
 		</list>
@@ -33,6 +34,7 @@
 			<item value="com.accesodatos.hibernate"/>
 		</list>
 		<list key="artifactId">
+			<item value="gimnasio"/>
 			<item value="libros"/>
 			<item value="otrareunionmas"/>
 		</list>

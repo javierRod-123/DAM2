@@ -45,13 +45,7 @@ public class Ejemplar {
 		super();
 		this.codigo = codigo;
 		this.localizacion = localizacion;
-	}
 
-	public Ejemplar(String codigo, String localizacion, Libro libro) {
-		super();
-		this.codigo = codigo;
-		this.localizacion = localizacion;
-		setLibro(libro);
 	}
 
 	public int getId() {

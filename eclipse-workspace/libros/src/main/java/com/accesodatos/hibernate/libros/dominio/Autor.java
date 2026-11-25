@@ -35,7 +35,7 @@ public class Autor {
 	public Autor(String nombre, Set<Libro> libros) {
 		super();
 		this.nombre = nombre;
-		this.libros = libros;
+		setLibros(libros);
 	}
 
 	public int getId() {

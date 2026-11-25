@@ -1,0 +1,31 @@
+CREATE DATABASE IF NOT EXISTS gimnasio
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+CREATE USER IF NOT EXISTS 'gimnasio_user'@'localhost' IDENTIFIED BY 'gimnasio_pass';
+CREATE USER IF NOT EXISTS 'gimnasio_user'@'%' IDENTIFIED BY 'gimnasio_pass';
+
+GRANT ALL PRIVILEGES ON gimnasio.* TO 'gimnasio_user'@'localhost';
+GRANT ALL PRIVILEGES ON gimnasio.* TO 'gimnasio_user'@'%';
+
+FLUSH PRIVILEGES;
+
+
+Eliminar tablas:
+
+USE gimnasio;
+
+SET FOREIGN_KEY_CHECKS = 0;
+
+DROP TABLE IF EXISTS reserva;
+DROP TABLE IF EXISTS Reserva;
+DROP TABLE IF EXISTS clase;
+DROP TABLE IF EXISTS Clase;
+DROP TABLE IF EXISTS entrenador;
+DROP TABLE IF EXISTS Entrenador;
+DROP TABLE IF EXISTS ficha_medica;
+DROP TABLE IF EXISTS FichaMedica;
+DROP TABLE IF EXISTS socio;
+DROP TABLE IF EXISTS Socio;
+
+SET FOREIGN_KEY_CHECKS = 1;

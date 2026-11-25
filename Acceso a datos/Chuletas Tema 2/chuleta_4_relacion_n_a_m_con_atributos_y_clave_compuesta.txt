@@ -164,7 +164,7 @@ public class Usuario {
         }
     }
 
-    public boolean containsPrestamo(Prestamo p) { return this.prestamos.contains(p); }
+    public boolean containsPrestamo(Prestamo p) { return this.prestamos != null && this.prestamos.contains(prestamo);}
 
     @Override
     public int hashCode() { return Objects.hash(nombre); }
@@ -196,4 +196,4 @@ public void removePrestamo(Prestamo p) {
     }
 }
 
-public boolean containsPrestamo(Prestamo p) { return this.prestamos.contains(p); }
+public boolean containsPrestamo(Prestamo p) { return this.prestamos != null && this.prestamos.contains(prestamo); }

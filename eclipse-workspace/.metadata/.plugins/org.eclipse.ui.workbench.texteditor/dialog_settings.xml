@@ -37,7 +37,15 @@
 		<item value="o"/>
 	</list>
 	<section name="java.lang.Class">
+		<item key="replaceBarOpen" value="true"/>
 		<list key="findhistory">
+			<item value="prestamo"/>
+			<item value="p."/>
+			<item value="p"/>
+		</list>
+		<list key="replacehistory">
+			<item value="c."/>
+			<item value="c"/>
 		</list>
 	</section>
 </section>
