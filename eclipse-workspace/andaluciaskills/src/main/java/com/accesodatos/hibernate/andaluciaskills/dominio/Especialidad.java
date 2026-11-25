@@ -1,8 +1,8 @@
 package com.accesodatos.hibernate.andaluciaskills.dominio;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,41 +18,46 @@ public class Especialidad {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	// Código y nombre de la especialidad según el modelo
 	@Column(unique = true)
-	private String codigo;
+	private int codigo;
 
 	private String nombre;
 
-	// Relación 1:1 con Experto: Experto tiene @JoinColumn en su atributo "especialidad"
+	// Lado inverso del 1:1 con Experto (Experto tiene @JoinColumn en "especialidad")
 	@OneToOne(mappedBy = "especialidad")
 	private Experto experto;
 
-	// Relación 1:N con Competidor: una Especialidad tiene muchos Competidores
-	// mappedBy = "especialidad" indica que el atributo "especialidad" en Competidor lleva la FK
+	// Lado inverso del 1:N con Competidor (Competidor tiene @JoinColumn en "especialidad")
 	@OneToMany(mappedBy = "especialidad")
-	private List<Competidor> competidores = new ArrayList<>();
+	private Set<Competidor> competidores = new HashSet<>();
 
 	public Especialidad() {
 		super();
 	}
 
-	public Especialidad(String codigo, String nombre) {
+	public Especialidad(int codigo, String nombre) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
+	}
+
+	public Especialidad(int codigo, String nombre, Experto experto) {
+		super();
+		this.codigo = codigo;
+		this.nombre = nombre;
+		setExperto(experto);
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public String getCodigo() {
-		return codigo;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public int getCodigo() {
+		return codigo;
 	}
 
 	public String getNombre() {
@@ -67,7 +72,6 @@ public class Especialidad {
 		return experto;
 	}
 
-	// Mantiene sincronizada la relación 1:1 con Experto
 	public void setExperto(Experto experto) {
 		this.experto = experto;
 		if (experto != null && (experto.getEspecialidad() == null || !experto.getEspecialidad().equals(this))) {
@@ -75,29 +79,34 @@ public class Especialidad {
 		}
 	}
 
-	public List<Competidor> getCompetidores() {
+	public Set<Competidor> getCompetidores() {
 		return competidores;
 	}
 
-	public void setCompetidores(List<Competidor> competidores) {
-		this.competidores = competidores;
+	public void addCompetidor(Competidor competidor) {
+		if (this.competidores == null) {
+			this.competidores = new HashSet<>();
+		}
+		this.competidores.add(competidor);
+		if (competidor != null && (competidor.getEspecialidad() == null || !competidor.getEspecialidad().equals(this))) {
+			competidor.setEspecialidad(this);
+		}
 	}
 
-	// Método de ayuda para añadir un competidor y mantener ambos lados sincronizados
-	public void addCompetidor(Competidor competidor) {
+	public void removeCompetidor(Competidor competidor) {
+		this.competidores.remove(competidor);
 		if (competidor != null) {
-			if (!this.competidores.contains(competidor)) {
-				this.competidores.add(competidor);
-			}
-			if (competidor.getEspecialidad() != this) {
-				competidor.setEspecialidad(this);
-			}
+			competidor.setEspecialidad(null);
 		}
+	}
+
+	public boolean containsCompetidor(Competidor competidor) {
+		return this.competidores != null && this.competidores.contains(competidor);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(codigo);
+		return Objects.hash(nombre);
 	}
 
 	@Override
@@ -109,11 +118,12 @@ public class Especialidad {
 		if (getClass() != obj.getClass())
 			return false;
 		Especialidad other = (Especialidad) obj;
-		return Objects.equals(codigo, other.codigo);
+		return Objects.equals(nombre, other.nombre);
 	}
 
 	@Override
 	public String toString() {
-		return "Especialidad [id=" + id + ", codigo=" + codigo + ", nombre=" + nombre + "]";
+		String nomExperto = (experto != null) ? experto.getNombre() : "sin experto";
+		return "Especialidad [id=" + id + ", codigo=" + codigo + ", nombre=" + nombre + ", experto=" + nomExperto + "]";
 	}
 }
