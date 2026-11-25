@@ -26,12 +26,14 @@
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
+			<item value="com.accesodatos.hibernate.libros"/>
 			<item value="com.accesodatos.hibernate.otrareunionmas"/>
 		</list>
 		<list key="groupId">
 			<item value="com.accesodatos.hibernate"/>
 		</list>
 		<list key="artifactId">
+			<item value="libros"/>
 			<item value="otrareunionmas"/>
 		</list>
 		<list key="projectNameTemplate">
@@ -80,6 +82,14 @@
 		</list>
 	</section>
 	<section name="org.eclipse.m2e.core.pom.overview">
+		<list key="ciManagementUrl">
+		</list>
+		<list key="ciManagementSystem">
+		</list>
+		<list key="issueManagementSystem">
+		</list>
+		<list key="issueManagementUrl">
+		</list>
 	</section>
 	<section name="org.eclipse.m2e.core.pom.dependencies">
 	</section>
